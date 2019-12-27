@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RockPaperSpell.Model
+﻿namespace RockPaperSpell.Model
 {
     public abstract class Spell
     {
@@ -12,5 +10,12 @@ namespace RockPaperSpell.Model
         }
 
         public abstract void Cast(Wizard source, Wizard target);
+
+        public override string ToString()
+        {
+            string toString = base.ToString();
+            string[] splits = toString.Split('.');
+            return splits[splits.Length - 1];
+        }
     }
 }

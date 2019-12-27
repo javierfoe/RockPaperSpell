@@ -1,16 +1,12 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace RockPaperSpell.Model
 {
     public static class Dungeon
     {
-        private static Wizard[] wizards { get; set; }
+        public static Wizard[] Wizards { get; private set; }
         private static SpellLibrary spellLibrary;
-
-        public static Wizard GetWizard(int index)
-        {
-            return wizards[index];
-        }
 
         public static void SetupBoard(int players)
         {
@@ -23,7 +19,7 @@ namespace RockPaperSpell.Model
             int closestPosition = -1;
             int secondClosestPosition = -1;
             int currentPosition;
-            foreach (Wizard wizard in wizards)
+            foreach (Wizard wizard in Wizards)
             {
                 currentPosition = wizard.Position;
                 if (currentPosition > closestPosition)
@@ -36,7 +32,7 @@ namespace RockPaperSpell.Model
                     secondClosestPosition = currentPosition;
                 }
             }
-            foreach (Wizard wizard in wizards)
+            foreach (Wizard wizard in Wizards)
             {
                 currentPosition = wizard.Position;
                 if (currentPosition == closestPosition)
@@ -52,7 +48,7 @@ namespace RockPaperSpell.Model
 
         public static void Reposition()
         {
-            foreach(Wizard wizard in wizards)
+            foreach(Wizard wizard in Wizards)
             {
                 wizard.Reposition();
             }
@@ -67,7 +63,7 @@ namespace RockPaperSpell.Model
         {
             int position = wizard.Position;
             int res = 0;
-            foreach (Wizard other in wizards)
+            foreach (Wizard other in Wizards)
             {
                 res += other.Position > position ? 1 : 0;
             }
@@ -83,7 +79,7 @@ namespace RockPaperSpell.Model
         {
             int gold = than.Gold;
             int res = 0;
-            foreach (Wizard wizard in wizards)
+            foreach (Wizard wizard in Wizards)
             {
                 res += wizard.Gold < gold ? 1 : 0;
             }
@@ -110,16 +106,16 @@ namespace RockPaperSpell.Model
 
         private static void SetupWizards(int players)
         {
-            wizards = new Wizard[players];
+            Wizards = new Wizard[players];
             for (int i = 0; i < players; i++)
-                wizards[i] = new Wizard(i);
+                Wizards[i] = new Wizard(i);
 
             Wizard wizard;
             for (int i = 0; i < players; i++)
             {
-                wizard = wizards[i];
-                wizard.Next = i + 1 < players ? wizards[i + 1] : wizards[0];
-                wizard.Previous = i - 1 > -1 ? wizards[i - 1] : wizards[players - 1];
+                wizard = Wizards[i];
+                wizard.Next = i + 1 < players ? Wizards[i + 1] : Wizards[0];
+                wizard.Previous = i - 1 > -1 ? Wizards[i - 1] : Wizards[players - 1];
             }
         }
 

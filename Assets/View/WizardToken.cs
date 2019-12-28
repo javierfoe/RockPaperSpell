@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -7,7 +6,8 @@ namespace RockPaperSpell.View
 {
     public class WizardToken : Wizard, IPointerEnterHandler, IPointerExitHandler
     {
-        private UnityEvent pointerEnter, pointerExit;
+        public WizardRow WizardRow { get; set; }
+
         [SerializeField] private Text gold = null, spell = null;
         [SerializeField] private Image target = null;
 
@@ -28,24 +28,24 @@ namespace RockPaperSpell.View
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            pointerExit.Invoke();
+            Highlight(false);
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            pointerEnter.Invoke();
+            Highlight(true);
         }
 
-        public void AddListenerPointerEnter(UnityAction action)
+        public override void Highlight(bool on)
         {
-            if (pointerEnter == null) pointerEnter = new UnityEvent();
-            pointerEnter.AddListener(action);
+            base.Highlight(on);
+            WizardRow.Highlight(on);
         }
 
-        public void AddListenerPointerExit(UnityAction action)
+        public override void SetColor(Color color)
         {
-            if (pointerExit == null) pointerExit = new UnityEvent();
-            pointerExit.AddListener(action);
+            base.SetColor(color);
+            WizardRow.SetColor(color);
         }
     }
 }

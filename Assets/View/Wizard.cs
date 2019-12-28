@@ -7,13 +7,13 @@ namespace RockPaperSpell.View
     {
         [SerializeField] protected Image wizardImage;
 
-        public void SetColor(Color color)
+        public virtual void SetColor(Color color)
         {
             wizardImage.color = color;
             Highlight(false);
         }
 
-        public void Highlight(bool on)
+        public virtual void Highlight(bool on)
         {
             Color color = wizardImage.color;
             float h, s, v;

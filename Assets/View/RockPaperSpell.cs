@@ -10,7 +10,6 @@ namespace RockPaperSpell.View
         public static float BrightnessOn { get; private set; }
         public static float BrightnessOff { get; private set; }
 
-        public int initialWizards;
         [Header("Highlighting")]
         [SerializeField] private float saturationOn = 0;
         [SerializeField] private float saturationOff = 0, brightnessOn = 0, brightnessOff = 0;
@@ -25,8 +24,20 @@ namespace RockPaperSpell.View
         [Header("Spell Book")]
         [SerializeField] private Spell spellPrefab = null;
         [SerializeField] private HorizontalLayoutGroup spellBook = null;
+        
+        public void SetView(int players)
+        {
+            AddWizards(players);
+            AddSpellsToSpellBook(players);
+        }
 
-        public void AddWizards(int players)
+        private void OnValidate()
+        {
+            wizards = transform.GetChild(1).GetComponent<HorizontalLayoutGroup>();
+            spellBook = transform.GetChild(2).GetComponent<HorizontalLayoutGroup>();
+        }
+
+        private void AddWizards(int players)
         {
             wizards.SetSpacingAndPadding(players);
             Color color;
@@ -34,15 +45,13 @@ namespace RockPaperSpell.View
             {
                 WizardToken wizard = wizards.AddObject(wizardPrefab);
                 WizardRow wizardRow = Instantiate(wizardRowPrefab, wizardRows);
+                wizard.WizardRow = wizardRow;
                 color = wizardColors[i];
                 wizard.SetColor(color);
-                wizardRow.SetColor(color);
-                wizard.AddListenerPointerEnter(() => Highlight(wizard, wizardRow, true));
-                wizard.AddListenerPointerExit(() => Highlight(wizard, wizardRow, false));
             }
         }
 
-        public void AddSpellsToSpellBook(int players)
+        private void AddSpellsToSpellBook(int players)
         {
             int spells = players > 5 ? 5 : players;
             spellBook.SetSpacingAndPadding(spells);
@@ -52,18 +61,6 @@ namespace RockPaperSpell.View
             }
         }
 
-        private void OnValidate()
-        {
-            wizards = transform.GetChild(1).GetComponent<HorizontalLayoutGroup>();
-            spellBook = transform.GetChild(2).GetComponent<HorizontalLayoutGroup>();
-        }
-
-        private void Highlight(Wizard wizard, Wizard wizardRow, bool on)
-        {
-            wizard.Highlight(on);
-            wizardRow.Highlight(on);
-        }
-
         private void Awake()
         {
             WizardColors = wizardColors;
@@ -71,8 +68,6 @@ namespace RockPaperSpell.View
             SaturationOn = saturationOn;
             BrightnessOff = brightnessOff;
             BrightnessOn = brightnessOn;
-            AddWizards(initialWizards);
-            AddSpellsToSpellBook(initialWizards);
         }
     }
 }

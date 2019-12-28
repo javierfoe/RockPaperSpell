@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 465616134}
   - component: {fileID: 465616138}
   m_Layer: 5
-  m_Name: RPS.View
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -348,6 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13781f13bd231cf47815af9e7eb148dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialWizards: 6
   saturationOn: 1
   saturationOff: 0.8
   brightnessOn: 1
@@ -368,51 +369,6 @@ MonoBehaviour:
   spellPrefab: {fileID: 8811988859766817263, guid: 8fa31cc2945f3984490f517dc9bb7e23,
     type: 3}
   spellBook: {fileID: 406142591}
---- !u!1 &476511321
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 476511323}
-  - component: {fileID: 476511322}
-  m_Layer: 0
-  m_Name: RPS.Controller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &476511322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 476511321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 261352e2679d93f428c52a506e5a42ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  players: 6
-  rockPaperSpell: {fileID: 465616138}
---- !u!4 &476511323
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 476511321}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &526281939
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ namespace RockPaperSpell.View
 {
     public class Spell : MonoBehaviour
     {
-        [SerializeField] private Text spellText;
+        [SerializeField] private Text spellText = null;
 
         public void SetSpell(Model.Spell spell)
         {

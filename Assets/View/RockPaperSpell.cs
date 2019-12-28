@@ -18,20 +18,21 @@ namespace RockPaperSpell.View
         [SerializeField] private Color[] wizardColors = null;
         [Header("Wizards")]
         [SerializeField] private WizardToken wizardPrefab = null;
-        [SerializeField] private Transform wizards = null;
+        [SerializeField] private HorizontalLayoutGroup wizards = null;
         [Header("Wizard Rows")]
         [SerializeField] private WizardRow wizardRowPrefab = null;
         [SerializeField] private Transform wizardRows = null;
         [Header("Spell Book")]
         [SerializeField] private Spell spellPrefab = null;
-        [SerializeField] private Transform spellBook = null;
+        [SerializeField] private HorizontalLayoutGroup spellBook = null;
 
         public void AddWizards(int players)
         {
+            wizards.SetSpacingAndPadding(players);
             Color color;
-            for(int i = 0; i < players; i++)
+            for (int i = 0; i < players; i++)
             {
-                WizardToken wizard = Instantiate(wizardPrefab, wizards);
+                WizardToken wizard = wizards.AddObject(wizardPrefab);
                 WizardRow wizardRow = Instantiate(wizardRowPrefab, wizardRows);
                 color = wizardColors[i];
                 wizard.SetColor(color);
@@ -43,11 +44,18 @@ namespace RockPaperSpell.View
 
         public void AddSpellsToSpellBook(int players)
         {
-            players = players > 5 ? 5 : players;
-            for(int i = 0; i < players; i++)
+            int spells = players > 5 ? 5 : players;
+            spellBook.SetSpacingAndPadding(spells);
+            for (int i = 0; i < spells; i++)
             {
-                Instantiate(spellPrefab, spellBook);
+                spellBook.AddObject(spellPrefab);
             }
+        }
+
+        private void OnValidate()
+        {
+            wizards = transform.GetChild(1).GetComponent<HorizontalLayoutGroup>();
+            spellBook = transform.GetChild(2).GetComponent<HorizontalLayoutGroup>();
         }
 
         private void Highlight(Wizard wizard, Wizard wizardRow, bool on)
@@ -58,7 +66,6 @@ namespace RockPaperSpell.View
 
         private void Awake()
         {
-            Model.Dungeon.SetupBoard(initialWizards);
             WizardColors = wizardColors;
             SaturationOff = saturationOff;
             SaturationOn = saturationOn;

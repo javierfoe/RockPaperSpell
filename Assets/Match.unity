@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 406142589}
   - component: {fileID: 406142588}
   - component: {fileID: 406142590}
+  - component: {fileID: 406142591}
   m_Layer: 5
   m_Name: SpellBook
   m_TagString: Untagged
@@ -214,12 +215,25 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 0
   m_Spacing: 0
-  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
+  m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &406142591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406142586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60eafca8eeb0b064b9e0ce71642507cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maximumChilds: 5
 --- !u!1 &465616133
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,19 +356,19 @@ MonoBehaviour:
   wizardColors:
   - {r: 0.8, g: 0.16, b: 0.16, a: 1}
   - {r: 0.16078429, g: 0.8, b: 0.16078429, a: 1}
-  - {r: 0.16078429, g: 0.16078429, b: 0.8, a: 1}
+  - {r: 0.3175701, g: 0.16078429, b: 0.8, a: 1}
   - {r: 0.8, g: 0.8, b: 0.16078429, a: 1}
   - {r: 0.16078429, g: 0.8, b: 0.8, a: 1}
   - {r: 0.8, g: 0.16078429, b: 0.8, a: 1}
   wizardPrefab: {fileID: 4292241798184793862, guid: dd7552c447c87624ba4b13b633ab0b20,
     type: 3}
-  wizards: {fileID: 531063846}
+  wizards: {fileID: 531063850}
   wizardRowPrefab: {fileID: 7727031930301945551, guid: 29ed33daa35cc7441a3042302cde861b,
     type: 3}
   wizardRows: {fileID: 1757652490}
   spellPrefab: {fileID: 8811988859766817263, guid: 8fa31cc2945f3984490f517dc9bb7e23,
     type: 3}
-  spellBook: {fileID: 406142587}
+  spellBook: {fileID: 406142591}
 --- !u!1 &526281939
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,6 +447,7 @@ GameObject:
   - component: {fileID: 531063848}
   - component: {fileID: 531063847}
   - component: {fileID: 531063849}
+  - component: {fileID: 531063850}
   m_Layer: 5
   m_Name: Wizards
   m_TagString: Untagged
@@ -514,12 +529,25 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 0
   m_Spacing: 0
-  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
+  m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &531063850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531063845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60eafca8eeb0b064b9e0ce71642507cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maximumChilds: 6
 --- !u!1 &613778966
 GameObject:
   m_ObjectHideFlags: 0

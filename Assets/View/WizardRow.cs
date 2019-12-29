@@ -5,22 +5,23 @@ namespace RockPaperSpell.View
 {
     public class WizardRow : Wizard
     {
-        private RectTransform wizard;
+        private RectTransform wizard => wizardImage.rectTransform;
 
-        public IEnumerator MoveTo(int position, float time)
+        public IEnumerator MoveTo(int position)
         {
-            yield return new WaitForSeconds(1);
             Transform newPosition = transform.GetChild(position);
             if (newPosition.childCount < 1)
             {
                 wizard.SetParent(newPosition);
-                yield return Lerp(time);
+                yield return Lerp(RockPaperSpell.WizardMovementTime);
             }
         }
 
-        private void Start()
+        public void SetOnPosition(int position)
         {
-            wizard = wizardImage.rectTransform;
+            wizard.SetParent(transform.GetChild(position));
+            wizard.offsetMax = Vector2.zero;
+            wizard.offsetMin = Vector2.zero;
         }
 
         private IEnumerator Lerp(float timeToMove)

@@ -54,7 +54,7 @@ namespace RockPaperSpell.Model
         public Spell RandomSpell(SpellType spellType = SpellType.All)
         {
             List<Spell> spells;
-            if ((spellType & SpellType.All) != 0)
+            if (spellType == SpellType.All)
             {
                 spells = library;
             }

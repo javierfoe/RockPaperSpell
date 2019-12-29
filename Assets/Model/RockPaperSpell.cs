@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 namespace RockPaperSpell.Model
 {
-    public static class Dungeon
+    public static class RockPaperSpell
     {
         public static Wizard[] Wizards { get; private set; }
         private static SpellLibrary spellLibrary;
 
+        public static SpellBook SpellBook => spellLibrary.SpellBook;
+
         public static void SetupBoard(int players)
         {
-            SetupWizards(players);
             SetupSpells(players);
+            SetupWizards(players);
         }
 
         public static void SplitLoot()
@@ -108,7 +109,7 @@ namespace RockPaperSpell.Model
         {
             Wizards = new Wizard[players];
             for (int i = 0; i < players; i++)
-                Wizards[i] = new Wizard(i);
+                Wizards[i] = new Wizard();
 
             Wizard wizard;
             for (int i = 0; i < players; i++)

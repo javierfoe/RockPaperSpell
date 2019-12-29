@@ -1,14 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using RockPaperSpell.Events;
+using System.Collections.Generic;
+using UnityEngine.Events;
 
 namespace RockPaperSpell.Model
 {
     public class SpellBook
     {
+        private UnityEventSpell addSpellEvent;
         private List<Spell> spells;
         private int offensive, defensive, gold, size;
 
         public SpellBook(int wizards)
         {
+            addSpellEvent = new UnityEventSpell();
             spells = new List<Spell>();
             if (wizards > 5)
                 size = 5;
@@ -29,6 +33,7 @@ namespace RockPaperSpell.Model
             {
                 res = RemoveSpellFromList(0);
             }
+            addSpellEvent.Invoke(spell);
             return res;
         }
 
@@ -45,6 +50,15 @@ namespace RockPaperSpell.Model
                 res = size - index - 1;
             }
             return res;
+        }
+
+        public void AddListenerNewSpell(UnityAction<Spell> action)
+        {
+            addSpellEvent.AddListener(action);
+            foreach(Spell spell in spells)
+            {
+                addSpellEvent.Invoke(spell);
+            }
         }
 
         private void AddSpellToList(Spell spell)

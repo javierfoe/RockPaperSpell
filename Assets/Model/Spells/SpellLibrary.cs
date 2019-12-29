@@ -2,13 +2,14 @@
 {
     public class SpellLibrary
     {
+        public SpellBook SpellBook { get; private set; }
+
         private SpellStack stack;
-        private SpellBook book;
 
         public SpellLibrary(int players)
         {
             stack = new SpellStack();
-            book = new SpellBook(players);
+            SpellBook = new SpellBook(players);
             InitialSpellBook(players);
         }
 
@@ -19,14 +20,14 @@
 
         public int SpellsBefore(Spell spell)
         {
-            return book.SpellsBefore(spell);
+            return SpellBook.SpellsBefore(spell);
         }
 
         public void RotateSpellBook()
         {
-            Spell newSpell = stack.RandomSpell(book.ValidSpell());
-            Spell discardedSpell = book.AddSpell(newSpell);
-            if(discardedSpell != null)
+            Spell newSpell = stack.RandomSpell(SpellBook.ValidSpell());
+            Spell discardedSpell = SpellBook.AddSpell(newSpell);
+            if (discardedSpell != null)
             {
                 stack.AddSpell(discardedSpell);
             }

@@ -121,6 +121,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &305946966
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 305946968}
+  - component: {fileID: 305946967}
+  m_Layer: 0
+  m_Name: RPS.Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &305946967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305946966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 261352e2679d93f428c52a506e5a42ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  players: 5
+  rockPaperSpell: {fileID: 465616138}
+--- !u!4 &305946968
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305946966}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 506.4917, y: 272.47614, z: -70.431885}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &406142586
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,9 +275,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 406142586}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60eafca8eeb0b064b9e0ce71642507cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 007a3aa41eac25b42abd0d34c90ff91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefab: {fileID: 8811988859766817263, guid: 8fa31cc2945f3984490f517dc9bb7e23, type: 3}
   maximumChilds: 5
 --- !u!1 &465616133
 GameObject:
@@ -247,8 +293,9 @@ GameObject:
   - component: {fileID: 465616135}
   - component: {fileID: 465616134}
   - component: {fileID: 465616138}
+  - component: {fileID: 465616139}
   m_Layer: 5
-  m_Name: RPS.View
+  m_Name: RPC.View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -348,71 +395,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13781f13bd231cf47815af9e7eb148dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementTime: 0
   saturationOn: 1
   saturationOff: 0.8
   brightnessOn: 1
   brightnessOff: 0.5
-  wizardColors:
+  colors:
   - {r: 0.8, g: 0.16, b: 0.16, a: 1}
-  - {r: 0.16078429, g: 0.8, b: 0.16078429, a: 1}
-  - {r: 0.3175701, g: 0.16078429, b: 0.8, a: 1}
   - {r: 0.8, g: 0.8, b: 0.16078429, a: 1}
+  - {r: 0.16078429, g: 0.8, b: 0.16078429, a: 1}
   - {r: 0.16078429, g: 0.8, b: 0.8, a: 1}
+  - {r: 0.16078429, g: 0.16078429, b: 0.8, a: 1}
   - {r: 0.8, g: 0.16078429, b: 0.8, a: 1}
-  wizardPrefab: {fileID: 4292241798184793862, guid: dd7552c447c87624ba4b13b633ab0b20,
-    type: 3}
-  wizards: {fileID: 531063850}
-  wizardRowPrefab: {fileID: 7727031930301945551, guid: 29ed33daa35cc7441a3042302cde861b,
-    type: 3}
-  wizardRows: {fileID: 1757652490}
-  spellPrefab: {fileID: 8811988859766817263, guid: 8fa31cc2945f3984490f517dc9bb7e23,
-    type: 3}
+  wizardParty: {fileID: 465616139}
   spellBook: {fileID: 406142591}
---- !u!1 &476511321
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 476511323}
-  - component: {fileID: 476511322}
-  m_Layer: 0
-  m_Name: RPS.Controller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &476511322
+--- !u!114 &465616139
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 476511321}
+  m_GameObject: {fileID: 465616133}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 261352e2679d93f428c52a506e5a42ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 9640500a9ddb8244db95b9cea5a3b553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players: 6
-  rockPaperSpell: {fileID: 465616138}
---- !u!4 &476511323
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 476511321}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  board: {fileID: 1757652494}
+  wizardPartyStatus: {fileID: 531063850}
 --- !u!1 &526281939
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,7 +503,7 @@ GameObject:
   - component: {fileID: 531063849}
   - component: {fileID: 531063850}
   m_Layer: 5
-  m_Name: Wizards
+  m_Name: WizardPartyStatus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -588,9 +598,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 531063845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60eafca8eeb0b064b9e0ce71642507cf, type: 3}
+  m_Script: {fileID: 11500000, guid: f416eee333238be40b431b7e2a07b8f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefab: {fileID: 4292241798184793862, guid: dd7552c447c87624ba4b13b633ab0b20, type: 3}
   maximumChilds: 6
 --- !u!1 &613778966
 GameObject:
@@ -687,6 +698,7 @@ GameObject:
   - component: {fileID: 1757652492}
   - component: {fileID: 1757652491}
   - component: {fileID: 1757652493}
+  - component: {fileID: 1757652494}
   m_Layer: 5
   m_Name: Board
   m_TagString: Untagged
@@ -770,7 +782,21 @@ MonoBehaviour:
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
+  m_ChildControlWidth: 1
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &1757652494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757652489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5248a3da149180c4789bc2e7eecf91e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 7727031930301945551, guid: 29ed33daa35cc7441a3042302cde861b, type: 3}
+  maximumChilds: 6

@@ -6,7 +6,7 @@ namespace RockPaperSpell.Model
     {
         public override void Cast(Wizard source, Wizard target)
         {
-            List<Wizard> poorers = Dungeon.PoorerWizards(target);
+            List<Wizard> poorers = RockPaperSpell.PoorerWizards(target);
             int length = poorers.Count;
             for(int i = 0; i < length && target.Gold > 0; i++)
             {

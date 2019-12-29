@@ -1,14 +1,23 @@
-﻿using UnityEngine.Events;
+﻿using RockPaperSpell.Events;
+using UnityEngine;
+using UnityEngine.Events;
 
 namespace RockPaperSpell.Model
 {
-    internal class UnityEventInt : UnityEvent<int> { }
-
     public class Wizard
     {
+        private UnityEventWizard targetEvent;
+        private UnityEventSpell spellEvent;
         private UnityEventInt positionEvent, goldEvent;
-        private int position, gold;
 
+        private int position, gold;
+        private Wizard target;
+        private Spell chosenSpell;
+
+        public Color Color
+        {
+            get; set;
+        }
         public int Position
         {
             get => position;
@@ -35,15 +44,33 @@ namespace RockPaperSpell.Model
                 goldEvent.Invoke(gold);
             }
         }
-        public Wizard Target { get; set; }
-        public Spell ChosenSpell { get; set; }
+        public Wizard Target
+        {
+            get => target;
+            set
+            {
+                target = value;
+                targetEvent.Invoke(value);
+            }
+        }
+        public Spell ChosenSpell
+        {
+            get => chosenSpell;
+            set
+            {
+                chosenSpell = value;
+                spellEvent.Invoke(value);
+            }
+        }
         public Wizard Next { get; set; }
         public Wizard Previous { get; set; }
-        
+
         public Wizard() : this(5) { }
 
         public Wizard(int position)
         {
+            targetEvent = new UnityEventWizard();
+            spellEvent = new UnityEventSpell();
             goldEvent = new UnityEventInt();
             positionEvent = new UnityEventInt();
             Gold = 3;
@@ -83,6 +110,18 @@ namespace RockPaperSpell.Model
         {
             goldEvent.AddListener(action);
             goldEvent.Invoke(Gold);
+        }
+
+        public void AddTargetListener(UnityAction<Wizard> action)
+        {
+            targetEvent.AddListener(action);
+            targetEvent.Invoke(Target);
+        }
+
+        public void AddSpellListener(UnityAction<Spell> action)
+        {
+            spellEvent.AddListener(action);
+            spellEvent.Invoke(ChosenSpell);
         }
     }
 }

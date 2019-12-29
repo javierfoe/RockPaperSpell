@@ -4,7 +4,7 @@
     {
         public override void Cast(Wizard source, Wizard target)
         {
-            int poorer = Dungeon.PoorerWizardCount(target);
+            int poorer = RockPaperSpell.PoorerWizardCount(target);
             target.Gold -= poorer;
         }
     }

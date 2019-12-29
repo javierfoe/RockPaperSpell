@@ -5,7 +5,7 @@
         public override void Cast(Wizard source, Wizard target)
         {
             target.Position += 1;
-            int forward = Dungeon.WizardCountCloserToLoot(source);
+            int forward = RockPaperSpell.WizardCountCloserToLoot(source);
             source.Position += forward;
         }
     }

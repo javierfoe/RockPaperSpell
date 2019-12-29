@@ -15,7 +15,7 @@
         {
             string toString = base.ToString();
             string[] splits = toString.Split('.');
-            return splits[splits.Length - 1];
+            return splits[splits.Length - 1] + " " +Type;
         }
     }
 }

@@ -4,66 +4,60 @@ namespace RockPaperSpell.View
 {
     public class RockPaperSpell : MonoBehaviour
     {
-        public static Color[] WizardColors { get; private set; }
+        public static float WizardMovementTime { get; private set; }
         public static float SaturationOn { get; private set; }
         public static float SaturationOff { get; private set; }
         public static float BrightnessOn { get; private set; }
         public static float BrightnessOff { get; private set; }
 
+        [Header("Wizard Movement Time")]
+        [SerializeField] private float movementTime = 0;
         [Header("Highlighting")]
         [SerializeField] private float saturationOn = 0;
         [SerializeField] private float saturationOff = 0, brightnessOn = 0, brightnessOff = 0;
         [Header("Colors")]
-        [SerializeField] private Color[] wizardColors = null;
-        [Header("Wizards")]
-        [SerializeField] private WizardToken wizardPrefab = null;
-        [SerializeField] private HorizontalLayoutGroup wizards = null;
-        [Header("Wizard Rows")]
-        [SerializeField] private WizardRow wizardRowPrefab = null;
-        [SerializeField] private Transform wizardRows = null;
+        [SerializeField] private Color[] colors = null;
+        [Header("Wizard Party")]
+        [SerializeField] private WizardParty wizardParty = null;
         [Header("Spell Book")]
-        [SerializeField] private Spell spellPrefab = null;
-        [SerializeField] private HorizontalLayoutGroup spellBook = null;
+        [SerializeField] private SpellBook spellBook = null;
         
-        public void SetView(int players)
+        public void SetView(Model.Wizard[] wizards)
         {
-            AddWizards(players);
+            int players = wizards.Length;
+            AddWizards(wizards);
             AddSpellsToSpellBook(players);
+        }
+
+        public void SetSpellBook(Model.SpellBook spellBook)
+        {
+            this.spellBook.SetSpellBookModel(spellBook);
         }
 
         private void OnValidate()
         {
-            wizards = transform.GetChild(1).GetComponent<HorizontalLayoutGroup>();
-            spellBook = transform.GetChild(2).GetComponent<HorizontalLayoutGroup>();
+            wizardParty = GetComponent<WizardParty>();
+            spellBook = transform.GetChild(2).GetComponent<SpellBook>();
         }
 
-        private void AddWizards(int players)
+        private void AddWizards(Model.Wizard[] wizards)
         {
-            wizards.SetSpacingAndPadding(players);
-            Color color;
-            for (int i = 0; i < players; i++)
+            for(int i = 0; i < wizards.Length; i++)
             {
-                WizardToken wizard = wizards.AddObject(wizardPrefab);
-                WizardRow wizardRow = Instantiate(wizardRowPrefab, wizardRows);
-                wizard.WizardRow = wizardRow;
-                color = wizardColors[i];
-                wizard.SetColor(color);
+                wizards[i].Color = colors[i];
             }
+            wizardParty.AddWizards(wizards);
         }
 
         private void AddSpellsToSpellBook(int players)
         {
-            int spells = players > 5 ? 5 : players;
-            spellBook.SetSpacingAndPadding(spells);
-            for (int i = 0; i < spells; i++)
-            {
-                spellBook.AddObject(spellPrefab);
-            }
+            spellBook.AddSpellPrefabs(players);
+            spellBook.SetSpellBookModel(Model.RockPaperSpell.SpellBook);
         }
 
         private void Awake()
         {
-            WizardColors = wizardColors;
+            WizardMovementTime = movementTime;
             SaturationOff = saturationOff;
             SaturationOn = saturationOn;
             BrightnessOff = brightnessOff;

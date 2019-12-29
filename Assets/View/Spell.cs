@@ -11,5 +11,10 @@ namespace RockPaperSpell.View
         {
             spellText.text = spell.ToString();
         }
+
+        public void CopySpell(Spell spell)
+        {
+            spellText.text = spell.spellText.text;
+        }
     }
 }

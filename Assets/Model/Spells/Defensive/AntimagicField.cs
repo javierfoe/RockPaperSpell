@@ -5,7 +5,8 @@
         public override void Cast(Wizard source, Wizard target)
         {
             source.Position += 2;
-            target.ChosenSpell = RockPaperSpell.WildSurge();
+            if(target.ChosenSpell != null)
+                target.ChosenSpell = RockPaperSpell.WildSurge();
         }
     }
 }

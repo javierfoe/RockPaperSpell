@@ -5,7 +5,8 @@
         public override void Cast(Wizard source, Wizard target)
         {
             source.Position += 2;
-            target.Target = target;
+            if(target.ChosenSpell != null)
+                target.Target = target;
         }
     }
 }

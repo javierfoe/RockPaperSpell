@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using static RockPaperSpell.Controller.RockPaperSpell;
 
 namespace RockPaperSpell.Model
 {
@@ -13,6 +14,19 @@ namespace RockPaperSpell.Model
         {
             SetupSpells(players);
             SetupWizards(players);
+        }
+
+        public static void SetTargetsAndSpells(SpellTarget[] spellTargets)
+        {
+            SpellTarget spellTarget;
+            Wizard wizard;
+            for(int i = 0; i < Wizards.Length; i++)
+            {
+                wizard = Wizards[i];
+                spellTarget = spellTargets[i];
+                wizard.Target = Wizards[spellTarget.target];
+                wizard.ChosenSpell = SpellBook[spellTarget.spell];
+            }
         }
 
         public static void SplitLoot()
@@ -47,17 +61,37 @@ namespace RockPaperSpell.Model
             }
         }
 
-        public static void Reposition()
-        {
-            foreach(Wizard wizard in Wizards)
-            {
-                wizard.Reposition();
-            }
-        }
-
         public static Spell WildSurge()
         {
             return spellLibrary.WildSurge();
+        }
+
+        public static bool CheckWin(out int winner)
+        {
+            bool win = false;
+            int currentGold, maxGold = 0;
+            winner = 0;
+            Wizard wizard;
+            for(int i = 0; i < Wizards.Length; i++)
+            {
+                wizard = Wizards[i];
+                currentGold = wizard.Gold;
+                if (currentGold > maxGold)
+                {
+                    maxGold = currentGold;
+                    win = maxGold > 24;
+                    winner = i;
+                } else if(currentGold == maxGold)
+                {
+                    win = false;
+                }
+            }
+            if (!win)
+            {
+                spellLibrary.RotateSpellBook();
+                Reposition();
+            }
+            return win;
         }
 
         public static int WizardCountCloserToLoot(Wizard wizard)
@@ -103,6 +137,14 @@ namespace RockPaperSpell.Model
             } while (aux != than);
 
             return wizards;
+        }
+
+        private static void Reposition()
+        {
+            foreach (Wizard wizard in Wizards)
+            {
+                wizard.Reposition();
+            }
         }
 
         private static void SetupWizards(int players)

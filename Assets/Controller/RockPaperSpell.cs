@@ -18,7 +18,7 @@ namespace RockPaperSpell.Controller
             StartCoroutine(StartGame());
         }
 
-        private struct SpellTarget
+        public struct SpellTarget
         {
             public int spell, target;
 
@@ -35,15 +35,27 @@ namespace RockPaperSpell.Controller
         private IEnumerator StartGame()
         {
             SpellTarget[] roundSpells = new SpellTarget[players];
-            bool win = false;
-            Model.Wizard winner = null;
+            bool win;
+            int winner;
+            int speedPotion = 0;
             do
             {
-                for(int i = 0; i < players; i++)
+                for (int i = 0; i < players; i++)
                 {
                     roundSpells[i] = new SpellTarget(i);
                 }
-                yield return null;
+                Model.RockPaperSpell.SetTargetsAndSpells(roundSpells);
+                bool first = true;
+                for (int i = speedPotion; i != speedPotion || first; i = i < players - 1 ? i + 1 : 0)
+                {
+                    yield return new WaitForSeconds(2);
+                    first = false;
+                    Model.RockPaperSpell.Wizards[i].CastSpell();
+                    yield return new WaitForSeconds(2);
+                }
+                speedPotion = speedPotion < players - 1 ? speedPotion + 1 : 0;
+                Model.RockPaperSpell.SplitLoot();
+                win = Model.RockPaperSpell.CheckWin(out winner);
             } while (!win);
             Debug.Log(winner);
         }

@@ -395,7 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13781f13bd231cf47815af9e7eb148dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementTime: 0
+  movementTime: 2
   saturationOn: 1
   saturationOff: 0.8
   brightnessOn: 1

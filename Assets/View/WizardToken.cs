@@ -60,7 +60,7 @@ namespace RockPaperSpell.View
 
         private void SetPosition(int position)
         {
-            WizardRow.MoveTo(position);
+            StartCoroutine(WizardRow.MoveTo(position));
         }
 
     }

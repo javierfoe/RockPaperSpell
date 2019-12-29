@@ -10,6 +10,8 @@ namespace RockPaperSpell.Model
         private List<Spell> spells;
         private int offensive, defensive, gold, size;
 
+        public Spell this[int i] => spells[i];
+
         public SpellBook(int wizards)
         {
             addSpellEvent = new UnityEventSpell();

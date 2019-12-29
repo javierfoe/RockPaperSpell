@@ -25,8 +25,8 @@ namespace RockPaperSpell.Model
             {
                 if (value < 0)
                     position = 0;
-                else if (value > 11)
-                    position = 11;
+                else if (value > 10)
+                    position = 10;
                 else
                     position = value;
                 positionEvent.Invoke(position);
@@ -86,13 +86,14 @@ namespace RockPaperSpell.Model
         public void CastSpell()
         {
             ChosenSpell?.Cast(this, Target);
+            ChosenSpell = null;
         }
 
         public void Reposition()
         {
-            if (Position < 4)
+            if (Position < 3)
             {
-                Position = 4;
+                Position = 3;
             }
             else if (Position > 7)
             {

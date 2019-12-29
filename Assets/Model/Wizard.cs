@@ -14,10 +14,8 @@ namespace RockPaperSpell.Model
         private Wizard target;
         private Spell chosenSpell;
 
-        public Color Color
-        {
-            get; set;
-        }
+        public bool WildSurge { get; set; }
+        public Color Color { get; set; }
         public int Position
         {
             get => position;
@@ -99,6 +97,7 @@ namespace RockPaperSpell.Model
             {
                 Position = 7;
             }
+            WildSurge = false;
         }
 
         public void AddPositionListener(UnityAction<int> action)

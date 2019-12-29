@@ -27,6 +27,7 @@ namespace RockPaperSpell.Model
                 wizard.Target = Wizards[spellTarget.target];
                 wizard.ChosenSpell = SpellBook[spellTarget.spell];
             }
+            CheckWildSurges();
         }
 
         public static void SplitLoot()
@@ -137,6 +138,24 @@ namespace RockPaperSpell.Model
             } while (aux != than);
 
             return wizards;
+        }
+
+        private static void CheckWildSurges()
+        {
+            foreach (Wizard wizard in Wizards)
+            {
+                if (!wizard.WildSurge && wizard.Target.Target == wizard && wizard.ChosenSpell == wizard.Target.ChosenSpell)
+                {
+                    WildSurge(wizard);
+                    WildSurge(wizard.Target);
+                }
+            }
+        }
+
+        private static void WildSurge(Wizard wizard)
+        {
+            wizard.ChosenSpell = WildSurge();
+            wizard.WildSurge = true;
         }
 
         private static void Reposition()

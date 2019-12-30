@@ -11,10 +11,11 @@ namespace RockPaperSpell.View
         {
             int players = wizards.Length;
             wizardPartyStatus.SetSpacingAndPadding(players);
+            board.SetSpacingAndPadding(players);
             for (int i = 0; i < players; i++)
             {
-                WizardToken wizard = wizardPartyStatus.AddObject();
-                WizardRow wizardRow = board.AddObject();
+                WizardToken wizard = wizardPartyStatus[i];
+                WizardRow wizardRow = board[i];
                 wizard.WizardRow = wizardRow;
                 wizard.SetWizardModel(wizards[i]);
             }

@@ -8,15 +8,13 @@ namespace RockPaperSpell.Controller
         private static int Players;
         public int players;
 
+        [Header("Rock Paper Spell View")]
         [SerializeField] private View.RockPaperSpell rockPaperSpell = null;
-
-        private void Start()
-        {
-            Players = players;
-            Model.RockPaperSpell.SetupBoard(players);
-            rockPaperSpell.SetView(players);
-            //StartCoroutine(StartGame());
-        }
+        [Header("Controllers")]
+        [Header("Wizard Controllers")]
+        [SerializeField] private Transform wizardControllers = null;
+        [Header("Spell Book Controller")]
+        [SerializeField] private Transform spellBook = null;
 
         public struct SpellTarget
         {
@@ -30,6 +28,32 @@ namespace RockPaperSpell.Controller
                 } while (target == player);
                 spell = Random.Range(0, Players > 5 ? 5 : Players);
             }
+        }
+
+        private void Start()
+        {
+            Players = players;
+            Model.RockPaperSpell.SetupBoard(players);
+            rockPaperSpell.SetView(players);
+            SetupWizards();
+            SetupSpellBook();
+            StartCoroutine(StartGame());
+        }
+
+        private void SetupWizards()
+        {
+            Model.Wizard[] wizards = Model.RockPaperSpell.Wizards;
+            int length = wizards.Length;
+            for (int i = 0; i < length; i++)
+            {
+                wizards[i].Color = rockPaperSpell.Colors[i];
+                wizardControllers.GetChild(i).GetComponent<Wizard>().SetWizardModel(wizards[i]);
+            }
+        }
+
+        private void SetupSpellBook()
+        {
+            spellBook.GetComponent<SpellBook>().SetSpellBook(Model.RockPaperSpell.SpellBook);
         }
 
         private IEnumerator StartGame()

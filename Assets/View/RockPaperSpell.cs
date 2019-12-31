@@ -4,7 +4,6 @@ namespace RockPaperSpell.View
 {
     public class RockPaperSpell : MonoBehaviour
     {
-        public static Color[] WizardColors { get; private set; }
         public static float WizardMovementTime { get; private set; }
         public static float SaturationOn { get; private set; }
         public static float SaturationOff { get; private set; }
@@ -16,15 +15,14 @@ namespace RockPaperSpell.View
         [Header("Highlighting")]
         [SerializeField] private float saturationOn = 0;
         [SerializeField] private float saturationOff = 0, brightnessOn = 0, brightnessOff = 0;
-        [Header("Colors")]
-        [SerializeField] private Color[] colors = null;
+        [field: Header("Colors"), SerializeField] public Color[] Colors { get; private set; }
         [Header("Board")]
         [SerializeField] private Board board = null;
         [Header("Wizard Party")]
         [SerializeField] private WizardParty wizardParty = null;
         [Header("Spell Book")]
         [SerializeField] private SpellBook spellBook = null;
-        
+
         public void SetView(int players)
         {
             SetWizards(players);
@@ -50,7 +48,6 @@ namespace RockPaperSpell.View
 
         private void Awake()
         {
-            WizardColors = colors;
             WizardMovementTime = movementTime;
             SaturationOff = saturationOff;
             SaturationOn = saturationOn;

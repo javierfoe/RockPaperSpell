@@ -105,7 +105,6 @@ namespace RockPaperSpell.Model
         public void AddPositionListener(UnityAction<int> action)
         {
             positionEvent.AddListener(action);
-            positionEvent.Invoke(Position);
         }
 
         public void AddGoldListener(UnityAction<int> action)

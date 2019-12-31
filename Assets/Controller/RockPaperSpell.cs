@@ -14,8 +14,8 @@ namespace RockPaperSpell.Controller
         {
             Players = players;
             Model.RockPaperSpell.SetupBoard(players);
-            rockPaperSpell.SetView(Model.RockPaperSpell.Wizards);
-            StartCoroutine(StartGame());
+            rockPaperSpell.SetView(players);
+            //StartCoroutine(StartGame());
         }
 
         public struct SpellTarget

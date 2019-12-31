@@ -4,6 +4,7 @@ namespace RockPaperSpell.View
 {
     public class RockPaperSpell : MonoBehaviour
     {
+        public static Color[] WizardColors { get; private set; }
         public static float WizardMovementTime { get; private set; }
         public static float SaturationOn { get; private set; }
         public static float SaturationOff { get; private set; }
@@ -17,51 +18,52 @@ namespace RockPaperSpell.View
         [SerializeField] private float saturationOff = 0, brightnessOn = 0, brightnessOff = 0;
         [Header("Colors")]
         [SerializeField] private Color[] colors = null;
+        [Header("Board")]
+        [SerializeField] private Board board = null;
         [Header("Wizard Party")]
         [SerializeField] private WizardParty wizardParty = null;
         [Header("Spell Book")]
         [SerializeField] private SpellBook spellBook = null;
         
-        public void SetView(Model.Wizard[] wizards)
+        public void SetView(int players)
         {
-            int players = wizards.Length;
-            AddWizards(wizards);
-            AddSpellsToSpellBook(players);
+            SetWizards(players);
+            SetSpellBook(players);
         }
 
-        public void SetSpellBook(Model.SpellBook spellBook)
+        private void SetWizards(int players)
         {
-            this.spellBook.SetSpellBookModel(spellBook);
-        }
-
-        private void OnValidate()
-        {
-            wizardParty = GetComponent<WizardParty>();
-            spellBook = transform.GetChild(2).GetComponent<SpellBook>();
-        }
-
-        private void AddWizards(Model.Wizard[] wizards)
-        {
-            for(int i = 0; i < wizards.Length; i++)
+            wizardParty.SetSpacingAndPadding(players);
+            board.SetSpacingAndPadding(players);
+            for (int i = 0; i < players; i++)
             {
-                wizards[i].Color = colors[i];
+                WizardToken wizard = wizardParty[i];
+                WizardRow wizardRow = board[i];
+                wizard.WizardRow = wizardRow;
             }
-            wizardParty.AddWizards(wizards);
         }
 
-        private void AddSpellsToSpellBook(int players)
+        private void SetSpellBook(int players)
         {
-            spellBook.AddSpellPrefabs(players);
-            spellBook.SetSpellBookModel(Model.RockPaperSpell.SpellBook);
+            spellBook.SetSpacingAndPadding(players);
         }
 
         private void Awake()
         {
+            WizardColors = colors;
             WizardMovementTime = movementTime;
             SaturationOff = saturationOff;
             SaturationOn = saturationOn;
             BrightnessOff = brightnessOff;
             BrightnessOn = brightnessOn;
+        }
+
+        private void OnValidate()
+        {
+            wizardParty = GetComponent<WizardParty>();
+            board = transform.GetChild(0).GetComponent<Board>();
+            wizardParty = transform.GetChild(1).GetComponent<WizardParty>();
+            spellBook = transform.GetChild(2).GetComponent<SpellBook>();
         }
     }
 }

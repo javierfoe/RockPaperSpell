@@ -4,22 +4,12 @@ using UnityEngine.UI;
 
 namespace RockPaperSpell.View
 {
-    public class WizardToken : Wizard, IPointerEnterHandler, IPointerExitHandler
+    public class WizardToken : Wizard, IPointerEnterHandler, IPointerExitHandler, Interfaces.Wizard
     {
         public WizardRow WizardRow { get; set; }
 
         [SerializeField] private Text gold = null, spell = null;
         [SerializeField] private Image target = null;
-
-        public void SetWizardModel(Model.Wizard wizard)
-        {
-            wizard.AddGoldListener(SetGold);
-            wizard.AddSpellListener(SetSpell);
-            wizard.AddTargetListener(SetTarget);
-            wizard.AddPositionListener(SetPosition);
-            WizardRow.SetOnPosition(wizard.Position);
-            SetColor(wizard.Color);
-        }
 
         public override void Highlight(bool on)
         {
@@ -43,25 +33,29 @@ namespace RockPaperSpell.View
             Highlight(true);
         }
 
-        private void SetGold(int gold)
+        public void SetGold(int gold)
         {
             this.gold.text = gold.ToString();
         }
 
-        private void SetSpell(Model.Spell spell)
+        public void SetSpell(Model.Spell spell)
         {
             this.spell.text = spell == null ? "" : spell.ToString();
         }
 
-        private void SetTarget(Model.Wizard target)
+        public void SetTarget(Model.Wizard target)
         {
             this.target.color = target == null ? Color.white : target.Color;
         }
 
-        private void SetPosition(int position)
+        public void SetPosition(int position)
         {
             StartCoroutine(WizardRow.MoveTo(position));
         }
 
+        public void SetInitialPosition(int position)
+        {
+            WizardRow.SetPosition(position);
+        }
     }
 }

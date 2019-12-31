@@ -10,10 +10,12 @@ namespace RockPaperSpell.View
         protected T[] children;
         private float childSize;
 
+        public int Length => children.Length;
         public T this[int index] => children[index];
 
-        public void SetSpacingAndPadding(int amount)
+        public virtual void SetSpacingAndPadding(int amount)
         {
+            amount = amount > maximumChilds ? maximumChilds : amount;
             float maximumSize = MaximumSize();
             childSize = maximumSize / maximumChilds;
             SetChildrenSize(childSize);

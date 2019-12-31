@@ -17,7 +17,7 @@ namespace RockPaperSpell.View
             }
         }
 
-        public void SetOnPosition(int position)
+        public void SetPosition(int position)
         {
             wizard.SetParent(transform.GetChild(position));
             wizard.offsetMax = Vector2.zero;

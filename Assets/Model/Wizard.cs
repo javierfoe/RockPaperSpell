@@ -13,9 +13,10 @@ namespace RockPaperSpell.Model
         private int position, gold;
         private Wizard target;
         private Spell chosenSpell;
+        public Color color;
 
         public bool WildSurge { get; set; }
-        public Color Color { get; set; }
+        public Color Color { get => color; set => color = value; }
         public int Position
         {
             get => position;

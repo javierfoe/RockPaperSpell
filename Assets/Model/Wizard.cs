@@ -81,10 +81,12 @@ namespace RockPaperSpell.Model
             ChosenSpell = spell;
         }
 
-        public void CastSpell()
+        public bool CastSpell()
         {
-            ChosenSpell?.Cast(this, Target);
+            if (ChosenSpell == null) return false;
+            ChosenSpell.Cast(this, Target);
             ChosenSpell = null;
+            return true;
         }
 
         public void Reposition()

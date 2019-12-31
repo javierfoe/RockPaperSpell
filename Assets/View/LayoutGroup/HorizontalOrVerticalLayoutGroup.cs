@@ -5,7 +5,6 @@ namespace RockPaperSpell.View
     [RequireComponent(typeof(UnityEngine.UI.HorizontalOrVerticalLayoutGroup))]
     public abstract class HorizontalOrVerticalLayoutGroup<T> : MonoBehaviour where T : MonoBehaviour
     {
-
         [SerializeField] protected int maximumChilds = 0;
         protected UnityEngine.UI.HorizontalOrVerticalLayoutGroup layoutGroup;
         protected T[] children;
@@ -40,12 +39,12 @@ namespace RockPaperSpell.View
 
         public void RemoveRemaining(int amount)
         {
-            for(int i = amount; i < children.Length; i++)
+            for (int i = amount; i < children.Length; i++)
             {
                 children[i].gameObject.SetActive(false);
             }
             T[] newArray = new T[amount];
-            for(int i = 0; i < amount; i++)
+            for (int i = 0; i < amount; i++)
             {
                 newArray[i] = children[i];
             }
@@ -59,14 +58,22 @@ namespace RockPaperSpell.View
             rect.sizeDelta = new Vector2(childSize, size.y);
         }
 
+        private void GetDependencies()
+        {
+            layoutGroup = GetComponent<UnityEngine.UI.HorizontalOrVerticalLayoutGroup>();
+            children = GetComponentsInChildren<T>();
+            if (children == null || children.Length < maximumChilds)
+                Debug.LogError("The layout group doesn't have the right amount of children or they don't have the proper Component: " + typeof(T), gameObject);
+        }
+
         private void Awake()
         {
-            children = GetComponentsInChildren<T>();
+            GetDependencies();
         }
 
         private void OnValidate()
         {
-            layoutGroup = GetComponent<UnityEngine.UI.HorizontalOrVerticalLayoutGroup>();
+            GetDependencies();
         }
     }
 }

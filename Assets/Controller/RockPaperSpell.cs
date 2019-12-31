@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 namespace RockPaperSpell.Controller
@@ -50,8 +50,10 @@ namespace RockPaperSpell.Controller
                 {
                     yield return new WaitForSeconds(2);
                     first = false;
-                    Model.RockPaperSpell.Wizards[i].CastSpell();
-                    yield return new WaitForSeconds(2);
+                    if (Model.RockPaperSpell.Wizards[i].CastSpell())
+                    {
+                        yield return new WaitForSeconds(2);
+                    }
                 }
                 speedPotion = speedPotion < players - 1 ? speedPotion + 1 : 0;
                 Model.RockPaperSpell.SplitLoot();

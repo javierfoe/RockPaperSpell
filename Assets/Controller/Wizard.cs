@@ -4,6 +4,7 @@
     {
         public void SetWizardModel(Model.Wizard wizard)
         {
+            GetDependencies();
             wizard.AddGoldListener(view.SetGold);
             wizard.AddPositionListener(view.SetPosition);
             wizard.AddSpellListener(view.SetSpell);

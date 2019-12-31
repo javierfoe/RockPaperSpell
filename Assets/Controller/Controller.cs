@@ -7,8 +7,9 @@ namespace RockPaperSpell.Controller
         [SerializeField] private Component interfaceComponent = null;
         protected T view;
 
-        private void GetDependencies()
+        protected void GetDependencies()
         {
+            if (view != null) return;
             if (interfaceComponent != null && (view = interfaceComponent as T) != null) return;
             view = GetComponent<T>();
             interfaceComponent = view as Component;

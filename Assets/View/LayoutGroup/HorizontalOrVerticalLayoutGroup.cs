@@ -33,6 +33,7 @@ namespace RockPaperSpell.View
 
         protected virtual void SetChildrenSize(float childSize)
         {
+            GetDependencies();
             foreach (T child in children)
             {
                 SetSize(child);
@@ -62,8 +63,16 @@ namespace RockPaperSpell.View
 
         private void GetDependencies()
         {
-            layoutGroup = GetComponent<UnityEngine.UI.HorizontalOrVerticalLayoutGroup>();
-            children = GetComponentsInChildren<T>();
+            if (children == null)
+            {
+                layoutGroup = GetComponent<UnityEngine.UI.HorizontalOrVerticalLayoutGroup>();
+                int length = transform.childCount;
+                children = new T[length];
+                for (int i = 0; i < length; i++)
+                {
+                    children[i] = transform.GetChild(i).gameObject.GetComponent<T>();
+                }
+            }
             if (children == null || children.Length < maximumChilds)
                 Debug.LogError("The layout group doesn't have the right amount of children or they don't have the proper Component: " + typeof(T), gameObject);
         }

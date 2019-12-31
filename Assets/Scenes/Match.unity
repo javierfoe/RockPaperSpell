@@ -718,6 +718,7 @@ GameObject:
   - component: {fileID: 305946969}
   - component: {fileID: 305946967}
   - component: {fileID: 305946970}
+  - component: {fileID: 305946971}
   m_Layer: 0
   m_Name: RPS.Controller
   m_TagString: Untagged
@@ -822,6 +823,21 @@ MonoBehaviour:
   playerSpawnMethod: 0
   spawnPrefabs: []
   players: 6
+--- !u!114 &305946971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305946966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showGUI: 1
+  offsetX: 0
+  offsetY: 0
 --- !u!1 &406142586
 GameObject:
   m_ObjectHideFlags: 0

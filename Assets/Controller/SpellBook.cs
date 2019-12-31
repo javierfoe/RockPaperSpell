@@ -4,6 +4,7 @@
     {
         public void SetSpellBook(Model.SpellBook spellBook)
         {
+            GetDependencies();
             spellBook.AddListenerNewSpell(view.AddSpell);
         }
     }

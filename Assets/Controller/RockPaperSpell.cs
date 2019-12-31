@@ -5,38 +5,47 @@ namespace RockPaperSpell.Controller
 {
     public class RockPaperSpell : MonoBehaviour
     {
-        private static int Players;
-        public int players;
-
         [Header("Rock Paper Spell View")]
         [SerializeField] private View.RockPaperSpell rockPaperSpell = null;
-        [Header("Controllers")]
-        [Header("Wizard Controllers")]
-        [SerializeField] private Transform wizardControllers = null;
+        [field: Header("Wizard Controller"), SerializeField] public Transform WizardControllers { get; private set; }
         [Header("Spell Book Controller")]
         [SerializeField] private Transform spellBook = null;
+        private int players;
 
         public struct SpellTarget
         {
             public int spell, target;
-
-            public SpellTarget(int player)
+            public SpellTarget(int player, int maxPlayers)
             {
                 do
                 {
-                    target = Random.Range(0, Players);
+                    target = Random.Range(0, maxPlayers);
                 } while (target == player);
-                spell = Random.Range(0, Players > 5 ? 5 : Players);
+                spell = Random.Range(0, maxPlayers > 5 ? 5 : maxPlayers);
             }
         }
 
-        private void Start()
+        public SpellTarget CreateSpellTarget(int player)
         {
-            Players = players;
+            return new SpellTarget(player, players);
+        }
+
+        public void Setup(int players)
+        {
+            this.players = players;
             Model.RockPaperSpell.SetupBoard(players);
-            rockPaperSpell.SetView(players);
+            SetView(players);
             SetupWizards();
             SetupSpellBook();
+        }
+
+        public void SetView(int players)
+        {
+            rockPaperSpell.SetView(players);
+        }
+
+        public void StartMatch()
+        {
             StartCoroutine(StartGame());
         }
 
@@ -47,7 +56,7 @@ namespace RockPaperSpell.Controller
             for (int i = 0; i < length; i++)
             {
                 wizards[i].Color = rockPaperSpell.Colors[i];
-                wizardControllers.GetChild(i).GetComponent<Wizard>().SetWizardModel(wizards[i]);
+                WizardControllers.GetChild(i).GetComponent<Wizard>().SetWizardModel(wizards[i]);
             }
         }
 
@@ -66,7 +75,7 @@ namespace RockPaperSpell.Controller
             {
                 for (int i = 0; i < players; i++)
                 {
-                    roundSpells[i] = new SpellTarget(i);
+                    roundSpells[i] = CreateSpellTarget(i);
                 }
                 Model.RockPaperSpell.SetTargetsAndSpells(roundSpells);
                 bool first = true;

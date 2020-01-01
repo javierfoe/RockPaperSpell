@@ -12,8 +12,8 @@ namespace RockPaperSpell.Controller
         [Header("Spell Book Controller")]
         [SerializeField] private SpellBook spellBook = null;
         [Header("Offline settings")]
-        [SerializeField] private bool offline;
-        [SerializeField] private int offlinePlayers;
+        [SerializeField] private bool offline = false;
+        [SerializeField] private int offlinePlayers = 0;
         private int players;
         private Wizard[] wizardControllers;
 

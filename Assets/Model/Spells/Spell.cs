@@ -5,6 +5,14 @@
         public string Name;
         public SpellType Type { get; private set; }
 
+        public Structs.Spell GetStruct()
+        {
+            return new Structs.Spell
+            {
+                name = Name
+            };
+        }
+
         public Spell() : this(SpellType.None) { }
 
         public Spell(SpellType type)

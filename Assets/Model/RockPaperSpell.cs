@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using static RockPaperSpell.Controller.RockPaperSpell;
+﻿using RockPaperSpell.Structs;
+using System.Collections.Generic;
 
 namespace RockPaperSpell.Model
 {

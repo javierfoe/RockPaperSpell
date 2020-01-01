@@ -6,7 +6,7 @@
         void SetInitialPosition(int position);
         void SetPosition(int position);
         void SetGold(int gold);
-        void SetSpell(Model.Spell spell);
-        void SetTarget(Model.Wizard target);
+        void SetSpell(Structs.Spell spell);
+        void SetTarget(Structs.Wizard target);
     }
 }

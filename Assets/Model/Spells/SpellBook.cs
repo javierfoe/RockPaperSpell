@@ -35,7 +35,7 @@ namespace RockPaperSpell.Model
             {
                 res = RemoveSpellFromList(0);
             }
-            addSpellEvent.Invoke(spell);
+            addSpellEvent.Invoke(spell.GetStruct());
             return res;
         }
 
@@ -54,12 +54,16 @@ namespace RockPaperSpell.Model
             return res;
         }
 
-        public void AddListenerNewSpell(UnityAction<Spell> action)
+        public void AddListenerNewSpell(UnityAction<Structs.Spell> action)
         {
             addSpellEvent.AddListener(action);
-            foreach(Spell spell in spells)
+        }
+
+        public void InvokeEvents()
+        {
+            foreach (Spell spell in spells)
             {
-                addSpellEvent.Invoke(spell);
+                addSpellEvent.Invoke(spell.GetStruct());
             }
         }
 

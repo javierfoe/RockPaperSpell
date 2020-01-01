@@ -9,7 +9,7 @@ namespace RockPaperSpell.Network
         [SerializeField] private Component viewComponent = null;
         private Interfaces.SpellBook spellBook;
 
-        public void AddSpell(Spell spell)
+        public void AddSpell(Structs.Spell spell)
         {
             RpcAddSpell(spell);
         }
@@ -31,7 +31,7 @@ namespace RockPaperSpell.Network
         }
 
         [ClientRpc]
-        private void RpcAddSpell(Spell spell)
+        private void RpcAddSpell(Structs.Spell spell)
         {
             spellBook.AddSpell(spell);
         }

@@ -2,7 +2,7 @@
 {
     public class SpellBook : HorizontalLayoutGroup<Spell>, Interfaces.SpellBook
     {
-        public void AddSpell(Model.Spell spell)
+        public void AddSpell(Structs.Spell spell)
         {
             for (int i = 0; i < children.Length - 1; i++)
             {

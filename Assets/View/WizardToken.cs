@@ -38,14 +38,14 @@ namespace RockPaperSpell.View
             this.gold.text = gold.ToString();
         }
 
-        public void SetSpell(Model.Spell spell)
+        public void SetSpell(Structs.Spell spell)
         {
-            this.spell.text = spell == null ? "" : spell.ToString();
+            this.spell.text = spell.name;
         }
 
-        public void SetTarget(Model.Wizard target)
+        public void SetTarget(Structs.Wizard target)
         {
-            this.target.color = target == null ? Color.white : target.Color;
+            this.target.color = target.color;
         }
 
         public void SetPosition(int position)

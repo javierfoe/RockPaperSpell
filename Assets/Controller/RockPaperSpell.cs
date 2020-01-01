@@ -1,3 +1,4 @@
+using RockPaperSpell.Structs;
 using System.Collections;
 using UnityEngine;
 
@@ -9,22 +10,12 @@ namespace RockPaperSpell.Controller
         [SerializeField] private View.RockPaperSpell rockPaperSpell = null;
         [field: Header("Wizard Controller"), SerializeField] public Transform WizardControllers { get; private set; }
         [Header("Spell Book Controller")]
-        [SerializeField] private Transform spellBook = null;
+        [SerializeField] private SpellBook spellBook = null;
+        [Header("Offline settings")]
+        [SerializeField] private bool offline;
+        [SerializeField] private int offlinePlayers;
         private int players;
         private Wizard[] wizardControllers;
-
-        public struct SpellTarget
-        {
-            public int spell, target;
-            public SpellTarget(int player, int maxPlayers)
-            {
-                do
-                {
-                    target = Random.Range(0, maxPlayers);
-                } while (target == player);
-                spell = Random.Range(0, maxPlayers > 5 ? 5 : maxPlayers);
-            }
-        }
 
         public SpellTarget CreateSpellTarget(int player)
         {
@@ -42,13 +33,7 @@ namespace RockPaperSpell.Controller
 
         public void StartMatch()
         {
-
             StartCoroutine(StartGame());
-        }
-
-        private void Start()
-        {
-            rockPaperSpell.SetView(6);
         }
 
         private void SetupWizards()
@@ -66,7 +51,8 @@ namespace RockPaperSpell.Controller
 
         private void SetupSpellBook()
         {
-            spellBook.GetComponent<SpellBook>().SetSpellBook(Model.RockPaperSpell.SpellBook);
+            spellBook.GetComponent<SpellBook>();
+            spellBook.SetSpellBook(Model.RockPaperSpell.SpellBook);
         }
 
         private IEnumerator StartGame()
@@ -76,6 +62,7 @@ namespace RockPaperSpell.Controller
             {
                 wizard.InitialState();
             }
+            spellBook.InitialState();
             SpellTarget[] roundSpells = new SpellTarget[players];
             bool win;
             int winner;
@@ -100,8 +87,24 @@ namespace RockPaperSpell.Controller
                 speedPotion = speedPotion < players - 1 ? speedPotion + 1 : 0;
                 Model.RockPaperSpell.SplitLoot();
                 win = Model.RockPaperSpell.CheckWin(out winner);
+                yield return new WaitForSeconds(1);
             } while (!win);
             Debug.Log(winner);
+        }
+
+        private void Start()
+        {
+            rockPaperSpell.SetView(6);
+            if (offline)
+            {
+                Setup(offlinePlayers);
+                StartMatch();
+            }
+        }
+
+        private void OnValidate()
+        {
+            spellBook = rockPaperSpell.GetComponentInChildren<SpellBook>();
         }
     }
 }

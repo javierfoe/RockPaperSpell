@@ -1,4 +1,4 @@
-﻿using RockPaperSpell.Model;
+﻿using RockPaperSpell.Structs;
 using UnityEngine.Events;
 
 namespace RockPaperSpell.Events

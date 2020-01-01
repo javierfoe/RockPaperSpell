@@ -10,8 +10,8 @@ namespace RockPaperSpell.Network
 
         [SyncVar(hook = nameof(SetGoldView))] private int gold;
         [SyncVar(hook = nameof(SetPositionView))] private int position;
-        //[SyncVar(hook = nameof(SetSpellView))] private Spell spell;
-        //[SyncVar(hook = nameof(SetTargetView))] private Model.Wizard target;
+        [SyncVar(hook = nameof(SetSpellView))] private Structs.Spell spell;
+        [SyncVar(hook = nameof(SetTargetView))] private Structs.Wizard target;
 
         private Interfaces.Wizard wizardView;
 
@@ -35,14 +35,14 @@ namespace RockPaperSpell.Network
             this.position = position;
         }
 
-        public void SetSpell(Spell spell)
+        public void SetSpell(Structs.Spell spell)
         {
-            //this.spell = spell;
+            this.spell = spell;
         }
 
-        public void SetTarget(Model.Wizard target)
+        public void SetTarget(Structs.Wizard target)
         {
-            //this.target = target;
+            this.target = target;
         }
 
         public override void OnStartClient()
@@ -71,12 +71,12 @@ namespace RockPaperSpell.Network
             wizardView?.SetPosition(gold);
         }
 
-        private void SetSpellView(Spell spell)
+        private void SetSpellView(Structs.Spell spell)
         {
             wizardView?.SetSpell(spell);
         }
 
-        private void SetTargetView(Model.Wizard target)
+        private void SetTargetView(Structs.Wizard target)
         {
             wizardView?.SetTarget(target);
         }

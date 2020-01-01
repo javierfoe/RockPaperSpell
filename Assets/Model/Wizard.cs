@@ -13,10 +13,9 @@ namespace RockPaperSpell.Model
         private int position, gold;
         private Wizard target;
         private Spell chosenSpell;
-        public Color color;
 
         public bool WildSurge { get; set; }
-        public Color Color { get => color; set => color = value; }
+        public Color Color;
         public int Position
         {
             get => position;
@@ -49,7 +48,7 @@ namespace RockPaperSpell.Model
             set
             {
                 target = value;
-                targetEvent.Invoke(value);
+                targetEvent.Invoke(value.GetStruct());
             }
         }
         public Spell ChosenSpell
@@ -58,11 +57,26 @@ namespace RockPaperSpell.Model
             set
             {
                 chosenSpell = value;
-                spellEvent.Invoke(value);
+                if (value != null)
+                {
+                    spellEvent.Invoke(value.GetStruct());
+                }
+                else
+                {
+                    spellEvent.Invoke(new Structs.Spell());
+                }
             }
         }
         public Wizard Next { get; set; }
         public Wizard Previous { get; set; }
+
+        public Structs.Wizard GetStruct()
+        {
+            return new Structs.Wizard
+            {
+                color = Color
+            };
+        }
 
         public Wizard() : this(5) { }
 
@@ -113,12 +127,12 @@ namespace RockPaperSpell.Model
             goldEvent.AddListener(action);
         }
 
-        public void AddTargetListener(UnityAction<Wizard> action)
+        public void AddTargetListener(UnityAction<Structs.Wizard> action)
         {
             targetEvent.AddListener(action);
         }
 
-        public void AddSpellListener(UnityAction<Spell> action)
+        public void AddSpellListener(UnityAction<Structs.Spell> action)
         {
             spellEvent.AddListener(action);
         }
@@ -127,8 +141,6 @@ namespace RockPaperSpell.Model
         {
             goldEvent.Invoke(Gold);
             positionEvent.Invoke(Position);
-            targetEvent.Invoke(Target);
-            spellEvent.Invoke(ChosenSpell);
         }
     }
 }

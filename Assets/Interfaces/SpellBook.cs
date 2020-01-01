@@ -2,6 +2,6 @@
 {
     public interface SpellBook
     {
-        void AddSpell(Model.Spell spell);
+        void AddSpell(Structs.Spell spell);
     }
 }

@@ -11,6 +11,7 @@ namespace RockPaperSpell.Controller
         [Header("Spell Book Controller")]
         [SerializeField] private Transform spellBook = null;
         private int players;
+        private Wizard[] wizardControllers;
 
         public struct SpellTarget
         {
@@ -33,30 +34,33 @@ namespace RockPaperSpell.Controller
         public void Setup(int players)
         {
             this.players = players;
+            rockPaperSpell.SetView(players);
             Model.RockPaperSpell.SetupBoard(players);
-            SetView(players);
             SetupWizards();
             SetupSpellBook();
         }
 
-        public void SetView(int players)
-        {
-            rockPaperSpell.SetView(players);
-        }
-
         public void StartMatch()
         {
+
             StartCoroutine(StartGame());
+        }
+
+        private void Start()
+        {
+            rockPaperSpell.SetView(6);
         }
 
         private void SetupWizards()
         {
             Model.Wizard[] wizards = Model.RockPaperSpell.Wizards;
             int length = wizards.Length;
+            wizardControllers = new Wizard[length];
             for (int i = 0; i < length; i++)
             {
                 wizards[i].Color = rockPaperSpell.Colors[i];
-                WizardControllers.GetChild(i).GetComponent<Wizard>().SetWizardModel(wizards[i]);
+                wizardControllers[i] = WizardControllers.GetChild(i).GetComponent<Wizard>();
+                wizardControllers[i].SetWizardModel(wizards[i]);
             }
         }
 
@@ -67,6 +71,11 @@ namespace RockPaperSpell.Controller
 
         private IEnumerator StartGame()
         {
+            yield return null;
+            foreach(Wizard wizard in wizardControllers)
+            {
+                wizard.InitialState();
+            }
             SpellTarget[] roundSpells = new SpellTarget[players];
             bool win;
             int winner;

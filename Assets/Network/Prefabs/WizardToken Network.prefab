@@ -147,6 +147,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: WizardToken Network
       objectReference: {fileID: 0}
+    - target: {fileID: 4292241798184793869, guid: dd7552c447c87624ba4b13b633ab0b20,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7697352289553460273, guid: dd7552c447c87624ba4b13b633ab0b20,
+        type: 3}
+      propertyPath: interfaceComponent
+      value: 
+      objectReference: {fileID: 7490282330914166175}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd7552c447c87624ba4b13b633ab0b20, type: 3}
 --- !u!1 &8537568948141733434 stripped

@@ -111,18 +111,23 @@ namespace RockPaperSpell.Model
         public void AddGoldListener(UnityAction<int> action)
         {
             goldEvent.AddListener(action);
-            goldEvent.Invoke(Gold);
         }
 
         public void AddTargetListener(UnityAction<Wizard> action)
         {
             targetEvent.AddListener(action);
-            targetEvent.Invoke(Target);
         }
 
         public void AddSpellListener(UnityAction<Spell> action)
         {
             spellEvent.AddListener(action);
+        }
+
+        public void InvokeEvents()
+        {
+            goldEvent.Invoke(Gold);
+            positionEvent.Invoke(Position);
+            targetEvent.Invoke(Target);
             spellEvent.Invoke(ChosenSpell);
         }
     }

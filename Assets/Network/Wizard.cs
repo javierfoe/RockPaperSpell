@@ -63,22 +63,22 @@ namespace RockPaperSpell.Network
 
         private void SetGoldView(int gold)
         {
-            wizardView.SetGold(gold);
+            wizardView?.SetGold(gold);
         }
 
         private void SetPositionView(int gold)
         {
-            wizardView.SetPosition(gold);
+            wizardView?.SetPosition(gold);
         }
 
         private void SetSpellView(Spell spell)
         {
-            wizardView.SetSpell(spell);
+            wizardView?.SetSpell(spell);
         }
 
         private void SetTargetView(Model.Wizard target)
         {
-            wizardView.SetTarget(target);
+            wizardView?.SetTarget(target);
         }
 
         [ClientRpc]

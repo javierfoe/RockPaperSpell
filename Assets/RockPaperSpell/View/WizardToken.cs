@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace RockPaperSpell.View
 {
-    public class WizardToken : Wizard, IPointerEnterHandler, IPointerExitHandler, Interfaces.Wizard
+    public class WizardToken : Wizard, IPointerEnterHandler, IPointerExitHandler, Interface.Wizard
     {
         public WizardRow WizardRow { get; set; }
 

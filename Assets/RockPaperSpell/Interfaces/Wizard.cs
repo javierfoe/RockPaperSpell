@@ -1,4 +1,4 @@
-﻿namespace RockPaperSpell.Interfaces
+﻿namespace RockPaperSpell.Interface
 {
     public interface Wizard
     {

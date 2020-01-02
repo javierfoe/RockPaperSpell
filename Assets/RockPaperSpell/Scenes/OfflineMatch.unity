@@ -605,11 +605,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 261352e2679d93f428c52a506e5a42ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementTime: 2
+  saturationOn: 1
+  saturationOff: 0.8
+  brightnessOn: 1
+  brightnessOff: 0.6
+  colors:
+  - {r: 0.8, g: 0.16, b: 0.16, a: 1}
+  - {r: 0.16078429, g: 0.8, b: 0.16078429, a: 1}
+  - {r: 0.16078429, g: 0.16078429, b: 0.8, a: 1}
+  - {r: 0.8, g: 0.8, b: 0.16078429, a: 1}
+  - {r: 0.16078429, g: 0.8, b: 0.8, a: 1}
+  - {r: 0.8, g: 0.16078429, b: 0.8, a: 1}
   rockPaperSpell: {fileID: 465616138}
   <WizardControllers>k__BackingField: {fileID: 531063846}
-  spellBook: {fileID: 406142592}
+  spellBookGameObject: {fileID: 406142586}
   offline: 1
-  offlinePlayers: 6
+  offlinePlayers: 4
 --- !u!4 &305946968
 Transform:
   m_ObjectHideFlags: 0
@@ -995,18 +1007,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13781f13bd231cf47815af9e7eb148dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementTime: 2
-  saturationOn: 1
-  saturationOff: 0.8
-  brightnessOn: 1
-  brightnessOff: 0.5
-  <Colors>k__BackingField:
-  - {r: 0.8, g: 0.16, b: 0.16, a: 1}
-  - {r: 0.16078429, g: 0.8, b: 0.16078429, a: 1}
-  - {r: 0.16078429, g: 0.16078429, b: 0.8, a: 1}
-  - {r: 0.8, g: 0.8, b: 0.16078429, a: 1}
-  - {r: 0.16078429, g: 0.8, b: 0.8, a: 1}
-  - {r: 0.8, g: 0.16078429, b: 0.8, a: 1}
   board: {fileID: 1757652494}
   wizardParty: {fileID: 531063850}
   spellBook: {fileID: 406142591}

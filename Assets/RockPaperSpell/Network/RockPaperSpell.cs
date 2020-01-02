@@ -3,56 +3,25 @@ using UnityEngine;
 
 namespace RockPaperSpell.Network
 {
-    [RequireComponent(typeof(Controller.RockPaperSpell))]
-    public class RockPaperSpell : NetworkManager
+    public class RockPaperSpell : NetworkBehaviour, Interface.RockPaperSpell
     {
-        private class NetworkConnectionPlayer
-        {
-            public NetworkConnection conn;
-            public Wizard behaviour;
+        [SerializeField] private GameObject viewComponent = null;
+        private Interface.RockPaperSpell rockPaperSpellView;
 
-            public NetworkConnectionPlayer(NetworkConnection conn, Wizard behaviour)
-            {
-                this.conn = conn;
-                this.behaviour = behaviour;
-            }
+        public void SetView(int players)
+        {
+            RpcSetView(players);
         }
 
-        [SerializeField] private int players = 0;
-        private int connectedPlayers;
-        private Controller.RockPaperSpell controller;
-        private Wizard[] wizardControllers;
-        private NetworkConnectionPlayer[] allPlayers;
-
-        public override void OnStartServer()
+        public override void OnStartClient()
         {
-            connectedPlayers = 0;
-            controller = GetComponent<Controller.RockPaperSpell>();
-            controller.Setup(players);
-            allPlayers = new NetworkConnectionPlayer[players];
+            rockPaperSpellView = viewComponent.GetComponent<Interface.RockPaperSpell>();
         }
 
-        public override void OnServerConnect(NetworkConnection conn)
+        [ClientRpc]
+        private void RpcSetView(int players)
         {
-            if(wizardControllers == null)
-                wizardControllers = controller.WizardControllers.GetComponentsInChildren<Wizard>();
-
-            int i;
-            for (i = 0; i < players && allPlayers[i] != null; i++) ;
-            Wizard player = wizardControllers[i];
-            allPlayers[i] = new NetworkConnectionPlayer(conn, player);
-            NetworkServer.AddPlayerForConnection(conn, player.gameObject);
-            connectedPlayers++;
-            if (connectedPlayers == players)
-                controller.StartMatch();
-        }
-
-        public override void OnServerDisconnect(NetworkConnection conn)
-        {
-            int i;
-            for (i = 0; i < players && allPlayers[i].conn != conn; i++) ;
-            allPlayers[i] = null;
-            connectedPlayers--;
+            rockPaperSpellView.SetView(players);
         }
     }
 }

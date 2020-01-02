@@ -1,6 +1,6 @@
 ﻿namespace RockPaperSpell.Controller
 {
-    public class Wizard : Controller<Interfaces.Wizard>
+    public class Wizard : Controller<Interface.Wizard>
     {
         private Model.Wizard wizard;
 

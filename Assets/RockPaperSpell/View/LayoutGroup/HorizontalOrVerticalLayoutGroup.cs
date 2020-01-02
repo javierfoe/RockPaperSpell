@@ -15,6 +15,7 @@ namespace RockPaperSpell.View
 
         public virtual void SetSpacingAndPadding(int amount)
         {
+            GetDependencies();
             amount = amount > maximumChilds ? maximumChilds : amount;
             float maximumSize = MaximumSize();
             childSize = maximumSize / maximumChilds;
@@ -33,7 +34,6 @@ namespace RockPaperSpell.View
 
         protected virtual void SetChildrenSize(float childSize)
         {
-            GetDependencies();
             foreach (T child in children)
             {
                 SetSize(child);
@@ -63,28 +63,13 @@ namespace RockPaperSpell.View
 
         private void GetDependencies()
         {
-            if (children == null)
+            layoutGroup = GetComponent<UnityEngine.UI.HorizontalOrVerticalLayoutGroup>();
+            int length = transform.childCount;
+            children = new T[length];
+            for (int i = 0; i < length; i++)
             {
-                layoutGroup = GetComponent<UnityEngine.UI.HorizontalOrVerticalLayoutGroup>();
-                int length = transform.childCount;
-                children = new T[length];
-                for (int i = 0; i < length; i++)
-                {
-                    children[i] = transform.GetChild(i).gameObject.GetComponent<T>();
-                }
+                children[i] = transform.GetChild(i).gameObject.GetComponent<T>();
             }
-            if (children == null || children.Length < maximumChilds)
-                Debug.LogError("The layout group doesn't have the right amount of children or they don't have the proper Component: " + typeof(T), gameObject);
-        }
-
-        private void Awake()
-        {
-            GetDependencies();
-        }
-
-        private void OnValidate()
-        {
-            GetDependencies();
         }
     }
 }

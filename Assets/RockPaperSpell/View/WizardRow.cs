@@ -13,7 +13,7 @@ namespace RockPaperSpell.View
             if (newPosition.childCount < 1)
             {
                 wizard.SetParent(newPosition);
-                yield return Lerp(RockPaperSpell.WizardMovementTime);
+                yield return Lerp(Controller.RockPaperSpell.WizardMovementTime);
             }
         }
 

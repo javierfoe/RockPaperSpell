@@ -1,6 +1,6 @@
 ﻿namespace RockPaperSpell.View
 {
-    public class SpellBook : HorizontalLayoutGroup<Spell>, Interfaces.SpellBook
+    public class SpellBook : HorizontalLayoutGroup<Spell>, Interface.SpellBook
     {
         public void AddSpell(Structs.Spell spell)
         {

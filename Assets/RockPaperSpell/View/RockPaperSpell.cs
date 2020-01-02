@@ -2,20 +2,8 @@
 
 namespace RockPaperSpell.View
 {
-    public class RockPaperSpell : MonoBehaviour
+    public class RockPaperSpell : MonoBehaviour, Interface.RockPaperSpell
     {
-        public static float WizardMovementTime { get; private set; }
-        public static float SaturationOn { get; private set; }
-        public static float SaturationOff { get; private set; }
-        public static float BrightnessOn { get; private set; }
-        public static float BrightnessOff { get; private set; }
-
-        [Header("Wizard Movement Time")]
-        [SerializeField] private float movementTime = 0;
-        [Header("Highlighting")]
-        [SerializeField] private float saturationOn = 0;
-        [SerializeField] private float saturationOff = 0, brightnessOn = 0, brightnessOff = 0;
-        [field: Header("Colors"), SerializeField] public Color[] Colors { get; private set; }
         [Header("Board")]
         [SerializeField] private Board board = null;
         [Header("Wizard Party")]
@@ -48,11 +36,7 @@ namespace RockPaperSpell.View
 
         private void Awake()
         {
-            WizardMovementTime = movementTime;
-            SaturationOff = saturationOff;
-            SaturationOn = saturationOn;
-            BrightnessOff = brightnessOff;
-            BrightnessOn = brightnessOn;
+            SetView(6);
         }
 
         private void OnValidate()

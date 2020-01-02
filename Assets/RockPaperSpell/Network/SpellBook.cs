@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace RockPaperSpell.Network
 {
-    public class SpellBook : NetworkBehaviour, Interfaces.SpellBook
+    public class SpellBook : NetworkBehaviour, Interface.SpellBook
     {
         [SerializeField] private Component viewComponent = null;
-        private Interfaces.SpellBook spellBook;
+        private Interface.SpellBook spellBook;
 
         public void AddSpell(Structs.Spell spell)
         {
@@ -26,7 +26,7 @@ namespace RockPaperSpell.Network
 
         private void GetDependencies()
         {
-            if ((spellBook = viewComponent as Interfaces.SpellBook) == null)
+            if ((spellBook = viewComponent as Interface.SpellBook) == null)
                 Debug.LogError("Interfaces.SpellBook is not set");
         }
 

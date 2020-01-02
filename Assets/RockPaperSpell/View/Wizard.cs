@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using RockPaperSpell.Structs;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace RockPaperSpell.View
@@ -18,8 +19,9 @@ namespace RockPaperSpell.View
             Color color = wizardImage.color;
             float h, s, v;
             Color.RGBToHSV(color, out h, out s, out v);
-            s = on ? RockPaperSpell.SaturationOn : RockPaperSpell.SaturationOff;
-            v = on ? RockPaperSpell.BrightnessOn : RockPaperSpell.BrightnessOff;
+            Highlight highlight = Controller.RockPaperSpell.Highlight(on);
+            s = highlight.saturation;
+            v = highlight.brightness;
             color = Color.HSVToRGB(h, s, v);
             wizardImage.color = color;
         }

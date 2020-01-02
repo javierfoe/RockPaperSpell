@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RockPaperSpell.Network
 {
-    public class Wizard : NetworkBehaviour, Interfaces.Wizard
+    public class Wizard : NetworkBehaviour, Interface.Wizard
     {
         [SerializeField] private Component wizardComponent = null;
 
@@ -13,7 +13,7 @@ namespace RockPaperSpell.Network
         [SyncVar(hook = nameof(SetSpellView))] private Structs.Spell spell;
         [SyncVar(hook = nameof(SetTargetView))] private Structs.Wizard target;
 
-        private Interfaces.Wizard wizardView;
+        private Interface.Wizard wizardView;
 
         public void SetColor(Color color)
         {
@@ -57,7 +57,7 @@ namespace RockPaperSpell.Network
 
         private void GetDependencies()
         {
-            if ((wizardView = wizardComponent as Interfaces.Wizard) == null)
+            if ((wizardView = wizardComponent as Interface.Wizard) == null)
                 Debug.LogError("Interfaces.Wizard is not set");
         }
 

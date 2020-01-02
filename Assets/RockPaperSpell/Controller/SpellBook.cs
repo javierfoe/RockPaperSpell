@@ -1,6 +1,6 @@
 ﻿namespace RockPaperSpell.Controller
 {
-    public class SpellBook : Controller<Interfaces.SpellBook>
+    public class SpellBook : Controller<Interface.SpellBook>
     {
         private Model.SpellBook spellBook;
 

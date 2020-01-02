@@ -715,10 +715,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 305946968}
-  - component: {fileID: 305946969}
   - component: {fileID: 305946967}
   - component: {fileID: 305946970}
-  - component: {fileID: 305946971}
+  - component: {fileID: 305946969}
   m_Layer: 0
   m_Name: RPS.Controller
   m_TagString: Untagged
@@ -738,9 +737,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 261352e2679d93f428c52a506e5a42ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rockPaperSpell: {fileID: 465616138}
+  movementTime: 2
+  saturationOn: 1
+  saturationOff: 0.8
+  brightnessOn: 1
+  brightnessOff: 0.6
+  colors:
+  - {r: 0.8, g: 0.16, b: 0.16, a: 1}
+  - {r: 0.16078429, g: 0.8, b: 0.16078429, a: 1}
+  - {r: 0.16078429, g: 0.16078429, b: 0.8, a: 1}
+  - {r: 0.8, g: 0.8, b: 0.16078429, a: 1}
+  - {r: 0.16078429, g: 0.8, b: 0.8, a: 1}
+  - {r: 0.8, g: 0.16078429, b: 0.8, a: 1}
+  rockPaperSpell: {fileID: 305946969}
   <WizardControllers>k__BackingField: {fileID: 531063846}
-  spellBook: {fileID: 406142587}
+  spellBookGameObject: {fileID: 406142586}
+  offline: 0
+  offlinePlayers: 0
 --- !u!4 &305946968
 Transform:
   m_ObjectHideFlags: 0
@@ -764,37 +777,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 305946966}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7424c1070fad4ba2a7a96b02fbeb4bb, type: 3}
+  m_Script: {fileID: 11500000, guid: be38202bb6a7b4244ac0dd391060a4ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnClientConnected:
-    m_PersistentCalls:
-      m_Calls: []
-  OnClientDataReceived:
-    m_PersistentCalls:
-      m_Calls: []
-  OnClientError:
-    m_PersistentCalls:
-      m_Calls: []
-  OnClientDisconnected:
-    m_PersistentCalls:
-      m_Calls: []
-  OnServerConnected:
-    m_PersistentCalls:
-      m_Calls: []
-  OnServerDataReceived:
-    m_PersistentCalls:
-      m_Calls: []
-  OnServerError:
-    m_PersistentCalls:
-      m_Calls: []
-  OnServerDisconnected:
-    m_PersistentCalls:
-      m_Calls: []
-  port: 7777
-  NoDelay: 1
-  serverMaxMessageSize: 16384
-  clientMaxMessageSize: 16384
+  syncMode: 0
+  syncInterval: 0.1
+  viewComponent: {fileID: 465616133}
 --- !u!114 &305946970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,40 +792,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 305946966}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0179293c41fea6148932ec9b938b3f5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 1
-  runInBackground: 1
-  startOnHeadless: 1
-  serverTickRate: 30
-  showDebugMessages: 0
-  offlineScene: 
-  onlineScene: 
-  transport: {fileID: 305946969}
-  networkAddress: localhost
-  maxConnections: 6
-  authenticator: {fileID: 0}
-  playerPrefab: {fileID: 0}
-  autoCreatePlayer: 0
-  playerSpawnMethod: 0
-  spawnPrefabs: []
-  players: 6
---- !u!114 &305946971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 305946966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showGUI: 1
-  offsetX: 0
-  offsetY: 0
+  serverOnly: 0
+  m_AssetId: 
+  m_SceneId: 2467891722
 --- !u!1 &406142586
 GameObject:
   m_ObjectHideFlags: 0
@@ -1116,18 +1076,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13781f13bd231cf47815af9e7eb148dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementTime: 2
-  saturationOn: 1
-  saturationOff: 0.8
-  brightnessOn: 1
-  brightnessOff: 0.5
-  <Colors>k__BackingField:
-  - {r: 0.8, g: 0.16, b: 0.16, a: 1}
-  - {r: 0.16078429, g: 0.8, b: 0.16078429, a: 1}
-  - {r: 0.16078429, g: 0.16078429, b: 0.8, a: 1}
-  - {r: 0.8, g: 0.8, b: 0.16078429, a: 1}
-  - {r: 0.16078429, g: 0.8, b: 0.8, a: 1}
-  - {r: 0.8, g: 0.16078429, b: 0.8, a: 1}
   board: {fileID: 1757652494}
   wizardParty: {fileID: 531063850}
   spellBook: {fileID: 406142591}
@@ -3804,6 +3752,123 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1652952476}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1664379992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1664379996}
+  - component: {fileID: 1664379995}
+  - component: {fileID: 1664379994}
+  - component: {fileID: 1664379993}
+  m_Layer: 0
+  m_Name: NetworkManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1664379993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664379992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showGUI: 1
+  offsetX: 0
+  offsetY: 0
+--- !u!114 &1664379994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664379992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7424c1070fad4ba2a7a96b02fbeb4bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnClientConnected:
+    m_PersistentCalls:
+      m_Calls: []
+  OnClientDataReceived:
+    m_PersistentCalls:
+      m_Calls: []
+  OnClientError:
+    m_PersistentCalls:
+      m_Calls: []
+  OnClientDisconnected:
+    m_PersistentCalls:
+      m_Calls: []
+  OnServerConnected:
+    m_PersistentCalls:
+      m_Calls: []
+  OnServerDataReceived:
+    m_PersistentCalls:
+      m_Calls: []
+  OnServerError:
+    m_PersistentCalls:
+      m_Calls: []
+  OnServerDisconnected:
+    m_PersistentCalls:
+      m_Calls: []
+  port: 7777
+  NoDelay: 1
+  serverMaxMessageSize: 16384
+  clientMaxMessageSize: 16384
+--- !u!114 &1664379995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664379992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0179293c41fea6148932ec9b938b3f5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
+  runInBackground: 1
+  startOnHeadless: 1
+  serverTickRate: 30
+  showDebugMessages: 0
+  offlineScene: 
+  onlineScene: 
+  transport: {fileID: 1664379994}
+  networkAddress: localhost
+  maxConnections: 6
+  authenticator: {fileID: 0}
+  playerPrefab: {fileID: 0}
+  autoCreatePlayer: 0
+  playerSpawnMethod: 0
+  spawnPrefabs: []
+  players: 4
+  controller: {fileID: 305946967}
+--- !u!4 &1664379996
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664379992}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 468.40872, y: 249.04903, z: -110.2226}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1702617012
 PrefabInstance:
   m_ObjectHideFlags: 0

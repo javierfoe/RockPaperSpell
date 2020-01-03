@@ -6,7 +6,7 @@ namespace RockPaperSpell.Network
 {
     public class SpellBook : NetworkBehaviour, Interface.SpellBook
     {
-        [SerializeField] private Component viewComponent = null;
+        [SerializeField] private View.SpellBook spellBookGo = null;
         private Interface.SpellBook spellBook;
 
         public void AddSpell(Structs.Spell spell)
@@ -26,8 +26,7 @@ namespace RockPaperSpell.Network
 
         private void GetDependencies()
         {
-            if ((spellBook = viewComponent as Interface.SpellBook) == null)
-                Debug.LogError("Interfaces.SpellBook is not set");
+            spellBook = spellBookGo as Interface.SpellBook;
         }
 
         [ClientRpc]

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4292241798184793856}
   - component: {fileID: 4292241798184793859}
   - component: {fileID: 4292241798184793862}
-  - component: {fileID: 7697352289553460273}
   m_Layer: 5
   m_Name: WizardToken
   m_TagString: Untagged
@@ -116,19 +115,6 @@ MonoBehaviour:
   gold: {fileID: 4292241798376718416}
   spell: {fileID: 4292241798285699641}
   target: {fileID: 4292241799223568392}
---- !u!114 &7697352289553460273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4292241798184793869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65163f21752b2d34e846f2596907de29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wizardComponent: {fileID: 0}
 --- !u!1 &4292241798285699643
 GameObject:
   m_ObjectHideFlags: 0

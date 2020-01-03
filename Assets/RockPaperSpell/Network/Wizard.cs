@@ -1,12 +1,13 @@
 ﻿using Mirror;
-using RockPaperSpell.Model;
 using UnityEngine;
 
 namespace RockPaperSpell.Network
 {
     public class Wizard : NetworkBehaviour, Interface.Wizard
     {
-        [SerializeField] private Component wizardComponent = null;
+        public static Wizard LocalPlayer;
+
+        [SerializeField] private View.Wizard wizardViewGo = null;
 
         [SyncVar(hook = nameof(SetGoldView))] private int gold;
         [SyncVar(hook = nameof(SetPositionView))] private int position;
@@ -45,9 +46,19 @@ namespace RockPaperSpell.Network
             this.target = target;
         }
 
+        public void SetSpellTarget(Structs.SpellTarget spellTarget)
+        {
+            CmdSetSpellTarget(spellTarget);
+        }
+
         public override void OnStartClient()
         {
             GetDependencies();
+        }
+
+        public override void OnStartLocalPlayer()
+        {
+            LocalPlayer = this;
         }
 
         private void OnValidate()
@@ -57,8 +68,7 @@ namespace RockPaperSpell.Network
 
         private void GetDependencies()
         {
-            if ((wizardView = wizardComponent as Interface.Wizard) == null)
-                Debug.LogError("Interfaces.Wizard is not set");
+            wizardView = wizardViewGo as Interface.Wizard;
         }
 
         private void SetGoldView(int gold)
@@ -91,6 +101,12 @@ namespace RockPaperSpell.Network
         private void RpcSetPosition(int position)
         {
             wizardView.SetInitialPosition(position);
+        }
+
+        [Command]
+        private void CmdSetSpellTarget(Structs.SpellTarget spellTarget)
+        {
+
         }
     }
 }

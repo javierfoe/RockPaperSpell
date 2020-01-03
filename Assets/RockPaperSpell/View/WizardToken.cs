@@ -6,21 +6,20 @@ namespace RockPaperSpell.View
 {
     public class WizardToken : Wizard, IPointerEnterHandler, IPointerExitHandler, Interface.Wizard
     {
-        public WizardRow WizardRow { get; set; }
-
+        [SerializeField] private WizardRow wizardRow = null;
         [SerializeField] private Text gold = null, spell = null;
         [SerializeField] private Image target = null;
 
         public override void Highlight(bool on)
         {
             base.Highlight(on);
-            WizardRow.Highlight(on);
+            wizardRow.Highlight(on);
         }
 
         public override void SetColor(Color color)
         {
             base.SetColor(color);
-            WizardRow.SetColor(color);
+            wizardRow.SetColor(color);
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -50,12 +49,12 @@ namespace RockPaperSpell.View
 
         public void SetPosition(int position)
         {
-            StartCoroutine(WizardRow.MoveTo(position));
+            StartCoroutine(wizardRow.MoveTo(position));
         }
 
         public void SetInitialPosition(int position)
         {
-            WizardRow.SetPosition(position);
+            wizardRow.SetPosition(position);
         }
     }
 }

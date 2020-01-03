@@ -18,9 +18,9 @@ namespace RockPaperSpell.Network
         }
 
         [SerializeField] private int players = 0;
+        [SerializeField] private RockPaperSpell network = null;
         [SerializeField] private Controller.RockPaperSpell controller = null;
         private int connectedPlayers;
-        private Wizard[] wizardControllers;
         private NetworkConnectionPlayer[] allPlayers;
 
         public override void OnStartServer()
@@ -32,12 +32,9 @@ namespace RockPaperSpell.Network
 
         public override void OnServerConnect(NetworkConnection conn)
         {
-            if(wizardControllers == null)
-                wizardControllers = controller.WizardControllers.GetComponentsInChildren<Wizard>();
-
             int i;
             for (i = 0; i < players && allPlayers[i] != null; i++) ;
-            Wizard player = wizardControllers[i];
+            Wizard player = network[i];
             allPlayers[i] = new NetworkConnectionPlayer(conn, player);
             NetworkServer.AddPlayerForConnection(conn, player.gameObject);
             connectedPlayers++;

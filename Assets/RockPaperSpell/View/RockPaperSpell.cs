@@ -21,12 +21,6 @@ namespace RockPaperSpell.View
         {
             wizardParty.SetSpacingAndPadding(players);
             board.SetSpacingAndPadding(players);
-            for (int i = 0; i < players; i++)
-            {
-                WizardToken wizard = wizardParty[i];
-                WizardRow wizardRow = board[i];
-                wizard.WizardRow = wizardRow;
-            }
         }
 
         private void SetSpellBook(int players)

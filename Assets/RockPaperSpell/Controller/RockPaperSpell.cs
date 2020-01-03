@@ -28,19 +28,16 @@ namespace RockPaperSpell.Controller
         [SerializeField] private float saturationOff = 0, brightnessOn = 0, brightnessOff = 0;
         [Header("Colors")]
         [SerializeField] private Color[] colors = null;
-        [Header("Rock Paper Spell")]
-        [SerializeField] private Component rockPaperSpell = null;
-        [field: Header("Wizard Controller"), SerializeField] public Transform WizardControllers { get; private set; }
-        [Header("Spell Book Controller")]
-        [SerializeField] private GameObject spellBookGameObject = null;
+        [Header("Interface.RockPaperSpell")]
+        [SerializeField] private GameObject rockPaperSpell = null;
         [Header("Offline settings")]
         [SerializeField] private bool offline = false;
         [SerializeField] private int offlinePlayers = 0;
 
-        private SpellBook spellBook;
         private Interface.RockPaperSpell rockPaperSpellView;
         private int players;
         private Wizard[] wizardControllers;
+        private SpellBook spellBook;
 
         public SpellTarget CreateSpellTarget(int player)
         {
@@ -62,13 +59,12 @@ namespace RockPaperSpell.Controller
 
         private void SetupWizards()
         {
+            GetDependencies();
             Model.Wizard[] wizards = Model.RockPaperSpell.Wizards;
             int length = wizards.Length;
-            wizardControllers = new Wizard[length];
             for (int i = 0; i < length; i++)
             {
                 wizards[i].Color = colors[i];
-                wizardControllers[i] = WizardControllers.GetChild(i).GetComponent<Wizard>();
                 wizardControllers[i].SetWizardModel(wizards[i]);
             }
         }
@@ -83,9 +79,9 @@ namespace RockPaperSpell.Controller
         {
             yield return null;
             rockPaperSpellView.SetView(players);
-            foreach (Wizard wizard in wizardControllers)
+            for(int i = 0; i < players; i++)
             {
-                wizard.InitialState();
+                wizardControllers[i].InitialState();
             }
             spellBook.InitialState();
             yield return null;
@@ -135,9 +131,10 @@ namespace RockPaperSpell.Controller
         }
 
         private void GetDependencies()
-        {            
-            spellBook = spellBookGameObject.GetComponent<SpellBook>();
-            rockPaperSpellView = rockPaperSpell as Interface.RockPaperSpell;
+        {
+            wizardControllers = transform.GetChild(0).GetComponentsInChildren<Wizard>();
+            spellBook = transform.GetChild(1).GetComponentInChildren<SpellBook>();
+            rockPaperSpellView = rockPaperSpell.GetComponent<Interface.RockPaperSpell>();
         }
     }
 }

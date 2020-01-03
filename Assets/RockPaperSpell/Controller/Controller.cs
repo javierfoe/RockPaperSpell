@@ -4,17 +4,13 @@ namespace RockPaperSpell.Controller
 {
     public abstract class Controller<T> : MonoBehaviour where T : class
     {
-        [SerializeField] private Component interfaceComponent = null;
+        [SerializeField] private GameObject viewGo = null;
         protected T view;
 
         protected void GetDependencies()
         {
-            if (view != null) return;
-            if (interfaceComponent != null && (view = interfaceComponent as T) != null) return;
-            view = GetComponent<T>();
-            interfaceComponent = view as Component;
-            if (view == null)
-                Debug.Log("No proper interface "+ typeof(T) +" found", gameObject);
+            if (view != null || viewGo == null) return;
+            view = viewGo.GetComponent<T>();
         }
 
         private void Awake()

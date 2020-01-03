@@ -5,8 +5,10 @@ namespace RockPaperSpell.Network
 {
     public class RockPaperSpell : NetworkBehaviour, Interface.RockPaperSpell
     {
-        [SerializeField] private GameObject viewComponent = null;
+        [SerializeField] private View.RockPaperSpell rockPaperSpellViewGo = null;
         private Interface.RockPaperSpell rockPaperSpellView;
+
+        public Wizard this[int i] => transform.GetChild(0).GetChild(i).GetComponent<Wizard>();
 
         public void SetView(int players)
         {
@@ -15,7 +17,7 @@ namespace RockPaperSpell.Network
 
         public override void OnStartClient()
         {
-            rockPaperSpellView = viewComponent.GetComponent<Interface.RockPaperSpell>();
+            rockPaperSpellView = rockPaperSpellViewGo.GetComponent<Interface.RockPaperSpell>();
         }
 
         [ClientRpc]

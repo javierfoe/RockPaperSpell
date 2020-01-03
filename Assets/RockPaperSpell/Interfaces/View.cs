@@ -1,6 +1,6 @@
 ﻿namespace RockPaperSpell.Interface
 {
-    public interface RockPaperSpell
+    public interface View
     {
         void SetView(int players);
         Wizard this[int i] { get; }

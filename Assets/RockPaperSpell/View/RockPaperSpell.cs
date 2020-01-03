@@ -2,7 +2,7 @@
 
 namespace RockPaperSpell.View
 {
-    public class RockPaperSpell : MonoBehaviour, Interface.RockPaperSpell
+    public class RockPaperSpell : MonoBehaviour, Interface.View
     {
         [Header("Board")]
         [SerializeField] private Board board = null;

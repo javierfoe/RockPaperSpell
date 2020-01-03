@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RockPaperSpell.Controller
 {
-    public class RockPaperSpell : MonoBehaviour
+    public class RockPaperSpell : MonoBehaviour, Interface.Controller
     {
         public static float WizardMovementTime { get; private set; }
         private static float SaturationOn;
@@ -34,7 +34,7 @@ namespace RockPaperSpell.Controller
         [SerializeField] private bool offline = false;
         [SerializeField] private int offlinePlayers = 0;
 
-        private Interface.RockPaperSpell rockPaperSpellView;
+        private Interface.View rockPaperSpellView;
         private int players;
         private Wizard[] wizardControllers;
         private SpellBook spellBook;
@@ -55,6 +55,15 @@ namespace RockPaperSpell.Controller
         public void StartMatch()
         {
             StartCoroutine(StartGame());
+        }
+
+        public void SetViews()
+        {
+            for (int i = 0; i < wizardControllers.Length; i++)
+            {
+                wizardControllers[i].SetView(rockPaperSpellView[i]);
+            }
+            spellBook.SetView(rockPaperSpellView.SpellBook);
         }
 
         private void SetupWizards()
@@ -115,15 +124,6 @@ namespace RockPaperSpell.Controller
             Debug.Log(winner);
         }
 
-        private void SetViews()
-        {
-            for (int i = 0; i < wizardControllers.Length; i++)
-            {
-                wizardControllers[i].SetView(rockPaperSpellView[i]);
-            }
-            spellBook.SetView(rockPaperSpellView.SpellBook);
-        }
-
         private void Awake()
         {
             GetDependencies();
@@ -144,7 +144,7 @@ namespace RockPaperSpell.Controller
         {
             wizardControllers = transform.GetChild(0).GetComponentsInChildren<Wizard>();
             spellBook = transform.GetChild(1).GetComponentInChildren<SpellBook>();
-            rockPaperSpellView = rockPaperSpell.GetComponent<Interface.RockPaperSpell>();
+            rockPaperSpellView = rockPaperSpell.GetComponent<Interface.View>();
         }
     }
 }

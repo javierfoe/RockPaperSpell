@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace RockPaperSpell.Network
 {
-    public class RockPaperSpell : NetworkBehaviour, Interface.RockPaperSpell
+    public class RockPaperSpell : NetworkBehaviour, Interface.View, Interface.Controller
     {
         [SerializeField] private View.RockPaperSpell rockPaperSpellViewGo = null;
-        private Interface.RockPaperSpell rockPaperSpellView;
+        private Interface.View rockPaperSpellView;
 
         public Interface.Wizard this[int i] => transform.GetChild(0).GetChild(i).GetComponent<Wizard>();
         public Interface.SpellBook SpellBook => transform.GetChild(1).GetComponent<SpellBook>();
@@ -16,13 +16,7 @@ namespace RockPaperSpell.Network
             RpcSetView(players);
         }
 
-        public override void OnStartClient()
-        {
-            rockPaperSpellView = rockPaperSpellViewGo.GetComponent<Interface.RockPaperSpell>();
-            SetViews();
-        }
-
-        private void SetViews()
+        public void SetViews()
         {
             Transform wizards = transform.GetChild(0);
             for (int i = 0; i < wizards.childCount; i++)
@@ -30,6 +24,12 @@ namespace RockPaperSpell.Network
                 (this[i] as Wizard).SetView(rockPaperSpellView[i]);
             }
             (SpellBook as SpellBook).SetView(rockPaperSpellView.SpellBook);
+        }
+
+        public override void OnStartClient()
+        {
+            rockPaperSpellView = rockPaperSpellViewGo.GetComponent<Interface.View>();
+            SetViews();
         }
 
         [ClientRpc]

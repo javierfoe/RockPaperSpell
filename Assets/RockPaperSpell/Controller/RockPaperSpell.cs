@@ -139,10 +139,5 @@ namespace RockPaperSpell.Controller
             spellBook = spellBookGameObject.GetComponent<SpellBook>();
             rockPaperSpellView = rockPaperSpell as Interface.RockPaperSpell;
         }
-
-        private void OnValidate()
-        {
-            GetDependencies();
-        }
     }
 }

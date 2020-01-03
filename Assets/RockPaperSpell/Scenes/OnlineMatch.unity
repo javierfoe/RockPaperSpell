@@ -3030,7 +3030,7 @@ MonoBehaviour:
   autoCreatePlayer: 0
   playerSpawnMethod: 0
   spawnPrefabs: []
-  players: 4
+  players: 6
   network: {fileID: 908339011}
   controller: {fileID: 1249908148}
 --- !u!4 &1664379996

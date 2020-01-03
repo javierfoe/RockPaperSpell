@@ -2777,6 +2777,11 @@ PrefabInstance:
       propertyPath: rockPaperSpell
       value: 
       objectReference: {fileID: 963390298}
+    - target: {fileID: 903540982857541890, guid: df33bb74467b9494484b1976001258dd,
+        type: 3}
+      propertyPath: offlinePlayers
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 903540982857541891, guid: df33bb74467b9494484b1976001258dd,
         type: 3}
       propertyPath: m_Name

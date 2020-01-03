@@ -7,14 +7,17 @@ namespace RockPaperSpell.Network
     {
         public static Wizard LocalPlayer;
 
-        [SerializeField] private View.Wizard wizardViewGo = null;
-
         [SyncVar(hook = nameof(SetGoldView))] private int gold;
         [SyncVar(hook = nameof(SetPositionView))] private int position;
         [SyncVar(hook = nameof(SetSpellView))] private Structs.Spell spell;
         [SyncVar(hook = nameof(SetTargetView))] private Structs.Wizard target;
 
         private Interface.Wizard wizardView;
+
+        public void SetView(Interface.Wizard view)
+        {
+            wizardView = view;
+        }
 
         public void SetColor(Color color)
         {
@@ -51,24 +54,9 @@ namespace RockPaperSpell.Network
             CmdSetSpellTarget(spellTarget);
         }
 
-        public override void OnStartClient()
-        {
-            GetDependencies();
-        }
-
         public override void OnStartLocalPlayer()
         {
             LocalPlayer = this;
-        }
-
-        private void OnValidate()
-        {
-            GetDependencies();
-        }
-
-        private void GetDependencies()
-        {
-            wizardView = wizardViewGo as Interface.Wizard;
         }
 
         private void SetGoldView(int gold)

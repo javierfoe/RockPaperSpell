@@ -115,6 +115,15 @@ namespace RockPaperSpell.Controller
             Debug.Log(winner);
         }
 
+        private void SetViews()
+        {
+            for (int i = 0; i < wizardControllers.Length; i++)
+            {
+                wizardControllers[i].SetView(rockPaperSpellView[i]);
+            }
+            spellBook.SetView(rockPaperSpellView.SpellBook);
+        }
+
         private void Awake()
         {
             GetDependencies();
@@ -123,6 +132,7 @@ namespace RockPaperSpell.Controller
             SaturationOn = saturationOn;
             BrightnessOff = brightnessOff;
             BrightnessOn = brightnessOn;
+            SetViews();
             if (offline)
             {
                 Setup(offlinePlayers);

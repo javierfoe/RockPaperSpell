@@ -1,5 +1,4 @@
 ﻿using Mirror;
-using RockPaperSpell.Model;
 using UnityEngine;
 
 namespace RockPaperSpell.Network
@@ -8,6 +7,11 @@ namespace RockPaperSpell.Network
     {
         [SerializeField] private View.SpellBook spellBookGo = null;
         private Interface.SpellBook spellBook;
+
+        public void SetView(Interface.SpellBook spellBook)
+        {
+            this.spellBook = spellBook;
+        }
 
         public void AddSpell(Structs.Spell spell)
         {

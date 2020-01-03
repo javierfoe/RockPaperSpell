@@ -71,5 +71,10 @@ namespace RockPaperSpell.View
                 children[i] = transform.GetChild(i).gameObject.GetComponent<T>();
             }
         }
+
+        private void Awake()
+        {
+            GetDependencies();
+        }
     }
 }

@@ -11,6 +11,9 @@ namespace RockPaperSpell.View
         [Header("Spell Book")]
         [SerializeField] private SpellBook spellBook = null;
 
+        public Interface.Wizard this[int i] => wizardParty[i];
+        public Interface.SpellBook SpellBook => spellBook;
+
         public void SetView(int players)
         {
             SetWizards(players);
@@ -26,11 +29,6 @@ namespace RockPaperSpell.View
         private void SetSpellBook(int players)
         {
             spellBook.SetSpacingAndPadding(players);
-        }
-
-        private void Awake()
-        {
-            SetView(6);
         }
 
         private void OnValidate()

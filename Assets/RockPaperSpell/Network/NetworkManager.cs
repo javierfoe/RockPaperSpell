@@ -34,7 +34,7 @@ namespace RockPaperSpell.Network
         {
             int i;
             for (i = 0; i < players && allPlayers[i] != null; i++) ;
-            Wizard player = network[i];
+            Wizard player = network[i] as Wizard;
             allPlayers[i] = new NetworkConnectionPlayer(conn, player);
             NetworkServer.AddPlayerForConnection(conn, player.gameObject);
             connectedPlayers++;

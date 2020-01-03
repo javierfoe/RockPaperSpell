@@ -7,7 +7,6 @@
         public void SetSpellBook(Model.SpellBook spellBook)
         {
             this.spellBook = spellBook;
-            GetDependencies();
             spellBook.AddListenerNewSpell(view.AddSpell);
         }
 

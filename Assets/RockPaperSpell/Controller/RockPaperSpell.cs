@@ -28,7 +28,7 @@ namespace RockPaperSpell.Controller
         [SerializeField] private float saturationOff = 0, brightnessOn = 0, brightnessOff = 0;
         [Header("Colors")]
         [SerializeField] private Color[] colors = null;
-        [Header("Rock Paper Spell View")]
+        [Header("Rock Paper Spell")]
         [SerializeField] private Component rockPaperSpell = null;
         [field: Header("Wizard Controller"), SerializeField] public Transform WizardControllers { get; private set; }
         [Header("Spell Book Controller")]

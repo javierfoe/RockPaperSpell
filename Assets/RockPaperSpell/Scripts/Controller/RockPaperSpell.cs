@@ -23,7 +23,6 @@ namespace RockPaperSpell.Controller
 
         public static IEnumerator Lerp(RectTransform wizard)
         {
-            yield return null;
             Vector2 left = wizard.offsetMin;
             Vector2 right = wizard.offsetMax;
             float time = 0f;
@@ -112,8 +111,7 @@ namespace RockPaperSpell.Controller
 
         private IEnumerator StartGame()
         {
-            yield return null;
-
+            yield return new WaitForSeconds(movementTime);
             SpellTarget[] roundSpells = new SpellTarget[players];
             bool win;
             int winner;
@@ -128,11 +126,11 @@ namespace RockPaperSpell.Controller
                 bool first = true;
                 for (int i = speedPotion; i != speedPotion || first; i = i < players - 1 ? i + 1 : 0)
                 {
-                    yield return new WaitForSeconds(2);
+                    yield return new WaitForSeconds(1.25f);
                     first = false;
                     if (Model.RockPaperSpell.Wizards[i].CastSpell())
                     {
-                        yield return new WaitForSeconds(2);
+                        yield return new WaitForSeconds(movementTime);
                     }
                 }
                 speedPotion = speedPotion < players - 1 ? speedPotion + 1 : 0;

@@ -139,8 +139,8 @@ namespace RockPaperSpell.Model
 
         public void InvokeEvents()
         {
-            goldEvent.Invoke(Gold);
-            positionEvent.Invoke(Position);
+            Gold = Gold;
+            Position = Position;
         }
     }
 }

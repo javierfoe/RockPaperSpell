@@ -15,7 +15,6 @@
 
         public void InitialState()
         {
-            view.SetInitialPosition(wizard.Position);
             view.SetColor(wizard.Color);
             wizard.InvokeEvents();
         }

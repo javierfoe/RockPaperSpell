@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wizardImage: {fileID: 4292241799163464675}
+  wizardRow: {fileID: 0}
   gold: {fileID: 4292241798376718416}
   spell: {fileID: 4292241798285699641}
   target: {fileID: 4292241799223568392}
@@ -191,7 +192,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Spell
+  m_Text: 
 --- !u!1 &4292241798376718418
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +269,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Gold
+  m_Text: 
 --- !u!1 &4292241799163464685
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ namespace RockPaperSpell.Controller
 {
     public class RockPaperSpell : MonoBehaviour, Interface.Controller
     {
-        public static float WizardMovementTime { get; private set; }
+        private static float WizardMovementTime;
         private static float SaturationOn;
         private static float SaturationOff;
         private static float BrightnessOn;
@@ -19,6 +19,21 @@ namespace RockPaperSpell.Controller
                 saturation = on ? SaturationOn : SaturationOff,
                 brightness = on ? BrightnessOn : BrightnessOff
             };
+        }
+
+        public static IEnumerator Lerp(RectTransform wizard)
+        {
+            yield return null;
+            Vector2 left = wizard.offsetMin;
+            Vector2 right = wizard.offsetMax;
+            float time = 0f;
+            while (time < 1)
+            {
+                time += Time.deltaTime / WizardMovementTime;
+                wizard.offsetMin = Vector3.Lerp(left, Vector2.zero, time);
+                wizard.offsetMax = Vector3.Lerp(right, Vector2.zero, time);
+                yield return null;
+            }
         }
 
         [Header("Wizard Movement Time")]
@@ -54,6 +69,7 @@ namespace RockPaperSpell.Controller
 
         public void StartMatch()
         {
+            SetInitialState();
             StartCoroutine(StartGame());
         }
 
@@ -84,15 +100,18 @@ namespace RockPaperSpell.Controller
             spellBook.SetSpellBook(Model.RockPaperSpell.SpellBook);
         }
 
-        private IEnumerator StartGame()
+        private void SetInitialState()
         {
-            yield return null;
             rockPaperSpellView.SetView(players);
-            for(int i = 0; i < players; i++)
+            for (int i = 0; i < players; i++)
             {
                 wizardControllers[i].InitialState();
             }
             spellBook.InitialState();
+        }
+
+        private IEnumerator StartGame()
+        {
             yield return null;
 
             SpellTarget[] roundSpells = new SpellTarget[players];

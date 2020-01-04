@@ -5,7 +5,7 @@ namespace RockPaperSpell.View
 {
     public class WizardRow : Wizard
     {
-        private RectTransform wizard => wizardImage.rectTransform;
+        private RectTransform wizard;
 
         public IEnumerator MoveTo(int position)
         {
@@ -13,7 +13,7 @@ namespace RockPaperSpell.View
             if (newPosition.childCount < 1)
             {
                 wizard.SetParent(newPosition);
-                yield return Lerp(Controller.RockPaperSpell.WizardMovementTime);
+                yield return Controller.RockPaperSpell.Lerp(wizard);
             }
         }
 
@@ -24,19 +24,9 @@ namespace RockPaperSpell.View
             wizard.offsetMin = Vector2.zero;
         }
 
-        private IEnumerator Lerp(float timeToMove)
+        private void Awake()
         {
-            yield return null;
-            Vector2 left = wizard.offsetMin;
-            Vector2 right = wizard.offsetMax;
-            float time = 0f;
-            while (time < 1)
-            {
-                time += Time.deltaTime / timeToMove;
-                wizard.offsetMin = Vector3.Lerp(left, Vector2.zero, time);
-                wizard.offsetMax = Vector3.Lerp(right, Vector2.zero, time);
-                yield return null;
-            }
+            wizard = wizardImage.rectTransform;
         }
     }
 }

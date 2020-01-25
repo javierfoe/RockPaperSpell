@@ -42,24 +42,24 @@ namespace RockPaperSpell.Network
             this.target = target;
         }
 
-        private void SetGoldView(int gold)
+        private void SetGoldView(int oldGold, int newGold)
         {
-            wizardView?.SetGold(gold);
+            wizardView?.SetGold(newGold);
         }
 
-        private void SetPositionView(int gold)
+        private void SetPositionView(int oldPosition, int newPosition)
         {
-            wizardView?.SetPosition(gold);
+            wizardView?.SetPosition(newPosition);
         }
 
-        private void SetSpellView(Structs.Spell spell)
+        private void SetSpellView(Structs.Spell oldSpell, Structs.Spell newSpell)
         {
-            wizardView?.SetSpell(spell);
+            wizardView?.SetSpell(newSpell);
         }
 
-        private void SetTargetView(Structs.Wizard target)
+        private void SetTargetView(Structs.Wizard oldTarget, Structs.Wizard newTarget)
         {
-            wizardView?.SetTarget(target);
+            wizardView?.SetTarget(newTarget);
         }
 
         [ClientRpc]

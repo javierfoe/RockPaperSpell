@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4292241798184793856}
   - component: {fileID: 4292241798184793859}
   - component: {fileID: 4292241798184793862}
+  - component: {fileID: 7947874119853513949}
   m_Layer: 5
   m_Name: WizardToken
   m_TagString: Untagged
@@ -111,11 +112,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d4acdeb9fe5404dab441f9b2368d89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Index: 0
   wizardImage: {fileID: 4292241799163464675}
   wizardRow: {fileID: 0}
   gold: {fileID: 4292241798376718416}
   spell: {fileID: 4292241798285699641}
   target: {fileID: 4292241799223568392}
+--- !u!114 &7947874119853513949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4292241798184793869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b78ad2c31574a2e47ae371b392360c70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4292241798285699643
 GameObject:
   m_ObjectHideFlags: 0

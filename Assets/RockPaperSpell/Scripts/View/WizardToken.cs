@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace RockPaperSpell.View
 {
-    public class WizardToken : Wizard, IPointerEnterHandler, IPointerExitHandler, Interface.Wizard
+    public class WizardToken : Wizard, Interface.Wizard
     {
         [SerializeField] private WizardRow wizardRow = null;
         [SerializeField] private Text gold = null, spell = null;
@@ -20,16 +19,6 @@ namespace RockPaperSpell.View
         {
             base.SetColor(color);
             wizardRow.SetColor(color);
-        }
-
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            Highlight(false);
-        }
-
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            Highlight(true);
         }
 
         public void SetGold(int gold)

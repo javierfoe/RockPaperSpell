@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace RockPaperSpell.View
 {
-    public class Wizard : MonoBehaviour
+    public class Wizard : IndexBehaviour
     {
         [SerializeField] protected Image wizardImage;
 

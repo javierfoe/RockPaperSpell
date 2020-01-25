@@ -45,6 +45,7 @@ namespace RockPaperSpell.Controller
         [Header("Interface.RockPaperSpell")]
         [SerializeField] private GameObject rockPaperSpell = null;
         [Header("Offline settings")]
+        [SerializeField] private View.WizardToken localPlayer = null;
         [SerializeField] private bool offline = false;
         [SerializeField] private int offlinePlayers = 0;
 
@@ -151,9 +152,10 @@ namespace RockPaperSpell.Controller
             BrightnessOn = brightnessOn;
             SetViews();
             if (offline)
-            {
+            {                
                 Setup(offlinePlayers);
                 StartMatch();
+                View.RockPaperSpell.LocalPlayer = localPlayer;
             }
         }
 

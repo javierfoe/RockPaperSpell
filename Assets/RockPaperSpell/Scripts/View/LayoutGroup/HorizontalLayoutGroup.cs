@@ -2,12 +2,13 @@
 
 namespace RockPaperSpell.View
 {
-    public abstract class HorizontalLayoutGroup<T> : HorizontalOrVerticalLayoutGroup<T> where T : MonoBehaviour
+    public abstract class HorizontalLayoutGroup<T> : HorizontalOrVerticalLayoutGroup<T> where T : IndexBehaviour
     {
         protected override float MaximumSize()
         {
             return (transform as RectTransform).sizeDelta.x;
         }
+
         protected override void SetPadding(int padding)
         {
             layoutGroup.padding.left = padding;

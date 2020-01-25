@@ -3,7 +3,7 @@
 namespace RockPaperSpell.View
 {
     [RequireComponent(typeof(UnityEngine.UI.HorizontalOrVerticalLayoutGroup))]
-    public abstract class HorizontalOrVerticalLayoutGroup<T> : MonoBehaviour where T : MonoBehaviour
+    public abstract class HorizontalOrVerticalLayoutGroup<T> : MonoBehaviour where T : IndexBehaviour
     {
         [SerializeField] protected int maximumChilds = 0;
         protected UnityEngine.UI.HorizontalOrVerticalLayoutGroup layoutGroup;
@@ -69,10 +69,16 @@ namespace RockPaperSpell.View
             for (int i = 0; i < length; i++)
             {
                 children[i] = transform.GetChild(i).gameObject.GetComponent<T>();
+                children[i].Index = i;
             }
         }
 
         private void Awake()
+        {
+            GetDependencies();
+        }
+
+        private void OnValidate()
         {
             GetDependencies();
         }

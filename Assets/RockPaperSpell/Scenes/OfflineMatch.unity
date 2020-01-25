@@ -2464,6 +2464,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6031496585779451443, guid: bc9a928a8dd715541aa84d768af45f3b,
+        type: 3}
+      propertyPath: localPlayer
+      value: 
+      objectReference: {fileID: 144233130}
     - target: {fileID: 6031496585779451452, guid: bc9a928a8dd715541aa84d768af45f3b,
         type: 3}
       propertyPath: m_Name
@@ -2633,6 +2638,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 144233111}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &144233130 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7504462750848064174, guid: bc9a928a8dd715541aa84d768af45f3b,
+    type: 3}
+  m_PrefabInstance: {fileID: 144233111}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144233117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1d4acdeb9fe5404dab441f9b2368d89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &613778966
 GameObject:
   m_ObjectHideFlags: 0
@@ -2722,6 +2739,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 144233111}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &963390300 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6031496585779451443, guid: bc9a928a8dd715541aa84d768af45f3b,
+    type: 3}
+  m_PrefabInstance: {fileID: 144233111}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963390298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13781f13bd231cf47815af9e7eb148dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1105371993 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 69582017831569449, guid: df33bb74467b9494484b1976001258dd,
@@ -2782,6 +2811,16 @@ PrefabInstance:
       propertyPath: offlinePlayers
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 903540982857541890, guid: df33bb74467b9494484b1976001258dd,
+        type: 3}
+      propertyPath: viewOffline
+      value: 
+      objectReference: {fileID: 963390300}
+    - target: {fileID: 903540982857541890, guid: df33bb74467b9494484b1976001258dd,
+        type: 3}
+      propertyPath: localPlayer
+      value: 
+      objectReference: {fileID: 144233130}
     - target: {fileID: 903540982857541891, guid: df33bb74467b9494484b1976001258dd,
         type: 3}
       propertyPath: m_Name

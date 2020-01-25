@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace RockPaperSpell.View
 {
-    public class Spell : MonoBehaviour
+    public class Spell : IndexBehaviour
     {
         [SerializeField] private Text spellText = null;
 

@@ -4,9 +4,9 @@ A PC port of the board game **Rock Paper Wizard** by **Wizard of the Coast**.
 
 ## MVC Pattern
 
-For the multiplayer connectivity there is an additional component called Network that acts as an interface in between the View and the Controller for receiving input from the players and to send the data to the players' views.
-
 **Model** <- **Controller** <-> Network* <-> **View**
+
+*Required for multiplayer
 
 Arrows indicate interaction.
 
@@ -15,7 +15,7 @@ Arrows indicate interaction.
   * It listens to the input from the View. 
   * Makes changes on the Model.
   * Updates the View.
-- View component is the UI elements that show the status of the match to the players.
+- View component is the UI elements that show the status of the match to the players and get the user input.
 - Network is an optional component required for multiplayer matches. It mimics the behaviour of both the View and the Controller so that it is transparent for both. Handles the communication between the server and clients.
   * It acts as a View component from the Controller.
   * It acts as a Controller component from the View.

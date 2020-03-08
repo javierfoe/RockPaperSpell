@@ -13,5 +13,10 @@ namespace RockPaperSpell.Structs
             } while (target == player);
             spell = Random.Range(0, maxPlayers > 5 ? 5 : maxPlayers);
         }
+
+        public bool IsDefault()
+        {
+            return spell < 0 && target < 0;
+        }
     }
 }

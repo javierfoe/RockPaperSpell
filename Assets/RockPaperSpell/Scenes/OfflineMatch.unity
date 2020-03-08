@@ -2821,6 +2821,11 @@ PrefabInstance:
       propertyPath: localPlayer
       value: 
       objectReference: {fileID: 144233130}
+    - target: {fileID: 903540982857541890, guid: df33bb74467b9494484b1976001258dd,
+        type: 3}
+      propertyPath: offline
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 903540982857541891, guid: df33bb74467b9494484b1976001258dd,
         type: 3}
       propertyPath: m_Name

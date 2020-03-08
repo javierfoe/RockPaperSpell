@@ -16,6 +16,11 @@ namespace RockPaperSpell.Network
             RpcSetView(players);
         }
 
+        public void EnableCast(bool value)
+        {
+            RpcEnableCast(value);
+        }
+
         public void SetViews()
         {
             Transform wizards = transform.GetChild(0);
@@ -36,6 +41,12 @@ namespace RockPaperSpell.Network
         private void RpcSetView(int players)
         {
             rockPaperSpellView.SetView(players);
+        }
+
+        [ClientRpc]
+        private void RpcEnableCast(bool value)
+        {
+            rockPaperSpellView.EnableCast(value);
         }
     }
 }

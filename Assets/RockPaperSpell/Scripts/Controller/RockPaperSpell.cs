@@ -6,6 +6,8 @@ namespace RockPaperSpell.Controller
 {
     public class RockPaperSpell : MonoBehaviour, Interface.Controller
     {
+        public static float TargetSelectionTime { get; private set; }
+
         private static float WizardMovementTime;
         private static float SaturationOn;
         private static float SaturationOff;
@@ -37,27 +39,25 @@ namespace RockPaperSpell.Controller
 
         [Header("Wizard Movement Time")]
         [SerializeField] private float movementTime = 0;
+        [Header("Spell & Target Select Time")]
+        [SerializeField] private float targetSelectionTime = 0;
         [Header("Highlighting")]
         [SerializeField] private float saturationOn = 0;
         [SerializeField] private float saturationOff = 0, brightnessOn = 0, brightnessOff = 0;
         [Header("Colors")]
         [SerializeField] private Color[] colors = null;
-        [Header("Interface.RockPaperSpell")]
+        [Header("Interface.View RockPaperSpell")]
         [SerializeField] private GameObject rockPaperSpell = null;
         [Header("Offline settings")]
-        [SerializeField] private View.WizardToken localPlayer = null;
         [SerializeField] private bool offline = false;
+        [SerializeField] private View.WizardToken localPlayer = null;
         [SerializeField] private int offlinePlayers = 0;
 
         private Interface.View rockPaperSpellView;
         private int players;
         private Wizard[] wizardControllers;
         private SpellBook spellBook;
-
-        public SpellTarget CreateSpellTarget(int player)
-        {
-            return new SpellTarget(player, players);
-        }
+        private WaitForSpells waitForSpells;
 
         public void Setup(int players)
         {
@@ -80,6 +80,11 @@ namespace RockPaperSpell.Controller
                 wizardControllers[i].SetView(rockPaperSpellView[i]);
             }
             spellBook.SetView(rockPaperSpellView.SpellBook);
+        }
+
+        public void SetTargetSpell(int index, int spell, int target)
+        {
+            waitForSpells.SetSpellTarget(index, spell, target);
         }
 
         private void SetupWizards()
@@ -113,17 +118,14 @@ namespace RockPaperSpell.Controller
         private IEnumerator StartGame()
         {
             yield return new WaitForSeconds(movementTime);
-            SpellTarget[] roundSpells = new SpellTarget[players];
             bool win;
             int winner;
             int speedPotion = 0;
             do
             {
-                for (int i = 0; i < players; i++)
-                {
-                    roundSpells[i] = CreateSpellTarget(i);
-                }
-                Model.RockPaperSpell.SetTargetsAndSpells(roundSpells);
+                waitForSpells = new WaitForSpells(players);
+                yield return waitForSpells;
+                Model.RockPaperSpell.SetTargetsAndSpells(waitForSpells.SpellTargets);
                 bool first = true;
                 for (int i = speedPotion; i != speedPotion || first; i = i < players - 1 ? i + 1 : 0)
                 {
@@ -150,6 +152,7 @@ namespace RockPaperSpell.Controller
             SaturationOn = saturationOn;
             BrightnessOff = brightnessOff;
             BrightnessOn = brightnessOn;
+            TargetSelectionTime = targetSelectionTime;
             SetViews();
             if (offline)
             {                

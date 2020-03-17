@@ -4,8 +4,8 @@ namespace RockPaperSpell.View
 {
     public class RockPaperSpell : MonoBehaviour, Interface.View
     {
-        public static bool CanCast, CastingSpell;
-        public static WizardToken LocalPlayer;
+        internal static bool CanCast, CastingSpell;
+        internal static WizardToken LocalPlayer;
 
         [Header("Board")]
         [SerializeField] private Board board = null;

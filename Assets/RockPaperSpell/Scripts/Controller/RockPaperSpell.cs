@@ -7,7 +7,6 @@ namespace RockPaperSpell.Controller
     public class RockPaperSpell : MonoBehaviour, Interface.Controller
     {
         public static float TargetSelectionTime { get; private set; }
-        public static Interface.WizardController LocalPlayer { get; set; }
         internal static RockPaperSpell Controller { get; private set; }
 
         private static float WizardMovementTime;
@@ -164,7 +163,6 @@ namespace RockPaperSpell.Controller
             BrightnessOn = brightnessOn;
             TargetSelectionTime = targetSelectionTime;
             Controller = this;
-            LocalPlayer = this[localPlayerIndex];
             SetViews();
             if (offline)
             {

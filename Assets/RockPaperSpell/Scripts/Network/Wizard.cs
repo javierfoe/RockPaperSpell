@@ -55,7 +55,7 @@ namespace RockPaperSpell.Network
 
         public override void OnStartLocalPlayer()
         {
-            Controller.RockPaperSpell.LocalPlayer = this;
+
         }
 
         private void SetGoldView(int oldGold, int newGold)

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace RockPaperSpell.View
 {
-    public class WizardToken : Wizard, Interface.Wizard
+    public class WizardToken : Wizard, Interface.WizardView
     {
         [SerializeField] private WizardRow wizardRow = null;
         [SerializeField] private Text gold = null, spell = null;

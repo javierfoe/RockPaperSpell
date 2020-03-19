@@ -3,23 +3,18 @@ using UnityEngine;
 
 namespace RockPaperSpell.Network
 {
-    public class Wizard : NetworkBehaviour, Interface.Wizard
+    public class Wizard : NetworkBehaviour, Interface.WizardView, Interface.WizardController
     {
         [SyncVar(hook = nameof(SetGoldView))] private int gold;
         [SyncVar(hook = nameof(SetPositionView))] private int position;
         [SyncVar(hook = nameof(SetSpellView))] private Structs.Spell spell;
         [SyncVar(hook = nameof(SetTargetView))] private Structs.Wizard target;
 
-        private Interface.Wizard wizardView;
+        private Interface.WizardView wizardView;
 
-        public void SetView(Interface.Wizard view)
+        public void SetView(Interface.WizardView view)
         {
             wizardView = view;
-        }
-
-        public void SetColor(Color color)
-        {
-            RpcSetColor(color);
         }
 
         public void SetGold(int gold)
@@ -40,6 +35,21 @@ namespace RockPaperSpell.Network
         public void SetTarget(Structs.Wizard target)
         {
             this.target = target;
+        }
+
+        public void SetColor(Color color)
+        {
+            RpcSetColor(color);
+        }
+
+        public void SetSpellTarget(int player, Structs.SpellTarget spellTarget)
+        {
+            CmdSetSpellTarget(player, spellTarget);
+        }
+
+        public override void OnStartLocalPlayer()
+        {
+            Controller.RockPaperSpell.LocalPlayer = this;
         }
 
         private void SetGoldView(int oldGold, int newGold)
@@ -66,6 +76,12 @@ namespace RockPaperSpell.Network
         private void RpcSetColor(Color color)
         {
             wizardView.SetColor(color);
+        }
+
+        [Command]
+        private void CmdSetSpellTarget(int player, Structs.SpellTarget spellTarget)
+        {
+            Controller.RockPaperSpell.Controller.SetTargetSpell(player, spellTarget);
         }
     }
 }

@@ -5,7 +5,8 @@ namespace RockPaperSpell.View
     public class RockPaperSpell : MonoBehaviour, Interface.View
     {
         internal static bool CanCast, CastingSpell;
-        internal static WizardToken LocalPlayer;
+        internal static int LocalPlayerIndex;
+        internal static Interface.WizardView LocalPlayer;
 
         [Header("Board")]
         [SerializeField] private Board board = null;
@@ -14,8 +15,14 @@ namespace RockPaperSpell.View
         [Header("Spell Book")]
         [SerializeField] private SpellBook spellBook = null;
 
-        public Interface.Wizard this[int i] => wizardParty[i];
+        public Interface.WizardView this[int i] => wizardParty[i];
         public Interface.SpellBook SpellBook => spellBook;
+
+        public void SetLocalPlayer(int index)
+        {
+            LocalPlayerIndex = index;
+            LocalPlayer = this[index];
+        }
 
         public void EnableCast(bool value)
         {

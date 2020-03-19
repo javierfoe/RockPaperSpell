@@ -65,7 +65,7 @@ namespace RockPaperSpell.View
             }
 
             currentTarget = null;
-            if (drop != null && drop != RockPaperSpell.LocalPlayer)
+            if (drop != null && (Interface.WizardView)drop != RockPaperSpell.LocalPlayer)
             {
                 currentTarget = drop;
                 drop.Highlight(true);
@@ -79,8 +79,15 @@ namespace RockPaperSpell.View
             if (!RockPaperSpell.CanCast) return;
             RockPaperSpell.CastingSpell = false;
             Destroy(ghostCard);
-            if(currentTarget != null)
-                Debug.Log("Current Target: " + currentTarget.Index + " - Current Spell: " + spell.Index);
+            if (currentTarget != null)
+            {
+                Structs.SpellTarget spellTarget = new Structs.SpellTarget
+                {
+                    target = currentTarget.Index,
+                    spell = spell.Index
+                };
+                Controller.RockPaperSpell.LocalPlayer.SetSpellTarget(RockPaperSpell.LocalPlayerIndex, spellTarget);
+            }
         }
 
         private void Awake()

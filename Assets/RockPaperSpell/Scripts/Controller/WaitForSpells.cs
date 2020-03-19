@@ -5,10 +5,8 @@ namespace RockPaperSpell.Controller
 {
     public class WaitForSpells : System.Collections.IEnumerator
     {
-
         private float currentTime;
-
-        public object Current => throw new System.NotImplementedException();
+        public object Current { get; set; }
         public SpellTarget[] SpellTargets { get; private set; }
 
         public WaitForSpells(int players)
@@ -22,9 +20,9 @@ namespace RockPaperSpell.Controller
             currentTime = 0;
         }
 
-        public void SetSpellTarget(int index, int spell, int target)
+        public void SetSpellTarget(int index, SpellTarget spellTarget)
         {
-            SpellTargets[index] = new SpellTarget { spell = spell, target = target };
+            SpellTargets[index] = spellTarget;
         }
 
         public bool MoveNext()
@@ -57,7 +55,7 @@ namespace RockPaperSpell.Controller
         {
             SpellTarget aux;
             int length = SpellTargets.Length;
-            for(int i = 0; i < length; ++i)
+            for (int i = 0; i < length; ++i)
             {
                 aux = SpellTargets[i];
                 SpellTargets[i] = aux.IsDefault() ? new SpellTarget(i, length) : aux;

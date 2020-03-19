@@ -8,7 +8,7 @@ namespace RockPaperSpell.Network
         [SerializeField] private View.RockPaperSpell rockPaperSpellViewGo = null;
         private Interface.View rockPaperSpellView;
 
-        public Interface.Wizard this[int i] => transform.GetChild(0).GetChild(i).GetComponent<Wizard>();
+        public Interface.WizardView this[int i] => transform.GetChild(0).GetChild(i).GetComponent<Wizard>();
         public Interface.SpellBook SpellBook => transform.GetChild(1).GetComponent<SpellBook>();
 
         public void SetView(int players)

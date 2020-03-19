@@ -1,6 +1,6 @@
 ﻿namespace RockPaperSpell.Interface
 {
-    public interface Wizard
+    public interface WizardView
     {
         void SetColor(UnityEngine.Color color);
         void SetPosition(int position);

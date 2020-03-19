@@ -7,6 +7,8 @@ namespace RockPaperSpell.Controller
     public class RockPaperSpell : MonoBehaviour, Interface.Controller
     {
         public static float TargetSelectionTime { get; private set; }
+        public static Interface.WizardController LocalPlayer { get; set; }
+        internal static RockPaperSpell Controller { get; private set; }
 
         private static float WizardMovementTime;
         private static float SaturationOn;
@@ -50,7 +52,7 @@ namespace RockPaperSpell.Controller
         [SerializeField] private GameObject rockPaperSpell = null;
         [Header("Offline settings")]
         [SerializeField] private bool offline = false;
-        [SerializeField] private View.WizardToken localPlayer = null;
+        [SerializeField] private int localPlayerIndex = 0;
         [SerializeField] private int offlinePlayers = 0;
 
         private Interface.View rockPaperSpellView;
@@ -58,6 +60,8 @@ namespace RockPaperSpell.Controller
         private Wizard[] wizardControllers;
         private SpellBook spellBook;
         private WaitForSpells waitForSpells;
+
+        private Wizard this[int index] => wizardControllers[index];        
 
         public void Setup(int players)
         {
@@ -82,9 +86,9 @@ namespace RockPaperSpell.Controller
             spellBook.SetView(rockPaperSpellView.SpellBook);
         }
 
-        public void SetTargetSpell(int index, int spell, int target)
+        public void SetTargetSpell(int player, SpellTarget spellTarget)
         {
-            waitForSpells.SetSpellTarget(index, spell, target);
+            waitForSpells.SetSpellTarget(player, spellTarget);
         }
 
         private void SetupWizards()
@@ -95,7 +99,7 @@ namespace RockPaperSpell.Controller
             for (int i = 0; i < length; i++)
             {
                 wizards[i].Color = colors[i];
-                wizardControllers[i].SetWizardModel(wizards[i]);
+                this[i].SetWizardModel(wizards[i]);
             }
         }
 
@@ -153,12 +157,14 @@ namespace RockPaperSpell.Controller
             BrightnessOff = brightnessOff;
             BrightnessOn = brightnessOn;
             TargetSelectionTime = targetSelectionTime;
-            SetViews();
+            Controller = this;
+            LocalPlayer = this[localPlayerIndex];
             if (offline)
-            {                
+            {
+                SetViews();
                 Setup(offlinePlayers);
                 StartMatch();
-                View.RockPaperSpell.LocalPlayer = localPlayer;
+                rockPaperSpell.GetComponent<View.RockPaperSpell>().SetLocalPlayer(localPlayerIndex);
             }
         }
 

@@ -1,6 +1,8 @@
-﻿namespace RockPaperSpell.Controller
+﻿using RockPaperSpell.Structs;
+
+namespace RockPaperSpell.Controller
 {
-    public class Wizard : Controller<Interface.Wizard>
+    public class Wizard : Controller<Interface.WizardView>, Interface.WizardController
     {
         private Model.Wizard wizard;
 
@@ -17,6 +19,11 @@
         {
             view.SetColor(wizard.Color);
             wizard.InvokeEvents();
+        }
+
+        public void SetSpellTarget(int player, SpellTarget spellTarget)
+        {
+            RockPaperSpell.Controller.SetTargetSpell(player, spellTarget);
         }
     }
 }

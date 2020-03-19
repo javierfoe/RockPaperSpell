@@ -89,9 +89,6 @@ namespace RockPaperSpell.Controller
         public void SetTargetSpell(int player, SpellTarget spellTarget)
         {
             waitForSpells.SetSpellTarget(player, spellTarget);
-            Model.Wizard playerWizard = Model.RockPaperSpell.Wizards[player];
-            playerWizard.Target = Model.RockPaperSpell.Wizards[spellTarget.target];
-            playerWizard.ChosenSpell = Model.RockPaperSpell.SpellBook[spellTarget.spell];
         }
 
         private void SetupWizards()

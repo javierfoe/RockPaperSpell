@@ -81,12 +81,7 @@ namespace RockPaperSpell.View
             Destroy(ghostCard);
             if (currentTarget != null)
             {
-                Structs.SpellTarget spellTarget = new Structs.SpellTarget
-                {
-                    target = currentTarget.Index,
-                    spell = spell.Index
-                };
-                RockPaperSpell.SetSpellTarget(spellTarget);
+                RockPaperSpell.SetSpellTarget(currentTarget, spell);
             }
         }
 

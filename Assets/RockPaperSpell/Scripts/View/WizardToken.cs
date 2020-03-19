@@ -9,7 +9,16 @@ namespace RockPaperSpell.View
         [SerializeField] private Text gold = null, spell = null;
         [SerializeField] private Image target = null;
 
+        private Color color;
         private Interface.WizardController wizardController;
+
+        public Structs.Wizard GetStruct()
+        {
+            return new Structs.Wizard
+            {
+                color = color
+            };
+        }
 
         public void SetController(Interface.WizardController controller)
         {
@@ -25,6 +34,7 @@ namespace RockPaperSpell.View
         public override void SetColor(Color color)
         {
             base.SetColor(color);
+            this.color = color;
             wizardRow.SetColor(color);
         }
 

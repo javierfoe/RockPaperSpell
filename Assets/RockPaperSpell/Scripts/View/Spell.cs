@@ -7,6 +7,14 @@ namespace RockPaperSpell.View
     {
         [SerializeField] private Text spellText = null;
 
+        public Structs.Spell GetStruct()
+        {
+            return new Structs.Spell
+            {
+                name = spellText.text
+            };
+        }
+
         public void SetSpell(Structs.Spell spell)
         {
             spellText.text = spell.name;

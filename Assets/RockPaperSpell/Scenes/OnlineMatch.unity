@@ -3018,8 +3018,8 @@ MonoBehaviour:
   dontDestroyOnLoad: 1
   runInBackground: 1
   startOnHeadless: 1
-  serverTickRate: 30
   showDebugMessages: 0
+  serverTickRate: 30
   offlineScene: 
   onlineScene: 
   transport: {fileID: 1664379994}
@@ -3030,7 +3030,7 @@ MonoBehaviour:
   autoCreatePlayer: 0
   playerSpawnMethod: 0
   spawnPrefabs: []
-  players: 6
+  players: 3
   network: {fileID: 908339011}
   controller: {fileID: 1249908148}
 --- !u!4 &1664379996

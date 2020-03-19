@@ -8,8 +8,15 @@ namespace RockPaperSpell.View
         internal static Interface.WizardView LocalPlayer;
         private static int localPlayerIndex;
 
-        public static void SetSpellTarget(Structs.SpellTarget spellTarget)
+        public static void SetSpellTarget(WizardToken target, Spell spell)
         {
+            Structs.SpellTarget spellTarget = new Structs.SpellTarget
+            {
+                target = target.Index,
+                spell = spell.Index
+            };
+            LocalPlayer.SetTarget(target.GetStruct());
+            LocalPlayer.SetSpell(spell.GetStruct());
             LocalPlayer.SetSpellTarget(localPlayerIndex, spellTarget);
         }
 

@@ -53,11 +53,6 @@ namespace RockPaperSpell.Network
             CmdSetSpellTarget(player, spellTarget);
         }
 
-        public override void OnStartLocalPlayer()
-        {
-
-        }
-
         private void SetGoldView(int oldGold, int newGold)
         {
             wizardView?.SetGold(newGold);

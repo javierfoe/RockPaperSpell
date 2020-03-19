@@ -23,12 +23,6 @@ namespace RockPaperSpell.View
         public Interface.WizardView this[int i] => wizardParty[i];
         public Interface.SpellBook SpellBook => spellBook;
 
-        public void SetLocalPlayer(Interface.WizardView wizardView)
-        {
-            int index = wizardParty.IndexOf(wizardView);
-            SetLocalPlayer(index);
-        }
-
         public void SetLocalPlayer(int index)
         {
             localPlayerIndex = index;

@@ -60,7 +60,7 @@ namespace RockPaperSpell.Controller
         private SpellBook spellBook;
         private WaitForSpells waitForSpells;
 
-        private Wizard this[int index] => wizardControllers[index];        
+        private Wizard this[int index] => wizardControllers[index];
 
         public void Setup(int players)
         {

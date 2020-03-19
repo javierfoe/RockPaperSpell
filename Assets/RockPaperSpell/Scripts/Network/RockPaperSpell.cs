@@ -37,6 +37,16 @@ namespace RockPaperSpell.Network
                 rockPaperSpellView[i].SetController(aux);
             }
             (SpellBook as SpellBook).SetView(rockPaperSpellView.SpellBook);
+
+            Wizard localPlayer;
+            int index = 0;
+            foreach (Transform wizard in transform.GetChild(0))
+            {
+                localPlayer = wizard.GetComponent<Wizard>();
+                if (localPlayer.isLocalPlayer) break;
+                index++;
+            }
+            rockPaperSpellViewGo.SetLocalPlayer(index);
         }
 
         public override void OnStartClient()

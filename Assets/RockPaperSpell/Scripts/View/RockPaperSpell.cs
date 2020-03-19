@@ -5,8 +5,13 @@ namespace RockPaperSpell.View
     public class RockPaperSpell : MonoBehaviour, Interface.View
     {
         internal static bool CanCast, CastingSpell;
-        internal static int LocalPlayerIndex;
         internal static Interface.WizardView LocalPlayer;
+        private static int localPlayerIndex;
+
+        public static void SetSpellTarget(Structs.SpellTarget spellTarget)
+        {
+            LocalPlayer.SetSpellTarget(localPlayerIndex, spellTarget);
+        }
 
         [Header("Board")]
         [SerializeField] private Board board = null;
@@ -20,7 +25,7 @@ namespace RockPaperSpell.View
 
         public void SetLocalPlayer(int index)
         {
-            LocalPlayerIndex = index;
+            localPlayerIndex = index;
             LocalPlayer = this[index];
         }
 

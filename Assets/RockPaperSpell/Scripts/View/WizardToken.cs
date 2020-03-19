@@ -9,6 +9,13 @@ namespace RockPaperSpell.View
         [SerializeField] private Text gold = null, spell = null;
         [SerializeField] private Image target = null;
 
+        private Interface.WizardController wizardController;
+
+        public void SetController(Interface.WizardController controller)
+        {
+            wizardController = controller;
+        }
+
         public override void Highlight(bool on)
         {
             base.Highlight(on);
@@ -44,6 +51,11 @@ namespace RockPaperSpell.View
         public void SetInitialPosition(int position)
         {
             wizardRow.SetPosition(position);
+        }
+
+        public void SetSpellTarget(int player, Structs.SpellTarget spellTarget)
+        {
+            wizardController.SetSpellTarget(player, spellTarget);
         }
     }
 }

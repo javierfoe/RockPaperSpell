@@ -8,8 +8,13 @@ namespace RockPaperSpell.Network
         [SerializeField] private View.RockPaperSpell rockPaperSpellViewGo = null;
         private Interface.View rockPaperSpellView;
 
-        public Interface.WizardView this[int i] => transform.GetChild(0).GetChild(i).GetComponent<Wizard>();
+        public Interface.WizardView this[int i] => GetWizard<Wizard>(i);
         public Interface.SpellBook SpellBook => transform.GetChild(1).GetComponent<SpellBook>();
+
+        public T GetWizard<T>(int index)
+        {
+            return transform.GetChild(0).GetChild(index).GetComponent<T>();
+        }
 
         public void SetView(int players)
         {
@@ -24,9 +29,12 @@ namespace RockPaperSpell.Network
         public void SetViews()
         {
             Transform wizards = transform.GetChild(0);
+            Wizard aux;
             for (int i = 0; i < wizards.childCount; i++)
             {
                 (this[i] as Wizard).SetView(rockPaperSpellView[i]);
+                aux = GetWizard<Wizard>(i);
+                rockPaperSpellView[i].SetController(aux);
             }
             (SpellBook as SpellBook).SetView(rockPaperSpellView.SpellBook);
         }

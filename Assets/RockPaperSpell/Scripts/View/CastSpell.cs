@@ -86,7 +86,7 @@ namespace RockPaperSpell.View
                     target = currentTarget.Index,
                     spell = spell.Index
                 };
-                Controller.RockPaperSpell.LocalPlayer.SetSpellTarget(RockPaperSpell.LocalPlayerIndex, spellTarget);
+                RockPaperSpell.SetSpellTarget(spellTarget);
             }
         }
 

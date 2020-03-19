@@ -11,6 +11,12 @@ namespace RockPaperSpell.Network
         [SyncVar(hook = nameof(SetTargetView))] private Structs.Wizard target;
 
         private Interface.WizardView wizardView;
+        private Interface.WizardController wizardController;
+
+        public void SetController(Interface.WizardController controller)
+        {
+            wizardController = controller;
+        }
 
         public void SetView(Interface.WizardView view)
         {
@@ -81,7 +87,7 @@ namespace RockPaperSpell.Network
         [Command]
         private void CmdSetSpellTarget(int player, Structs.SpellTarget spellTarget)
         {
-            Controller.RockPaperSpell.Controller.SetTargetSpell(player, spellTarget);
+            wizardController.SetSpellTarget(player, spellTarget);
         }
     }
 }

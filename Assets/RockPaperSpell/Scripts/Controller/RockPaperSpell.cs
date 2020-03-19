@@ -82,6 +82,7 @@ namespace RockPaperSpell.Controller
             for (int i = 0; i < wizardControllers.Length; i++)
             {
                 wizardControllers[i].SetView(rockPaperSpellView[i]);
+                rockPaperSpellView[i].SetController(wizardControllers[i]);
             }
             spellBook.SetView(rockPaperSpellView.SpellBook);
         }
@@ -89,6 +90,9 @@ namespace RockPaperSpell.Controller
         public void SetTargetSpell(int player, SpellTarget spellTarget)
         {
             waitForSpells.SetSpellTarget(player, spellTarget);
+            Model.Wizard playerWizard = Model.RockPaperSpell.Wizards[player];
+            playerWizard.Target = Model.RockPaperSpell.Wizards[spellTarget.target];
+            playerWizard.ChosenSpell = Model.RockPaperSpell.SpellBook[spellTarget.spell];
         }
 
         private void SetupWizards()
@@ -128,7 +132,9 @@ namespace RockPaperSpell.Controller
             do
             {
                 waitForSpells = new WaitForSpells(players);
+                rockPaperSpellView.EnableCast(true);
                 yield return waitForSpells;
+                rockPaperSpellView.EnableCast(false);
                 Model.RockPaperSpell.SetTargetsAndSpells(waitForSpells.SpellTargets);
                 bool first = true;
                 for (int i = speedPotion; i != speedPotion || first; i = i < players - 1 ? i + 1 : 0)
@@ -159,9 +165,9 @@ namespace RockPaperSpell.Controller
             TargetSelectionTime = targetSelectionTime;
             Controller = this;
             LocalPlayer = this[localPlayerIndex];
+            SetViews();
             if (offline)
             {
-                SetViews();
                 Setup(offlinePlayers);
                 StartMatch();
                 rockPaperSpell.GetComponent<View.RockPaperSpell>().SetLocalPlayer(localPlayerIndex);

@@ -8,6 +8,7 @@ namespace RockPaperSpell.View
         [SerializeField] private WizardRow wizardRow = null;
         [SerializeField] private Text gold = null, spell = null;
         [SerializeField] private Image target = null;
+        [SerializeField] private GameObject speedPotion = null, localPlayer = null;
 
         private Color color;
         private Interface.WizardController wizardController;
@@ -18,6 +19,11 @@ namespace RockPaperSpell.View
             {
                 color = color
             };
+        }
+
+        public void LocalPlayer()
+        {
+            localPlayer.SetActive(true);
         }
 
         public void SetController(Interface.WizardController controller)
@@ -36,6 +42,11 @@ namespace RockPaperSpell.View
             base.SetColor(color);
             this.color = color;
             wizardRow.SetColor(color);
+        }
+
+        public void SetSpeedPotion(bool speedPotion)
+        {
+            this.speedPotion.SetActive(speedPotion);
         }
 
         public void SetGold(int gold)

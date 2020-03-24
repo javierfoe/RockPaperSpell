@@ -6,16 +6,19 @@ namespace RockPaperSpell.Model
 {
     public class Wizard
     {
-        private UnityEventWizard targetEvent;
-        private UnityEventSpell spellEvent;
-        private UnityEventInt positionEvent, goldEvent;
+        private readonly UnityEventInt positionEvent = new UnityEventInt(), goldEvent = new UnityEventInt();
+        private readonly UnityEventBool speedPotionEvent = new UnityEventBool();
+        private readonly UnityEventWizard targetEvent = new UnityEventWizard();
+        private readonly UnityEventSpell spellEvent = new UnityEventSpell();
 
         private int position, gold;
+        private bool speedPotion;
         private Wizard target;
         private Spell chosenSpell;
 
         public bool WildSurge { get; set; }
         public Color Color;
+
         public int Position
         {
             get => position;
@@ -30,6 +33,7 @@ namespace RockPaperSpell.Model
                 positionEvent.Invoke(position);
             }
         }
+
         public int Gold
         {
             get => gold;
@@ -42,6 +46,17 @@ namespace RockPaperSpell.Model
                 goldEvent.Invoke(gold);
             }
         }
+
+        public bool SpeedPotion
+        {
+            get => speedPotion;
+            set
+            {
+                speedPotion = value;
+                speedPotionEvent.Invoke(speedPotion);
+            }
+        }
+
         public Wizard Target
         {
             get => target;
@@ -51,6 +66,7 @@ namespace RockPaperSpell.Model
                 targetEvent.Invoke(value.GetStruct());
             }
         }
+
         public Spell ChosenSpell
         {
             get => chosenSpell;
@@ -67,6 +83,7 @@ namespace RockPaperSpell.Model
                 }
             }
         }
+
         public Wizard Next { get; set; }
         public Wizard Previous { get; set; }
 
@@ -82,18 +99,8 @@ namespace RockPaperSpell.Model
 
         public Wizard(int position)
         {
-            targetEvent = new UnityEventWizard();
-            spellEvent = new UnityEventSpell();
-            goldEvent = new UnityEventInt();
-            positionEvent = new UnityEventInt();
             Gold = 3;
             Position = position;
-        }
-
-        public void SetSpellAndTarget(Wizard target, Spell spell)
-        {
-            Target = target;
-            ChosenSpell = spell;
         }
 
         public bool CastSpell()
@@ -127,6 +134,11 @@ namespace RockPaperSpell.Model
             goldEvent.AddListener(action);
         }
 
+        public void AddSpeedPotionListener(UnityAction<bool> action)
+        {
+            speedPotionEvent.AddListener(action);
+        }
+
         public void AddTargetListener(UnityAction<Structs.Wizard> action)
         {
             targetEvent.AddListener(action);
@@ -141,6 +153,7 @@ namespace RockPaperSpell.Model
         {
             Gold = Gold;
             Position = Position;
+            SpeedPotion = SpeedPotion;
         }
     }
 }

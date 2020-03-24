@@ -7,6 +7,7 @@ namespace RockPaperSpell.Network
     {
         [SyncVar(hook = nameof(SetGoldView))] private int gold;
         [SyncVar(hook = nameof(SetPositionView))] private int position;
+        [SyncVar(hook = nameof(SetSpeedPotionView))] private bool speedPotion;
         [SyncVar(hook = nameof(SetSpellView))] private Structs.Spell spell;
         [SyncVar(hook = nameof(SetTargetView))] private Structs.Wizard target;
 
@@ -21,6 +22,11 @@ namespace RockPaperSpell.Network
         public void SetView(Interface.WizardView view)
         {
             wizardView = view;
+        }
+
+        public void SetSpeedPotion(bool speedPotion)
+        {
+            this.speedPotion = speedPotion;
         }
 
         public void SetGold(int gold)
@@ -51,6 +57,11 @@ namespace RockPaperSpell.Network
         public void SetSpellTarget(int player, Structs.SpellTarget spellTarget)
         {
             CmdSetSpellTarget(player, spellTarget);
+        }
+
+        private void SetSpeedPotionView(bool oldSpeedPotion, bool newSpeedPotion)
+        {
+            wizardView?.SetSpeedPotion(newSpeedPotion);
         }
 
         private void SetGoldView(int oldGold, int newGold)

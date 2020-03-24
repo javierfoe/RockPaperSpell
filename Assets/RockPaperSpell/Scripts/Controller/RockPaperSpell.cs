@@ -143,7 +143,6 @@ namespace RockPaperSpell.Controller
                     }
                 }
                 speedPotion = speedPotion < players - 1 ? speedPotion + 1 : 0;
-                Model.RockPaperSpell.SplitLoot();
                 win = Model.RockPaperSpell.CheckWin(out winner);
                 yield return new WaitForSeconds(1);
             } while (!win);
@@ -166,6 +165,7 @@ namespace RockPaperSpell.Controller
                 Setup(offlinePlayers);
                 StartMatch();
                 rockPaperSpell.GetComponent<View.RockPaperSpell>().SetLocalPlayer(localPlayerIndex);
+                ((View.WizardToken)rockPaperSpellView[localPlayerIndex]).LocalPlayer();
             }
         }
 

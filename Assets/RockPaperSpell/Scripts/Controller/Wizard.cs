@@ -11,6 +11,7 @@ namespace RockPaperSpell.Controller
             this.wizard = wizard;
             wizard.AddGoldListener(view.SetGold);
             wizard.AddPositionListener(view.SetPosition);
+            wizard.AddSpeedPotionListener(view.SetSpeedPotion);
             wizard.AddSpellListener(view.SetSpell);
             wizard.AddTargetListener(view.SetTarget);
         }

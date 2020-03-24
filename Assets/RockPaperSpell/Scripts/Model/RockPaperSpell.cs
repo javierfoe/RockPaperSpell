@@ -5,10 +5,11 @@ namespace RockPaperSpell.Model
 {
     public static class RockPaperSpell
     {
-        public static Wizard[] Wizards { get; private set; }
+        public static SpellBook SpellBook => spellLibrary.SpellBook;
         private static SpellLibrary spellLibrary;
 
-        public static SpellBook SpellBook => spellLibrary.SpellBook;
+        public static Wizard[] Wizards { get; private set; }
+        public static int SpeedPotion { get; private set; }
 
         public static void SetupBoard(int players)
         {
@@ -20,7 +21,7 @@ namespace RockPaperSpell.Model
         {
             SpellTarget spellTarget;
             Wizard wizard;
-            for(int i = 0; i < Wizards.Length; i++)
+            for (int i = 0; i < Wizards.Length; i++)
             {
                 wizard = Wizards[i];
                 spellTarget = spellTargets[i];
@@ -30,38 +31,6 @@ namespace RockPaperSpell.Model
             CheckWildSurges();
         }
 
-        public static void SplitLoot()
-        {
-            int closestPosition = -1;
-            int secondClosestPosition = -1;
-            int currentPosition;
-            foreach (Wizard wizard in Wizards)
-            {
-                currentPosition = wizard.Position;
-                if (currentPosition > closestPosition)
-                {
-                    secondClosestPosition = closestPosition;
-                    closestPosition = currentPosition;
-                }
-                if (currentPosition > secondClosestPosition && currentPosition < closestPosition)
-                {
-                    secondClosestPosition = currentPosition;
-                }
-            }
-            foreach (Wizard wizard in Wizards)
-            {
-                currentPosition = wizard.Position;
-                if (currentPosition == closestPosition)
-                {
-                    wizard.Gold += 5;
-                }
-                else if (currentPosition == secondClosestPosition)
-                {
-                    wizard.Gold += 3;
-                }
-            }
-        }
-
         public static Spell WildSurge()
         {
             return spellLibrary.WildSurge();
@@ -69,11 +38,12 @@ namespace RockPaperSpell.Model
 
         public static bool CheckWin(out int winner)
         {
+            SplitLoot();
             bool win = false;
             int currentGold, maxGold = 0;
             winner = 0;
             Wizard wizard;
-            for(int i = 0; i < Wizards.Length; i++)
+            for (int i = 0; i < Wizards.Length; i++)
             {
                 wizard = Wizards[i];
                 currentGold = wizard.Gold;
@@ -82,7 +52,8 @@ namespace RockPaperSpell.Model
                     maxGold = currentGold;
                     win = maxGold > 24;
                     winner = i;
-                } else if(currentGold == maxGold)
+                }
+                else if (currentGold == maxGold)
                 {
                     win = false;
                 }
@@ -91,6 +62,7 @@ namespace RockPaperSpell.Model
             {
                 spellLibrary.RotateSpellBook();
                 Reposition();
+                PassSpeedPotion();
             }
             return win;
         }
@@ -140,6 +112,38 @@ namespace RockPaperSpell.Model
             return wizards;
         }
 
+        private static void SplitLoot()
+        {
+            int closestPosition = -1;
+            int secondClosestPosition = -1;
+            int currentPosition;
+            foreach (Wizard wizard in Wizards)
+            {
+                currentPosition = wizard.Position;
+                if (currentPosition > closestPosition)
+                {
+                    secondClosestPosition = closestPosition;
+                    closestPosition = currentPosition;
+                }
+                if (currentPosition > secondClosestPosition && currentPosition < closestPosition)
+                {
+                    secondClosestPosition = currentPosition;
+                }
+            }
+            foreach (Wizard wizard in Wizards)
+            {
+                currentPosition = wizard.Position;
+                if (currentPosition == closestPosition)
+                {
+                    wizard.Gold += 5;
+                }
+                else if (currentPosition == secondClosestPosition)
+                {
+                    wizard.Gold += 3;
+                }
+            }
+        }
+
         private static void CheckWildSurges()
         {
             foreach (Wizard wizard in Wizards)
@@ -166,6 +170,13 @@ namespace RockPaperSpell.Model
             }
         }
 
+        private static void PassSpeedPotion()
+        {
+            Wizards[SpeedPotion].SpeedPotion = false;
+            SpeedPotion = SpeedPotion < Wizards.Length - 1 ? SpeedPotion + 1 : 0;
+            SetSpeedPotion(SpeedPotion);
+        }
+
         private static void SetupWizards(int players)
         {
             Wizards = new Wizard[players];
@@ -179,6 +190,12 @@ namespace RockPaperSpell.Model
                 wizard.Next = i + 1 < players ? Wizards[i + 1] : Wizards[0];
                 wizard.Previous = i - 1 > -1 ? Wizards[i - 1] : Wizards[players - 1];
             }
+            SetSpeedPotion(0);
+        }
+
+        private static void SetSpeedPotion(int index)
+        {
+            Wizards[index].SpeedPotion = true;
         }
 
         private static void SetupSpells(int players)

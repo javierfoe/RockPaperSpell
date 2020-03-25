@@ -21,7 +21,7 @@ namespace RockPaperSpell.View
             };
         }
 
-        public void LocalPlayer()
+        public void SetLocalPlayer()
         {
             localPlayer.SetActive(true);
         }

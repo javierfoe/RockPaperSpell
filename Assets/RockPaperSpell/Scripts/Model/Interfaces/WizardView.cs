@@ -10,5 +10,6 @@
         void SetSpell(Structs.Spell spell);
         void SetTarget(Structs.Wizard target);
         void SetSpellTarget(int player, Structs.SpellTarget spellTarget);
+        void SetLocalPlayer();
     }
 }

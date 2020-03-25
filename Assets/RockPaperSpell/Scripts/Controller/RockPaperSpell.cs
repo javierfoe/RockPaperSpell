@@ -165,7 +165,7 @@ namespace RockPaperSpell.Controller
                 Setup(offlinePlayers);
                 StartMatch();
                 rockPaperSpell.GetComponent<View.RockPaperSpell>().SetLocalPlayer(localPlayerIndex);
-                ((View.WizardToken)rockPaperSpellView[localPlayerIndex]).LocalPlayer();
+                rockPaperSpellView[localPlayerIndex].SetLocalPlayer();
             }
         }
 

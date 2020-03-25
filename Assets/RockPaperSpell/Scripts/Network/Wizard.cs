@@ -14,6 +14,11 @@ namespace RockPaperSpell.Network
         private Interface.WizardView wizardView;
         private Interface.WizardController wizardController;
 
+        public void SetLocalPlayer()
+        {
+            wizardView.SetLocalPlayer();
+        }
+
         public void SetController(Interface.WizardController controller)
         {
             wizardController = controller;
@@ -57,6 +62,11 @@ namespace RockPaperSpell.Network
         public void SetSpellTarget(int player, Structs.SpellTarget spellTarget)
         {
             CmdSetSpellTarget(player, spellTarget);
+        }
+
+        public override void OnStartLocalPlayer()
+        {
+            SetLocalPlayer();
         }
 
         private void SetSpeedPotionView(bool oldSpeedPotion, bool newSpeedPotion)

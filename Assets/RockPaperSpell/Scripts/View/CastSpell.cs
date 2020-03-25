@@ -49,7 +49,11 @@ namespace RockPaperSpell.View
 
         public void OnDrag(PointerEventData eventData)
         {
-            if (!RockPaperSpell.CanCast) return;
+            if (!RockPaperSpell.CanCast)
+            {
+                DestroyGhost();
+                return;
+            }
             WizardToken drop = null;
             List<GameObject> hovered = eventData.hovered;
             GameObject hover;
@@ -76,13 +80,21 @@ namespace RockPaperSpell.View
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (!RockPaperSpell.CanCast) return;
-            RockPaperSpell.CastingSpell = false;
-            Destroy(ghostCard);
+            DestroyGhost();
+            if (!RockPaperSpell.CanCast)
+            {
+                return;
+            }
             if (currentTarget != null)
             {
                 RockPaperSpell.SetSpellTarget(currentTarget, spell);
             }
+        }
+
+        private void DestroyGhost()
+        {
+            Destroy(ghostCard);
+            RockPaperSpell.CastingSpell = false;
         }
 
         private void Awake()

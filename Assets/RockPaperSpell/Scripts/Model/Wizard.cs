@@ -63,7 +63,14 @@ namespace RockPaperSpell.Model
             set
             {
                 target = value;
-                targetEvent.Invoke(value.GetStruct());
+                if (value != null)
+                {
+                    targetEvent.Invoke(value.GetStruct());
+                }
+                else
+                {
+                    targetEvent.Invoke(Structs.Wizard.Default);
+                }
             }
         }
 
@@ -122,6 +129,7 @@ namespace RockPaperSpell.Model
                 Position = 7;
             }
             WildSurge = false;
+            Target = null;
         }
 
         public void AddPositionListener(UnityAction<int> action)

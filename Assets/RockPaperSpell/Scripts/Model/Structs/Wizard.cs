@@ -4,14 +4,8 @@ namespace RockPaperSpell.Structs
 {
     public struct Wizard
     {
-        public Color color;
+        public static Wizard Default = new Wizard { color = Color.white };
 
-        public static Wizard CreateDefault()
-        {
-            return new Wizard
-            {
-                color = new Color(0, 0, 0, 0)
-            };
-        }
+        public Color color;
     }
 }

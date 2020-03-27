@@ -6,6 +6,7 @@ namespace RockPaperSpell.Controller
 {
     public class RockPaperSpell : MonoBehaviour, Interface.Controller
     {
+        public static int PlayerAmount { get; set; }
         public static float TargetSelectionTime { get; private set; }
         internal static RockPaperSpell Controller { get; private set; }
 
@@ -52,20 +53,17 @@ namespace RockPaperSpell.Controller
         [Header("Offline settings")]
         [SerializeField] private bool offline = false;
         [SerializeField] private int localPlayerIndex = 0;
-        [SerializeField] private int offlinePlayers = 0;
 
         private Interface.View rockPaperSpellView;
-        private int players;
         private Wizard[] wizardControllers;
         private SpellBook spellBook;
         private WaitForSpells waitForSpells;
 
         private Wizard this[int index] => wizardControllers[index];
 
-        public void Setup(int players)
+        public void Setup()
         {
-            this.players = players;
-            Model.RockPaperSpell.SetupBoard(players);
+            Model.RockPaperSpell.SetupBoard(PlayerAmount);
             SetupWizards();
             SetupSpellBook();
         }
@@ -111,8 +109,8 @@ namespace RockPaperSpell.Controller
 
         private void SetInitialState()
         {
-            rockPaperSpellView.SetView(players);
-            for (int i = 0; i < players; i++)
+            rockPaperSpellView.SetView(PlayerAmount);
+            for (int i = 0; i < PlayerAmount; i++)
             {
                 wizardControllers[i].InitialState();
             }
@@ -127,13 +125,13 @@ namespace RockPaperSpell.Controller
             int speedPotion = 0;
             do
             {
-                waitForSpells = new WaitForSpells(players);
+                waitForSpells = new WaitForSpells(PlayerAmount);
                 rockPaperSpellView.EnableCast(true);
                 yield return waitForSpells;
                 rockPaperSpellView.EnableCast(false);
                 Model.RockPaperSpell.SetTargetsAndSpells(waitForSpells.SpellTargets);
                 bool first = true;
-                for (int i = speedPotion; i != speedPotion || first; i = i < players - 1 ? i + 1 : 0)
+                for (int i = speedPotion; i != speedPotion || first; i = i < PlayerAmount - 1 ? i + 1 : 0)
                 {
                     yield return new WaitForSeconds(1.25f);
                     first = false;
@@ -142,7 +140,7 @@ namespace RockPaperSpell.Controller
                         yield return new WaitForSeconds(movementTime);
                     }
                 }
-                speedPotion = speedPotion < players - 1 ? speedPotion + 1 : 0;
+                speedPotion = speedPotion < PlayerAmount - 1 ? speedPotion + 1 : 0;
                 win = Model.RockPaperSpell.CheckWin(out winner);
                 yield return new WaitForSeconds(1);
             } while (!win);
@@ -162,7 +160,7 @@ namespace RockPaperSpell.Controller
             SetViews();
             if (offline)
             {
-                Setup(offlinePlayers);
+                Setup();
                 StartMatch();
                 rockPaperSpell.GetComponent<View.RockPaperSpell>().SetLocalPlayer(localPlayerIndex);
                 rockPaperSpellView[localPlayerIndex].SetLocalPlayer();

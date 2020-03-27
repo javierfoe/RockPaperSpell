@@ -49,7 +49,7 @@ namespace RockPaperSpell.View
 
         public void OnDrag(PointerEventData eventData)
         {
-            if (!RockPaperSpell.CanCast)
+            if (!RockPaperSpell.CanCast || ghostCard == null)
             {
                 DestroyGhost();
                 return;

@@ -17,16 +17,16 @@ namespace RockPaperSpell.Network
             }
         }
 
-        [SerializeField] private int players = 0;
         [SerializeField] private RockPaperSpell network = null;
         [SerializeField] private Controller.RockPaperSpell controller = null;
-        private int connectedPlayers;
+        private int connectedPlayers, players;
         private NetworkConnectionPlayer[] allPlayers;
 
         public override void OnStartServer()
         {
+            players = Controller.RockPaperSpell.PlayerAmount;
             connectedPlayers = 0;
-            controller.Setup(players);
+            controller.Setup();
             allPlayers = new NetworkConnectionPlayer[players];
         }
 

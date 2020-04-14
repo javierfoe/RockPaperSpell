@@ -16,6 +16,7 @@ namespace RockPaperSpell.Network
 
         public void SetLocalPlayer()
         {
+            transform.parent.GetComponentInParent<RockPaperSpell>().SetLocalPlayer(this);
             wizardView.SetLocalPlayer();
         }
 

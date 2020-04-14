@@ -27,13 +27,16 @@ namespace RockPaperSpell.View
         [Header("Spell Book")]
         [SerializeField] private SpellBook spellBook = null;
 
-        public Interface.WizardView this[int i] => wizardParty[i];
         public Interface.SpellBook SpellBook => spellBook;
+        public Interface.WizardView GetElement(int i)
+        {
+            return wizardParty.GetChild(i);
+        }
 
         public void SetLocalPlayer(int index)
         {
             localPlayerIndex = index;
-            LocalPlayer = this[index];
+            LocalPlayer = GetElement(index);
         }
 
         public void EnableCast(bool value)

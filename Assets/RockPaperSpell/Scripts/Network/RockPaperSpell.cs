@@ -1,4 +1,6 @@
 ﻿using Mirror;
+using RockPaperSpell.Interface;
+using System;
 using UnityEngine;
 
 namespace RockPaperSpell.Network
@@ -7,13 +9,13 @@ namespace RockPaperSpell.Network
     {
         [SerializeField] private View.RockPaperSpell rockPaperSpellViewGo = null;
         private Interface.View rockPaperSpellView;
+        private Wizard[] wizards;
 
-        public Interface.WizardView this[int i] => GetWizard<Wizard>(i);
         public Interface.SpellBook SpellBook => transform.GetChild(1).GetComponent<SpellBook>();
-
-        public T GetWizard<T>(int index)
+        public Interface.WizardView GetElement(int i)
         {
-            return transform.GetChild(0).GetChild(index).GetComponent<T>();
+            GetDependencies();
+            return wizards[i];
         }
 
         public void SetView(int players)
@@ -28,24 +30,21 @@ namespace RockPaperSpell.Network
 
         public void SetViews()
         {
-            Transform wizards = transform.GetChild(0);
-            Wizard aux;
-            for (int i = 0; i < wizards.childCount; i++)
+            GetDependencies();
+            WizardView viewAux;
+            for (int i = 0; i < wizards.Length; i++)
             {
-                (this[i] as Wizard).SetView(rockPaperSpellView[i]);
-                aux = GetWizard<Wizard>(i);
-                rockPaperSpellView[i].SetController(aux);
+                viewAux = rockPaperSpellView.GetElement(i);
+                wizards[i].SetView(viewAux);
+                viewAux.SetController(wizards[i]);
             }
             (SpellBook as SpellBook).SetView(rockPaperSpellView.SpellBook);
+        }
 
-            Wizard localPlayer;
-            int index = 0;
-            foreach (Transform wizard in transform.GetChild(0))
-            {
-                localPlayer = wizard.GetComponent<Wizard>();
-                if (localPlayer.isLocalPlayer) break;
-                index++;
-            }
+        public void SetLocalPlayer(Wizard wizard)
+        {
+            GetDependencies();
+            int index = Array.IndexOf(wizards, wizard);
             rockPaperSpellViewGo.SetLocalPlayer(index);
         }
 
@@ -53,6 +52,12 @@ namespace RockPaperSpell.Network
         {
             rockPaperSpellView = rockPaperSpellViewGo.GetComponent<Interface.View>();
             SetViews();
+        }
+
+        private void GetDependencies()
+        {
+            if (wizards == null)
+                wizards = transform.GetChild(0).GetComponentsInChildren<Wizard>();
         }
 
         [ClientRpc]

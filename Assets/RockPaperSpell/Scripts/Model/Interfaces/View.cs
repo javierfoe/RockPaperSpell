@@ -3,7 +3,7 @@
     public interface View
     {
         void SetView(int players);
-        WizardView this[int i] { get; }
+        WizardView GetElement(int i);
         SpellBook SpellBook { get; }
         void EnableCast(bool value);
     }

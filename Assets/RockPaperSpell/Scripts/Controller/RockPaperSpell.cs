@@ -1,3 +1,4 @@
+using RockPaperSpell.Interface;
 using RockPaperSpell.Structs;
 using System.Collections;
 using UnityEngine;
@@ -39,6 +40,8 @@ namespace RockPaperSpell.Controller
             }
         }
 
+        public Network.RockPaperSpell Network { get; private set; }
+
         [Header("Wizard Movement Time")]
         [SerializeField] private float movementTime = 0;
         [Header("Spell & Target Select Time")]
@@ -76,10 +79,12 @@ namespace RockPaperSpell.Controller
 
         public void SetViews()
         {
+            WizardView viewAux;
             for (int i = 0; i < wizardControllers.Length; i++)
             {
-                wizardControllers[i].SetView(rockPaperSpellView[i]);
-                rockPaperSpellView[i].SetController(wizardControllers[i]);
+                viewAux = rockPaperSpellView.GetElement(i);
+                wizardControllers[i].SetView(viewAux);
+                viewAux.SetController(wizardControllers[i]);
             }
             spellBook.SetView(rockPaperSpellView.SpellBook);
         }
@@ -163,7 +168,11 @@ namespace RockPaperSpell.Controller
                 Setup();
                 StartMatch();
                 rockPaperSpell.GetComponent<View.RockPaperSpell>().SetLocalPlayer(localPlayerIndex);
-                rockPaperSpellView[localPlayerIndex].SetLocalPlayer();
+                rockPaperSpellView.GetElement(localPlayerIndex).SetLocalPlayer();
+            }
+            else
+            {
+                Network = rockPaperSpellView as Network.RockPaperSpell;
             }
         }
 

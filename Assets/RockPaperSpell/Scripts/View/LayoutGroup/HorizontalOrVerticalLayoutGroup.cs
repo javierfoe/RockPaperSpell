@@ -11,7 +11,11 @@ namespace RockPaperSpell.View
         private float childSize;
 
         public int Length => children.Length;
-        public T this[int index] => children[index];
+        public T GetChild(int index)
+        {
+            GetDependencies();
+            return children[index];
+        }
 
         public virtual void SetSpacingAndPadding(int amount)
         {
@@ -63,6 +67,7 @@ namespace RockPaperSpell.View
 
         private void GetDependencies()
         {
+            if (layoutGroup != null) return;
             layoutGroup = GetComponent<UnityEngine.UI.HorizontalOrVerticalLayoutGroup>();
             int length = transform.childCount;
             children = new T[length];

@@ -64,15 +64,11 @@ namespace RockPaperSpell.Controller
 
         private Wizard this[int index] => wizardControllers[index];
 
-        public void Setup()
+        public void StartMatch()
         {
             Model.RockPaperSpell.SetupBoard(PlayerAmount);
             SetupWizards();
             SetupSpellBook();
-        }
-
-        public void StartMatch()
-        {
             SetInitialState();
             StartCoroutine(StartGame());
         }
@@ -165,7 +161,6 @@ namespace RockPaperSpell.Controller
             SetViews();
             if (offline)
             {
-                Setup();
                 StartMatch();
                 rockPaperSpell.GetComponent<View.RockPaperSpell>().SetLocalPlayer(localPlayerIndex);
                 rockPaperSpellView.GetElement(localPlayerIndex).SetLocalPlayer();

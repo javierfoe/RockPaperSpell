@@ -20,7 +20,7 @@ namespace RockPaperSpell.Network
 
         private RockPaperSpell network = null;
         private Controller.RockPaperSpell controller = null;
-        private int connectedPlayers, players;
+        private int players;
         private bool hostConnect = true;
         private NetworkConnectionPlayer[] allPlayers;
         private bool showStartButton;
@@ -48,6 +48,14 @@ namespace RockPaperSpell.Network
             }
         }
 
+        public override void OnRoomServerSceneChanged(string sceneName)
+        {
+            if (sceneName.Equals(GameplayScene))
+            {
+                controller.StartMatch();
+            }
+        }
+
         public override GameObject OnRoomServerCreateGamePlayer(NetworkConnection conn, GameObject roomPlayer)
         {
             if (hostConnect)
@@ -61,20 +69,10 @@ namespace RockPaperSpell.Network
             return player.gameObject;
         }
 
-        public override void OnServerConnect(NetworkConnection conn)
-        {
-            connectedPlayers++;
-            if (connectedPlayers == players)
-                controller.StartMatch();
-        }
-
         public override void OnClientConnect(NetworkConnection conn)
         {
-            if (!clientLoadedScene)
-            {
-                if (!ClientScene.ready) ClientScene.Ready(conn);
-                ClientScene.AddPlayer();
-            }
+            if (!ClientScene.ready) ClientScene.Ready(conn);
+            ClientScene.AddPlayer();
         }
 
         public override void OnServerDisconnect(NetworkConnection conn)
@@ -82,7 +80,6 @@ namespace RockPaperSpell.Network
             int i;
             for (i = 0; i < players && allPlayers[i].conn != conn; i++) ;
             allPlayers[i] = null;
-            connectedPlayers--;
         }
 
         public override void Awake()
@@ -95,8 +92,6 @@ namespace RockPaperSpell.Network
         {
             hostConnect = false;
             players = Controller.RockPaperSpell.PlayerAmount;
-            connectedPlayers = 0;
-            controller.Setup();
             allPlayers = new NetworkConnectionPlayer[players];
         }
 

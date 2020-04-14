@@ -57,7 +57,7 @@ namespace RockPaperSpell.Network
         private void GetDependencies()
         {
             if (wizards == null)
-                wizards = transform.GetChild(0).GetComponentsInChildren<Wizard>();
+                wizards = transform.GetChild(0).GetComponentsInChildren<Wizard>(true);
         }
 
         [ClientRpc]

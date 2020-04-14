@@ -1,6 +1,5 @@
 ﻿using Mirror;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace RockPaperSpell.Network
 {
@@ -50,6 +49,8 @@ namespace RockPaperSpell.Network
 
         public override void OnRoomServerSceneChanged(string sceneName)
         {
+            controller = FindObjectOfType<Controller.RockPaperSpell>();
+            if (controller != null) network = controller.Network;
             if (sceneName.Equals(GameplayScene))
             {
                 controller.StartMatch();
@@ -60,7 +61,9 @@ namespace RockPaperSpell.Network
         {
             if (hostConnect)
             {
-                HostConnected();
+                hostConnect = false;
+                players = Controller.RockPaperSpell.PlayerAmount;
+                allPlayers = new NetworkConnectionPlayer[players];
             }
             int i;
             for (i = 0; i < players && allPlayers[i] != null; i++) ;
@@ -80,25 +83,6 @@ namespace RockPaperSpell.Network
             int i;
             for (i = 0; i < players && allPlayers[i].conn != conn; i++) ;
             allPlayers[i] = null;
-        }
-
-        public override void Awake()
-        {
-            base.Awake();
-            SceneManager.sceneLoaded += OnSceneLoaded;
-        }
-
-        private void HostConnected()
-        {
-            hostConnect = false;
-            players = Controller.RockPaperSpell.PlayerAmount;
-            allPlayers = new NetworkConnectionPlayer[players];
-        }
-
-        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            controller = FindObjectOfType<Controller.RockPaperSpell>();
-            if (controller != null) network = controller.Network;
         }
     }
 }

@@ -66,10 +66,6 @@ namespace RockPaperSpell.Controller
 
         public void StartMatch()
         {
-            Model.RockPaperSpell.SetupBoard(PlayerAmount);
-            SetupWizards();
-            SetupSpellBook();
-            SetInitialState();
             StartCoroutine(StartGame());
         }
 
@@ -120,6 +116,10 @@ namespace RockPaperSpell.Controller
 
         private IEnumerator StartGame()
         {
+            Model.RockPaperSpell.SetupBoard(PlayerAmount);
+            SetupWizards();
+            SetupSpellBook();
+            SetInitialState();
             yield return new WaitForSeconds(movementTime);
             bool win;
             int winner;

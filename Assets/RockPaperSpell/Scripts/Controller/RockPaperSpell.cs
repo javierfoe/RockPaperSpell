@@ -106,7 +106,6 @@ namespace RockPaperSpell.Controller
 
         private void SetInitialState()
         {
-            rockPaperSpellView.SetView(PlayerAmount);
             for (int i = 0; i < PlayerAmount; i++)
             {
                 wizardControllers[i].InitialState();
@@ -116,6 +115,7 @@ namespace RockPaperSpell.Controller
 
         private IEnumerator StartGame()
         {
+            yield return rockPaperSpellView.SetView(PlayerAmount);
             Model.RockPaperSpell.SetupBoard(PlayerAmount);
             SetupWizards();
             SetupSpellBook();

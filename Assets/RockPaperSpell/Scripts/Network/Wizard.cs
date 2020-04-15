@@ -18,6 +18,7 @@ namespace RockPaperSpell.Network
         {
             transform.parent.GetComponentInParent<RockPaperSpell>().SetLocalPlayer(this);
             wizardView.SetLocalPlayer();
+            CmdPlayerReady();
         }
 
         public void SetController(Interface.WizardController controller)
@@ -105,6 +106,13 @@ namespace RockPaperSpell.Network
         private void CmdSetSpellTarget(int player, Structs.SpellTarget spellTarget)
         {
             wizardController.SetSpellTarget(player, spellTarget);
+        }
+
+        [Command]
+        private void CmdPlayerReady()
+        {
+            Debug.Log("Hostia puta");
+            transform.parent.GetComponentInParent<RockPaperSpell>().PlayerReady();
         }
     }
 }

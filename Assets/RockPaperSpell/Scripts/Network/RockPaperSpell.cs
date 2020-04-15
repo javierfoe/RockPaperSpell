@@ -1,6 +1,7 @@
 ﻿using Mirror;
 using RockPaperSpell.Interface;
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace RockPaperSpell.Network
@@ -10,6 +11,7 @@ namespace RockPaperSpell.Network
         [SerializeField] private View.RockPaperSpell rockPaperSpellViewGo = null;
         private Interface.View rockPaperSpellView;
         private Wizard[] wizards;
+        private int playersReady;
 
         public Interface.SpellBook SpellBook => transform.GetChild(1).GetComponent<SpellBook>();
         public Interface.WizardView GetElement(int i)
@@ -18,8 +20,10 @@ namespace RockPaperSpell.Network
             return wizards[i];
         }
 
-        public void SetView(int players)
+        public IEnumerator SetView(int players)
         {
+            playersReady = 0;
+            while (playersReady < players) yield return null;
             RpcSetView(players);
         }
 
@@ -60,16 +64,22 @@ namespace RockPaperSpell.Network
                 wizards = transform.GetChild(0).GetComponentsInChildren<Wizard>(true);
         }
 
-        [ClientRpc]
-        private void RpcSetView(int players)
+        public void PlayerReady()
         {
-            rockPaperSpellView.SetView(players);
+            playersReady++;
         }
 
         [ClientRpc]
         private void RpcEnableCast(bool value)
         {
             rockPaperSpellView.EnableCast(value);
+        }
+
+        [ClientRpc]
+        private void RpcSetView(int players)
+        {
+            Debug.Log("RpcSetView");
+            StartCoroutine(rockPaperSpellView.SetView(players));
         }
     }
 }

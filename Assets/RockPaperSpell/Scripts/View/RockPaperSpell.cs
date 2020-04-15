@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace RockPaperSpell.View
 {
@@ -44,10 +45,11 @@ namespace RockPaperSpell.View
             CanCast = value;
         }
 
-        public void SetView(int players)
+        public IEnumerator SetView(int players)
         {
             SetWizards(players);
             SetSpellBook(players);
+            if(false) yield return null;
         }
 
         private void SetWizards(int players)

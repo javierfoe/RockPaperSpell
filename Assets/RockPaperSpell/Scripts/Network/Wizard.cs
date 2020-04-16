@@ -111,7 +111,6 @@ namespace RockPaperSpell.Network
         [Command]
         private void CmdPlayerReady()
         {
-            Debug.Log("Hostia puta");
             transform.parent.GetComponentInParent<RockPaperSpell>().PlayerReady();
         }
     }

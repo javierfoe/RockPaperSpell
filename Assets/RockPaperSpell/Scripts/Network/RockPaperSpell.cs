@@ -78,7 +78,6 @@ namespace RockPaperSpell.Network
         [ClientRpc]
         private void RpcSetView(int players)
         {
-            Debug.Log("RpcSetView");
             StartCoroutine(rockPaperSpellView.SetView(players));
         }
     }

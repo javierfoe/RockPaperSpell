@@ -671,7 +671,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputField: {fileID: 1397574047}
-  networkManager: {fileID: 88062630}
 --- !u!1 &855631775 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8868802160385225194, guid: ff18d6f5d52a7cf4ab78a6ce62d874e3,
@@ -1843,7 +1842,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1076593549}
-  networkManager: {fileID: 88062630}
 --- !u!1 &1862896066
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,23 +5,11 @@ namespace RockPaperSpell.Network
 {
     public class NetworkManager : NetworkRoomManager
     {
-        private class NetworkConnectionPlayer
-        {
-            public NetworkConnection conn;
-            public Wizard behaviour;
-
-            public NetworkConnectionPlayer(NetworkConnection conn, Wizard behaviour)
-            {
-                this.conn = conn;
-                this.behaviour = behaviour;
-            }
-        }
-
         private RockPaperSpell network = null;
         private Controller.RockPaperSpell controller = null;
         private int players;
         private bool hostConnect = true;
-        private NetworkConnectionPlayer[] allPlayers;
+        private NetworkConnection[] allPlayers;
         private bool showStartButton;
 
         public override void OnRoomServerPlayersReady()
@@ -45,6 +33,12 @@ namespace RockPaperSpell.Network
 
                 ServerChangeScene(GameplayScene);
             }
+        }
+
+        public override void OnStartServer()
+        {
+            players = Controller.RockPaperSpell.PlayerAmount;
+            allPlayers = new NetworkConnection[players];
         }
 
         public override void OnStartClient()
@@ -72,13 +66,10 @@ namespace RockPaperSpell.Network
             if (hostConnect)
             {
                 hostConnect = false;
-                players = Controller.RockPaperSpell.PlayerAmount;
-                allPlayers = new NetworkConnectionPlayer[players];
             }
             int i;
-            for (i = 0; i < players && allPlayers[i] != null; i++) ;
+            for (i = 0; i < players && allPlayers[i] != conn; i++) ;
             Wizard player = network.GetElement(i) as Wizard;
-            allPlayers[i] = new NetworkConnectionPlayer(conn, player);
             return player.gameObject;
         }
 
@@ -88,10 +79,19 @@ namespace RockPaperSpell.Network
             ClientScene.AddPlayer();
         }
 
+        public override void OnServerConnect(NetworkConnection conn)
+        {
+            base.OnServerConnect(conn);
+            int i;
+            for (i = 0; i < players && allPlayers[i] != null; i++) ;
+            allPlayers[i] = conn;
+        }
+
         public override void OnServerDisconnect(NetworkConnection conn)
         {
+            base.OnServerDisconnect(conn);
             int i;
-            for (i = 0; i < players && allPlayers[i].conn != conn; i++) ;
+            for (i = 0; i < players && allPlayers[i] != conn; i++) ;
             allPlayers[i] = null;
         }
     }

@@ -8,7 +8,7 @@ namespace RockPaperSpell.UI
         protected abstract void Click();
 
         // Start is called before the first frame update
-        private void Start()
+        protected virtual void Start()
         {
             GetComponent<UnityEngine.UI.Button>().onClick.AddListener(Click);
         }

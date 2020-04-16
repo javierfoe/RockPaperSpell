@@ -3,10 +3,9 @@ using UnityEngine;
 
 namespace RockPaperSpell.UI
 {
-    public class StartHostButton : Button
+    public class StartHostButton : NetworkManagerButton
     {
         [SerializeField] private Slider slider = null;
-        [SerializeField] private NetworkManager networkManager = null;
 
         protected override void Click()
         {

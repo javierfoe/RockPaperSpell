@@ -49,7 +49,9 @@ namespace RockPaperSpell.View
         {
             SetWizards(players);
             SetSpellBook(players);
-            if(false) yield return null;
+#pragma warning disable CS0162 // Se detectó código inaccesible
+            if (false) yield return null;
+#pragma warning restore CS0162 // Se detectó código inaccesible
         }
 
         private void SetWizards(int players)

@@ -4,10 +4,9 @@ using UnityEngine.UI;
 
 namespace RockPaperSpell.UI
 {
-    public class JoinGame : Button
+    public class JoinGame : NetworkManagerButton
     {
         [SerializeField] private InputField inputField = null;
-        [SerializeField] private NetworkManager networkManager = null;
 
         protected override void Click()
         {

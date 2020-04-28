@@ -76,7 +76,7 @@ namespace RockPaperSpell.Network
         public override void OnClientConnect(NetworkConnection conn)
         {
             if (!ClientScene.ready) ClientScene.Ready(conn);
-            ClientScene.AddPlayer();
+            ClientScene.AddPlayer(conn);
         }
 
         public override void OnServerConnect(NetworkConnection conn)

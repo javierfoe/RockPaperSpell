@@ -24,7 +24,7 @@ namespace RockPaperSpell.Controller
 
         public void SetSpellTarget(int player, SpellTarget spellTarget)
         {
-            RockPaperSpell.Controller.SetTargetSpell(player, spellTarget);
+            GameController.SetTargetSpell(player, spellTarget);
         }
     }
 }

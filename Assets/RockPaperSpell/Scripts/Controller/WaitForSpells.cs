@@ -29,7 +29,7 @@ namespace RockPaperSpell.Controller
         {
             bool next;
             currentTime += Time.deltaTime;
-            if (currentTime >= RockPaperSpell.TargetSelectionTime)
+            if (currentTime >= GameController.TargetSelectionTime)
             {
                 next = false;
             }

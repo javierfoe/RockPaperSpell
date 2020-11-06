@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace RockPaperSpell.Network
 {
-    public class RockPaperSpell : NetworkBehaviour, Interface.View, Interface.Controller
+    public class RockPaperSpell : NetworkBehaviour, Interface.View
     {
         [SerializeField] private View.RockPaperSpell rockPaperSpellViewGo = null;
         private Interface.View rockPaperSpellView;

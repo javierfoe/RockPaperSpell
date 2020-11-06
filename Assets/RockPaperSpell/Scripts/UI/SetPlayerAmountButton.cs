@@ -8,7 +8,7 @@ namespace RockPaperSpell.UI
 
         protected override void Click()
         {
-            Controller.RockPaperSpell.PlayerAmount = slider.Amount;
+            Controller.GameController.PlayerAmount = slider.Amount;
         }
     }
 }

@@ -85,6 +85,7 @@ namespace RockPaperSpell.Controller
         private static void FindView()
         {
             View.RockPaperSpell viewRPP = GameObject.FindObjectOfType<View.RockPaperSpell>();
+            viewRPP.SetColors();
             Transform parent = viewRPP.transform.parent;
             if (parent.childCount > 1)
             {

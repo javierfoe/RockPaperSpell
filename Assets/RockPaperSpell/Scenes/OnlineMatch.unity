@@ -2573,26 +2573,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6031496585779451443, guid: bc9a928a8dd715541aa84d768af45f3b,
-        type: 3}
-      propertyPath: saturationOn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6031496585779451443, guid: bc9a928a8dd715541aa84d768af45f3b,
-        type: 3}
-      propertyPath: brightnessOn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6031496585779451443, guid: bc9a928a8dd715541aa84d768af45f3b,
-        type: 3}
-      propertyPath: saturationOff
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6031496585779451443, guid: bc9a928a8dd715541aa84d768af45f3b,
-        type: 3}
-      propertyPath: brightnessOff
-      value: 0.6
-      objectReference: {fileID: 0}
     - target: {fileID: 6031496585779451452, guid: bc9a928a8dd715541aa84d768af45f3b,
         type: 3}
       propertyPath: m_Name

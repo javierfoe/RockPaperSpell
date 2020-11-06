@@ -34,6 +34,11 @@ namespace RockPaperSpell.View
             return wizardParty.GetChild(i);
         }
 
+        public void SetColors()
+        {
+            Controller.GameController.SetWizardColors(colors);
+        }
+
         public void SetLocalPlayer(int index)
         {
             localPlayerIndex = index;
@@ -47,7 +52,6 @@ namespace RockPaperSpell.View
 
         public IEnumerator SetView(int players)
         {
-            Controller.GameController.SetWizardColors(colors);
             SetWizards(players);
             SetSpellBook(players);
 #pragma warning disable CS0162 // Se detectó código inaccesible

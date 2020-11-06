@@ -7,6 +7,11 @@
         public void SetSpellBook(Model.SpellBook spellBook)
         {
             this.spellBook = spellBook;
+        }
+
+        public override void SetView(Interface.SpellBook view)
+        {
+            base.SetView(view);
             spellBook.AddListenerNewSpell(view.AddSpell);
         }
 

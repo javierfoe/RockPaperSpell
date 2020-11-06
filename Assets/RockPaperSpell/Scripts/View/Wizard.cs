@@ -19,11 +19,20 @@ namespace RockPaperSpell.View
             Color color = wizardImage.color;
             float h, s, v;
             Color.RGBToHSV(color, out h, out s, out v);
-            Highlight highlight = Controller.RockPaperSpell.Highlight(on);
+            Highlight highlight = RetrieveHighlight(on);
             s = highlight.saturation;
             v = highlight.brightness;
             color = Color.HSVToRGB(h, s, v);
             wizardImage.color = color;
+        }
+
+        private Highlight RetrieveHighlight(bool on)
+        {
+            return new Highlight
+            {
+                saturation = on ? RockPaperSpell.SaturationOn : RockPaperSpell.SaturationOff,
+                brightness = on ? RockPaperSpell.BrightnessOn : RockPaperSpell.BrightnessOff
+            };
         }
     }
 }

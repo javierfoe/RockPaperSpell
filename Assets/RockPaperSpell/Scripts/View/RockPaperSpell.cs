@@ -7,6 +7,7 @@ namespace RockPaperSpell.View
     {
         internal static bool CanCast, CastingSpell;
         internal static Interface.WizardView LocalPlayer;
+        internal static float SaturationOn, SaturationOff, BrightnessOn, BrightnessOff;
         private static int localPlayerIndex;
 
         public static void SetSpellTarget(WizardToken target, Spell spell)
@@ -21,17 +22,23 @@ namespace RockPaperSpell.View
             LocalPlayer.SetSpellTarget(localPlayerIndex, spellTarget);
         }
 
-        [Header("Board")]
+        [SerializeField] private float saturationOn = 0, saturationOff = 0, brightnessOn = 0, brightnessOff = 0;
+        [SerializeField] private Color[] colors = null;
         [SerializeField] private Board board = null;
-        [Header("Wizard Party")]
         [SerializeField] private WizardParty wizardParty = null;
-        [Header("Spell Book")]
         [SerializeField] private SpellBook spellBook = null;
+        [Header("Offline")]
+        [SerializeField] private bool offline;
 
         public Interface.SpellBook SpellBook => spellBook;
         public Interface.WizardView GetElement(int i)
         {
             return wizardParty.GetChild(i);
+        }
+
+        public Color[] GetColors()
+        {
+            return colors;
         }
 
         public void SetLocalPlayer(int index)
@@ -71,6 +78,20 @@ namespace RockPaperSpell.View
             board = transform.GetChild(0).GetComponent<Board>();
             wizardParty = transform.GetChild(1).GetComponent<WizardParty>();
             spellBook = transform.GetChild(2).GetComponent<SpellBook>();
+        }
+
+        private void Awake()
+        {
+            SaturationOn = saturationOn;
+            SaturationOff = saturationOff;
+            BrightnessOn = brightnessOn;
+            BrightnessOff = brightnessOff;
+            if (offline)
+            {
+                SetLocalPlayer(0);
+                GetElement(0).SetLocalPlayer();
+                StartCoroutine(Controller.GameController.StartGame());
+            }
         }
     }
 }

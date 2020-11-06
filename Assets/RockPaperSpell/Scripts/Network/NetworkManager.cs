@@ -1,25 +1,15 @@
 ﻿using Mirror;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace RockPaperSpell.Network
 {
     public class NetworkManager : NetworkRoomManager
     {
         private RockPaperSpell network = null;
-        private Controller.RockPaperSpell controller = null;
         private int players;
-        private bool hostConnect = true;
         private NetworkConnection[] allPlayers;
         private bool showStartButton;
-
-        public override void OnRoomServerPlayersReady()
-        {
-            // calling the base method calls ServerChangeScene as soon as all players are in Ready state.
-            if (isHeadless)
-                base.OnRoomServerPlayersReady();
-            else
-                showStartButton = true;
-        }
 
         public override void OnGUI()
         {
@@ -37,7 +27,7 @@ namespace RockPaperSpell.Network
 
         public override void OnStartServer()
         {
-            players = Controller.RockPaperSpell.PlayerAmount;
+            players = Controller.GameController.PlayerAmount;
             allPlayers = new NetworkConnection[players];
         }
 
@@ -52,21 +42,16 @@ namespace RockPaperSpell.Network
         }
 
         public override void OnRoomServerSceneChanged(string sceneName)
-        {
-            controller = FindObjectOfType<Controller.RockPaperSpell>();
-            if (controller != null) network = controller.Network;
-            if (sceneName.Equals(GameplayScene))
+        {            
+            if (GameplayScene.Contains(SceneManager.GetActiveScene().name) && sceneName.Equals(GameplayScene) )
             {
-                controller.StartMatch();
+                StartCoroutine(Controller.GameController.StartGame());
             }
         }
 
         public override GameObject OnRoomServerCreateGamePlayer(NetworkConnection conn, GameObject roomPlayer)
         {
-            if (hostConnect)
-            {
-                hostConnect = false;
-            }
+            if (network == null) network = FindObjectOfType<RockPaperSpell>();
             int i;
             for (i = 0; i < players && allPlayers[i] != conn; i++) ;
             Wizard player = network.GetElement(i) as Wizard;

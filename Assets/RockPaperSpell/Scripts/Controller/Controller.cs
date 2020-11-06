@@ -4,7 +4,7 @@
     {
         protected T view;
 
-        public void SetView(T view)
+        public virtual void SetView(T view)
         {
             this.view = view;
         }

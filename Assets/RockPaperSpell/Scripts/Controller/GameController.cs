@@ -49,9 +49,9 @@ namespace RockPaperSpell.Controller
         public static IEnumerator StartGame()
         {
             Model.RockPaperSpell.SetupBoard(PlayerAmount);
-            SetViews();
             SetupWizards();
             SetupSpellBook();
+            SetViews();
             yield return rockPaperSpellView.SetView(PlayerAmount);
             SetInitialState();
             yield return new WaitForSeconds(WizardMovementTime);
@@ -88,7 +88,8 @@ namespace RockPaperSpell.Controller
             Transform parent = viewRPP.transform.parent;
             if (parent.childCount > 1)
             {
-                rockPaperSpellView = viewRPP.transform.GetChild(1).GetComponent<Interface.View>();
+                Transform network = parent.GetChild(1);
+                rockPaperSpellView = network.GetComponent<Network.RockPaperSpell>();
             }
             else
             {

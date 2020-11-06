@@ -1,5 +1,6 @@
 ﻿using Mirror;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace RockPaperSpell.Network
 {
@@ -7,10 +8,8 @@ namespace RockPaperSpell.Network
     {
         private RockPaperSpell network = null;
         private int players;
-        private bool hostConnect = true;
         private NetworkConnection[] allPlayers;
         private bool showStartButton;
-        private bool firstTimeScene;
 
         public override void OnGUI()
         {
@@ -43,21 +42,16 @@ namespace RockPaperSpell.Network
         }
 
         public override void OnRoomServerSceneChanged(string sceneName)
-        {
-            if (!firstTimeScene && sceneName.Equals(GameplayScene))
+        {            
+            if (GameplayScene.Contains(SceneManager.GetActiveScene().name) && sceneName.Equals(GameplayScene) )
             {
-                firstTimeScene = true;
                 StartCoroutine(Controller.GameController.StartGame());
-                Debug.Log("OnRoomServerSceneChanged");
             }
         }
 
         public override GameObject OnRoomServerCreateGamePlayer(NetworkConnection conn, GameObject roomPlayer)
         {
-            if (hostConnect)
-            {
-                hostConnect = false;
-            }
+            if (network == null) network = FindObjectOfType<RockPaperSpell>();
             int i;
             for (i = 0; i < players && allPlayers[i] != conn; i++) ;
             Wizard player = network.GetElement(i) as Wizard;

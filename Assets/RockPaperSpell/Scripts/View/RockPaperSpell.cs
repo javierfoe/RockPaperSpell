@@ -27,6 +27,8 @@ namespace RockPaperSpell.View
         [SerializeField] private Board board = null;
         [SerializeField] private WizardParty wizardParty = null;
         [SerializeField] private SpellBook spellBook = null;
+        [Header("Offline")]
+        [SerializeField] private bool offline;
 
         public Interface.SpellBook SpellBook => spellBook;
         public Interface.WizardView GetElement(int i)
@@ -34,9 +36,9 @@ namespace RockPaperSpell.View
             return wizardParty.GetChild(i);
         }
 
-        public void SetColors()
+        public Color[] GetColors()
         {
-            Controller.GameController.SetWizardColors(colors);
+            return colors;
         }
 
         public void SetLocalPlayer(int index)
@@ -84,6 +86,12 @@ namespace RockPaperSpell.View
             SaturationOff = saturationOff;
             BrightnessOn = brightnessOn;
             BrightnessOff = brightnessOff;
+            if (offline)
+            {
+                SetLocalPlayer(0);
+                GetElement(0).SetLocalPlayer();
+                StartCoroutine(Controller.GameController.StartGame());
+            }
         }
     }
 }

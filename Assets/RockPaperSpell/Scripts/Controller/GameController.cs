@@ -35,17 +35,6 @@ namespace RockPaperSpell.Controller
             waitForSpells.SetSpellTarget(player, spellTarget);
         }
 
-        public static void SetWizardColors(Color[] colors)
-        {
-            Model.Wizard[] wizards = Model.RockPaperSpell.Wizards;
-            if (wizards == null) return;
-            int length = wizards.Length;
-            for (int i = 0; i < length; i++)
-            {
-                wizards[i].Color = colors[i];
-            }
-        }
-
         public static IEnumerator StartGame()
         {
             Model.RockPaperSpell.SetupBoard(PlayerAmount);
@@ -85,9 +74,10 @@ namespace RockPaperSpell.Controller
         private static void FindView()
         {
             View.RockPaperSpell viewRPP = GameObject.FindObjectOfType<View.RockPaperSpell>();
-            viewRPP.SetColors();
+            Color[] colors = viewRPP.GetColors();
+            SetWizardColors(colors);
             Transform parent = viewRPP.transform.parent;
-            if (parent.childCount > 1)
+            if (parent != null && parent.childCount > 1)
             {
                 Transform network = parent.GetChild(1);
                 rockPaperSpellView = network.GetComponent<Network.RockPaperSpell>();
@@ -95,6 +85,17 @@ namespace RockPaperSpell.Controller
             else
             {
                 rockPaperSpellView = viewRPP;
+            }
+        }
+
+        private static void SetWizardColors(Color[] colors)
+        {
+            Model.Wizard[] wizards = Model.RockPaperSpell.Wizards;
+            if (wizards == null) return;
+            int length = wizards.Length;
+            for (int i = 0; i < length; i++)
+            {
+                wizards[i].Color = colors[i];
             }
         }
 

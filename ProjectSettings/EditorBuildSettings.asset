@@ -14,10 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/RockPaperSpell/Scenes/OnlineMatch.unity
     guid: 78bf2074c19b9a54f86cc19888211cc6
-  - enabled: 0
+  - enabled: 1
     path: Assets/RockPaperSpell/Scenes/OfflineMatch.unity
     guid: 374c344ed66a46d4aad21160b6a30d3d
-  - enabled: 0
+  - enabled: 1
     path: Assets/RockPaperSpell/Scenes/SinglePlayerMenu.unity
     guid: c49c9d0bddea8be4e81ed4d8c5167f89
   m_configObjects: {}

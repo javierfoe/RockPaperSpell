@@ -36,7 +36,7 @@ namespace RockPaperSpell.Network
             if (roomPlayerPrefab == null || roomPlayerPrefab.gameObject == null)
                 Debug.LogError("NetworkRoomManager no RoomPlayer prefab is registered. Please add a RoomPlayer prefab.");
             else
-                ClientScene.RegisterPrefab(roomPlayerPrefab.gameObject);
+                NetworkClient.RegisterPrefab(roomPlayerPrefab.gameObject);
 
             OnRoomStartClient();
         }
@@ -60,8 +60,8 @@ namespace RockPaperSpell.Network
 
         public override void OnClientConnect(NetworkConnection conn)
         {
-            if (!ClientScene.ready) ClientScene.Ready(conn);
-            ClientScene.AddPlayer(conn);
+            if (!NetworkClient.ready) NetworkClient.Ready();
+            NetworkClient.AddPlayer();
         }
 
         public override void OnServerConnect(NetworkConnection conn)

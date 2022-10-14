@@ -32,4 +32,4 @@ OnlineScene adds the Network component and the other components are not affected
 
 ## Dependencies
 
-Mirror by vis2k https://github.com/vis2k/Mirror/releases/tag/v11.2.0
+Mirror by vis2k https://github.com/vis2k/Mirror/releases/tag/v44.0.4
